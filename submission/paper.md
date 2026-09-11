@@ -52,12 +52,13 @@ Finally, empirical work on legal hallucinations shows why fluent legal output ca
 
 ## 5. Research Questions and Hypotheses
 
-The final operational questions reflect the implemented scope:
+The final operational questions are exactly the three canonical research questions:
 
-- **RQ1 - Outcome baselines:** How do a facts-only TF-IDF logistic-regression baseline and a corrected facts-only InLegalBERT chunk-and-pool model compare on the same fixed ILDC test population?
-- **RQ2 - Evidence recovery and integrity:** Under the final temporally constrained configuration, how often is a source-verified expected authority recovered at k=5 and k=100, and do displayed citations satisfy grounding, provenance, duplicate, and temporal requirements?
-- **RQ3 - Explanation format:** With evidence and citations held exactly constant, how does structured presentation compare with unstructured presentation for source clarity, source-finding ease, appropriate trust, and clarity of limitations?
-- **RQ4 - Evidence-augmented prediction:** When the frozen E2 checkpoint is reused without further training on facts followed by selected evidence, what accuracy and macro F1 do E3 and E4 obtain on the 30-case answer-key subset?
+- **RQ1:** Does grounding an Indian legal AI workflow in retrieved legal evidence improve legal-research reliability and relevant-evidence retrieval compared with a facts-only legal-language baseline?
+- **RQ2:** Does provenance-constrained evidence selection and citation verification reduce unsupported or unverifiable legal claims in the final output?
+- **RQ3:** Can the proposed structured explanation format improve human-verifiable transparency without materially degrading prediction or retrieval performance?
+
+The main controlled grounding comparison for RQ1 is E2 (facts-only legal-language baseline) versus E3 (the same setup plus BM25-retrieved evidence). E1 (TF-IDF with logistic regression) is a traditional predictive baseline reported for context; the E1-versus-E2 outcome comparison does not itself answer RQ1.
 
 The plan's hypotheses are reported with their final disposition rather than rewritten to match the results:
 
@@ -65,7 +66,7 @@ The plan's hypotheses are reported with their final disposition rather than rewr
 - **H2:** Moving the existing earlier-year rule before BM25 ranking will prevent ineligible documents from consuming the top-100 depth and improve authority recovery relative to post-ranking filtering. The bounded 30-case comparison supported this process hypothesis.
 - **H3:** Structured evidence presentation will be preferred to unstructured presentation when citations are held constant. The seven-case author self-review was directionally consistent with this hypothesis, but its non-independence and sample size preclude a general human-subject claim.
 
-Outcome prediction was added to E3 and E4 in a later revision, extending the original evidence-only implementation by reusing the E2 checkpoint through inference-time evidence augmentation. E3 and E4 metrics are reported separately on the same 30 cases; no canonical E4-minus-E3 prediction-delta metric is defined.
+Outcome prediction was added to E3 and E4 in a later revision, extending the original evidence-only implementation by reusing the E2 checkpoint through inference-time evidence augmentation. These secondary prediction analyses sit under RQ1 (grounding comparison) and RQ2 (integrity of the evidence path) respectively; there is no fourth research question. E3 and E4 metrics are reported separately on the same 30 cases; no canonical E4-minus-E3 prediction-delta metric is defined.
 
 ## 6. Operational Definitions
 
@@ -205,7 +206,7 @@ On the separate 30-case answer-key subset, evidence-augmented E3 achieved accura
 
 *Figure 1. Accuracy and macro F1 for E1, corrected E2 mean-logit and majority-vote pooling, and the majority baseline on the eligible ILDC test population (n=1,503).*
 
-This result does not show that domain pre-training is generally ineffective. It shows that, under the implemented facts extraction, data size, training budget, window aggregation, and frozen settings, the sparse baseline performed better. The per-case disagreement analysis below also shows non-identical errors.
+This result does not show that domain pre-training is generally ineffective. It shows that, under the implemented facts extraction, data size, training budget, window aggregation, and frozen settings, the sparse baseline performed better. The per-case disagreement analysis below also shows non-identical errors. E1 is reported here as the traditional contextual baseline; the RQ1 grounding comparison is E2 versus E3, reported through the retrieval analyses in Section 11.3 and the evidence-augmented subset results above.
 
 ### 11.3 Authority recovery, grounding, and temporal integrity
 
@@ -318,11 +319,11 @@ E4 evaluates several integrity checks together. The results establish bundle beh
 
 ### 13.8 Explanation review and uncertainty language
 
-The seven-case review is a non-random author self-review, not independent usability or legal-correctness evidence. In addition, generic uncertainty text did not adapt to the comparatively coherent evidence for `2013_35`, indicating uncalibrated caution.
+The seven-case review is a non-random author self-review, not independent usability or legal-correctness evidence. Any subsequent blinded LLM-based comparison of the same packets is exploratory presentation evaluation only and likewise does not constitute independent human evaluation. In addition, generic uncertainty text did not adapt to the comparatively coherent evidence for `2013_35`, indicating uncalibrated caution.
 
 ### 13.9 Semester-scale evaluation
 
-This is a semester-scale prototype, not a production service. The controlled scope limits model breadth, retrieval variants, answer-key annotation, independent review, and deployment testing. Results apply to the frozen implementation and samples rather than all users, courts, domains, or changing corpora.
+This is a semester-scale prototype, not a production service. The controlled scope limits model breadth, retrieval variants, answer-key annotation, independent review, and deployment testing. Results apply to the frozen implementation and samples rather than all users, courts, domains, or changing corpora. The researcher interface is a static local demo rather than the full React/Spring production-style stack; latency, memory, and compute efficiency metrics are not reported; and no standalone architecture-diagram file ships beyond the in-text architecture description and results figures.
 
 **Planned follow-up work.** The highest-value evaluation extension is an era-balanced answer key of 75-100 cases, large enough to support a paired significance test such as McNemar's test between retrieval configurations. A separate blinded review should use independent raters and report inter-annotator agreement, such as Fleiss' kappa. A hybrid dense-sparse retrieval comparison is also planned to test whether semantic retrieval closes residual lexical misses while retaining the present temporal and provenance controls. These are revision-stage extensions consistent with the existing future-work scope, not claims of the current evaluation.
 
