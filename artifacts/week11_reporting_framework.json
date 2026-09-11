@@ -1,0 +1,25 @@
+{
+  "reporting_framework_version": "week11-temporal-reporting-v2-preranked",
+  "scope": "The frozen 30-case answer-key cohort, rerun once for the approved final pre-ranking temporal-filter test.",
+  "retrieval_configuration": "week11-bm25-salient-terms-preranked-temporal-v3",
+  "temporal_filter_stage": "before BM25 ORDER BY/LIMIT",
+  "pre_ranking_baseline": {
+    "configuration": "week10-bm25-salient-terms-selfmatch-coverage-v2",
+    "candidate_status_counts": {
+      "eligible": 764,
+      "ineligible": 1712,
+      "ambiguous_excluded": 267
+    }
+  },
+  "temporal_integrity_counts": {
+    "returned_candidate_count": 3000,
+    "candidate_status_counts": {
+      "eligible": 3000
+    },
+    "displayed_citation_count": 150,
+    "final_cited_status_counts": {
+      "eligible": 150
+    }
+  },
+  "reporting_revision": "Two formerly reported temporal exposure-rate metrics were removed on the project mentor's guidance; direct status counts remain."
+}

@@ -1,0 +1,31 @@
+# Raw corpora are acquired locally and must not be committed.
+/corpus/ildc/*.parquet
+/corpus/ecourts/metadata/
+/corpus/ecourts/pdfs/
+/corpus/ecourts/archives/
+/corpus/ecourts/acquisition_record.json
+/corpus/ecourts/cleaned/
+/corpus/ecourts/cleaning_record.json
+/corpus/download_record.json
+/corpus/dedup_matches.csv
+/corpus/dedup_alignment_rejections.csv
+/corpus/temporal_ambiguities.csv
+
+# Python runtime artifacts
+__pycache__/
+*.py[cod]
+
+# Local PostgreSQL credentials
+.env
+
+# Local retrieval index (rebuild from PostgreSQL provenance)
+/retrieval/
+
+# Local E2 model caches, checkpoints, and weights (results remain tracked).
+/artifacts/e2_hf_cache/
+/artifacts/e2_training_checkpoints/
+/artifacts/e2_chunk_pool_checkpoints*/
+/artifacts/e2_chunk_pool_cache/
+/artifacts/e2_model/
+/artifacts/e2_docker_build*.log
+/artifacts/e2_training*.log

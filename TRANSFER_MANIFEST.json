@@ -1,0 +1,37 @@
+{
+  "package_purpose": "Teammate transfer for reproduction of the frozen legal XAI project baseline.",
+  "created_on": "2026-09-11",
+  "source_commit": "75da550dcf2a9057782be194f0631d09ea22c945",
+  "source_snapshot": "Committed HEAD only. Uncommitted working-tree files are intentionally excluded.",
+  "runtime_assets_included": [
+    "corpus/dedup_matches.csv",
+    "corpus/ildc/single_train.parquet",
+    "corpus/ildc/single_validation.parquet",
+    "corpus/ildc/single_test.parquet",
+    "corpus/ecourts",
+    "retrieval/bm25.sqlite",
+    "artifacts/e2_chunk_pool_checkpoints_cached/checkpoint-6318",
+    "artifacts/e2_hf_cache",
+    "artifacts/e2_chunk_pool_cache"
+  ],
+  "committed_file_count": 288,
+  "runtime_file_count": 39240,
+  "runtime_bytes": 27586157579,
+  "intentionally_excluded": [
+    ".git history and metadata",
+    ".env files, passwords, API keys, and all other credentials",
+    "PostgreSQL provenance database dump (not present in this workspace)",
+    "temporary render images and local report-builder work",
+    "non-final/retry E2 training checkpoints"
+  ],
+  "required_separate_transfer": {
+    "path": "provenance.dump",
+    "reason": "The PostgreSQL provenance dump is required for complete provenance replay but is not stored in this repository.",
+    "suggested_export": "pg_dump -Fc -h 127.0.0.1 -p 54329 -U legal_xai -d legal_xai -f provenance.dump"
+  },
+  "verification": {
+    "freeze_record": "config/reproducibility_freeze.json",
+    "bm25_sqlite_sha256": "3187f7fce824ea8ccc5a26d908936ce4b78e81238289ea69348cb861350d65fb",
+    "checkpoint_6318_model_safetensors_sha256": "924a5bb9078bcc212ef07acb9f08dfaa8593e880ae3868203deb28586dbdc773"
+  }
+}

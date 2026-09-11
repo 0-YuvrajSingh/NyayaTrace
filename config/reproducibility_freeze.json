@@ -1,0 +1,652 @@
+{
+  "freeze_version": "final-reproducibility-freeze-v4-e3e4-prediction",
+  "scope": "Final retrieval freeze plus the later E3/E4 evidence-augmented prediction revision; E1/E2, corpus, splits, answer key, and retrieval configuration remain unchanged.",
+  "revision_history": [
+    {
+      "date": "2026-09-06",
+      "config_id": "e3e4-evidence-augmented-inlegalbert-checkpoint6318-v1",
+      "changes": [
+        "Added E3/E4 outcome prediction by reusing frozen E2 checkpoint-6318 through inference-time evidence augmentation.",
+        "Removed FEER and FCER from reported metrics on the project mentor's guidance."
+      ],
+      "checkpoint_reused_from_E2_sha256": "924a5bb9078bcc212ef07acb9f08dfaa8593e880ae3868203deb28586dbdc773",
+      "unchanged": [
+        "E1",
+        "E2",
+        "ILDC corpus and splits",
+        "eCourts corpus",
+        "answer key",
+        "retrieval configuration"
+      ]
+    }
+  ],
+  "datasets_and_splits": {
+    "ildc_single": {
+      "splits": {
+        "train": {
+          "path": "corpus/ildc/single_train.parquet",
+          "sha256": "0d878add7371ad0d9ed41f59b0753d6c45b5fb6ebaec78b2d6284fe2a884f4b3",
+          "bytes": 56421032,
+          "rows": 5082
+        },
+        "validation": {
+          "path": "corpus/ildc/single_validation.parquet",
+          "sha256": "2140d52ecf8f9af5554c0ca9a8f15ca59994383d1e722298c1bb7ef419ca8fa1",
+          "bytes": 10770658,
+          "rows": 994
+        },
+        "test": {
+          "path": "corpus/ildc/single_test.parquet",
+          "sha256": "10cddb021db95645799c22a7db000234bde5f7657d54e5c8e2c70688b0a36efc",
+          "bytes": 16839899,
+          "rows": 1517
+        }
+      },
+      "facts_extraction": {
+        "path": "config/facts_extraction.json",
+        "sha256": "2a25d97cc5b61cb274e80d676d5af6fbdfa20c0256504155ac94b3b696e2ccf6",
+        "bytes": 2069
+      },
+      "known_limitation": "ILDC decision dates are year-granular; strict precedent filtering uses eCourts exact decision dates."
+    },
+    "ecourts_retrieval_corpus": {
+      "dataset_manifest": {
+        "path": "corpus/dataset_manifest.md",
+        "sha256": "e57fa817b1ed351cfb98f7e10332e35429371388187276366b04126a15ae31f1",
+        "bytes": 15355
+      },
+      "alignment_gated_crosswalk": {
+        "path": "corpus/dedup_matches.csv",
+        "sha256": "b05d93d58935ac89163fffe8aadb560d23b8d4d6158eeffb0b46003436b274c0",
+        "bytes": 386115
+      },
+      "cleaning_record": {
+        "path": "corpus/ecourts/cleaning_record.json",
+        "sha256": "6cf58140c663c6cf27a16276c20d570e2dde1a1d76a1ddf263aa929e3ea2076e",
+        "bytes": 18822
+      },
+      "cleaned_corpus_identity": {
+        "path": "artifacts/ecourts_corpus_identity.json",
+        "sha256": "d88d6b197d6991efc44cfb2338618d4993473b524a123cab9bb4d35e785d77ca",
+        "bytes": 16545,
+        "cleaned_jsonl_aggregate_sha256": "f0229bbb1242548abd57c4f8ec86a03d4edef4d2182d0ed6cbc442ee708f000f",
+        "cleaned_jsonl_file_count": 71,
+        "cleaned_jsonl_record_count": 2343435,
+        "identity_scope": "Final local cleaned JSONL corpus. This identifies the cleaned corpus bytes but is not an immutable upstream S3 snapshot or PostgreSQL volume dump."
+      },
+      "bm25_index": {
+        "path": "retrieval/bm25.sqlite",
+        "sha256": "3187f7fce824ea8ccc5a26d908936ce4b78e81238289ea69348cb861350d65fb",
+        "bytes": 2269376512
+      },
+      "index_build_record": {
+        "path": "artifacts/bm25_index.json",
+        "sha256": "6e904436c515aa34ed9ea09214f32969e2e48bf5e3a495d1b8e0a674eb8aded8",
+        "bytes": 300
+      }
+    }
+  },
+  "experiments": {
+    "E1": {
+      "config": {
+        "path": "config/e1_baseline.json",
+        "sha256": "ce52fe6601c92a9c9cb40a83bc6c0124c929070cbf5d64029b5e3b02ca47b55a",
+        "bytes": 1249
+      },
+      "result": {
+        "path": "artifacts/e1_baseline_results.json",
+        "sha256": "0726043d7e2445886f7c8658e4c7b8560f321d079b3e8203aa2d5890c9ccf13d",
+        "bytes": 5858
+      },
+      "reconstructed_model": {
+        "path": "artifacts/e1_reconstructed_model.joblib",
+        "sha256": "60f407d85483214485b2152c05529af2c473b1a7ea59e8f0d7bb44b7409efec8",
+        "bytes": 2079388,
+        "status": "tracked_reconstruction_artifact",
+        "note": "Deterministic reconstruction from frozen C=10.0 train+validation inputs; its hash is frozen for verification."
+      },
+      "random_seed": 202605,
+      "test_metrics": {
+        "accuracy": 0.61344,
+        "macro_f1": 0.612342,
+        "class_0_f1": 0.632975,
+        "class_1_f1": 0.591708,
+        "confusion_matrix_labels": [
+          0,
+          1
+        ],
+        "confusion_matrix": [
+          [
+            501,
+            248
+          ],
+          [
+            333,
+            421
+          ]
+        ]
+      }
+    },
+    "E2_corrected": {
+      "config": {
+        "path": "config/e2_chunk_pool.json",
+        "sha256": "633c0e3ea7fa6c49afd27f906be2d3ac7a1c91ec088f65c388cf0dbe9eed55fd",
+        "bytes": 2124
+      },
+      "result": {
+        "path": "artifacts/e2_chunk_pool_results.json",
+        "sha256": "d68be6f4950b984d663341441e7216324b4a02c2e5bfa839bef204a760e09d80",
+        "bytes": 5052
+      },
+      "correction_manifest": {
+        "path": "artifacts/e2_correction_manifest.json",
+        "sha256": "1ae92bc5e5b54fac129480e3c647dd755527cd66fc8f4fa476c636c4341b9f0e",
+        "bytes": 2309
+      },
+      "checkpoint_6318": {
+        "weights": {
+          "path": "artifacts/e2_chunk_pool_checkpoints_cached/checkpoint-6318/model.safetensors",
+          "sha256": "924a5bb9078bcc212ef07acb9f08dfaa8593e880ae3868203deb28586dbdc773",
+          "bytes": 437958648
+        },
+        "config": {
+          "path": "artifacts/e2_chunk_pool_checkpoints_cached/checkpoint-6318/config.json",
+          "sha256": "b0b0142bc2f3b2c96238a7210382934f3901974b882e75ed6abd21152e38bae6",
+          "bytes": 760
+        },
+        "trainer_state": {
+          "path": "artifacts/e2_chunk_pool_checkpoints_cached/checkpoint-6318/trainer_state.json",
+          "sha256": "78b3ec16acfb6be14b484225822c99265812d43728855b565b8d03daa98be97f",
+          "bytes": 12931
+        },
+        "storage": "gitignored_local_artifact",
+        "note": "Checkpoint weights remain gitignored by design because of size; their SHA-256 values are tracked here for verification before replay or inference."
+      },
+      "discarded_256_token_prefix": {
+        "status": "Discarded",
+        "reason": "256-token cap; 1491/1503 (99.20%) eligible test inputs were truncated.",
+        "test_metrics": {
+          "accuracy": 0.569528,
+          "macro_f1": 0.55748,
+          "class_0_f1": 0.630497,
+          "class_1_f1": 0.484462,
+          "confusion_matrix_labels": [
+            0,
+            1
+          ],
+          "confusion_matrix": [
+            [
+              552,
+              197
+            ],
+            [
+              450,
+              304
+            ]
+          ]
+        }
+      },
+      "random_seed": 202607,
+      "model": {
+        "id": "law-ai/InLegalBERT",
+        "revision": "b5ecfed8ed6cf9d25a3cb8225a8c52f161f7401a",
+        "head_initialization": "AutoModelForSequenceClassification with a new randomly initialized two-label classification head"
+      },
+      "test_metrics": {
+        "mean_logits": {
+          "accuracy": 0.596806,
+          "macro_f1": 0.592358,
+          "class_0_f1": 0.63494,
+          "class_1_f1": 0.549777,
+          "confusion_matrix_labels": [
+            0,
+            1
+          ],
+          "confusion_matrix": [
+            [
+              527,
+              222
+            ],
+            [
+              384,
+              370
+            ]
+          ]
+        },
+        "majority_vote": {
+          "accuracy": 0.601464,
+          "macro_f1": 0.593682,
+          "class_0_f1": 0.649912,
+          "class_1_f1": 0.537452,
+          "confusion_matrix_labels": [
+            0,
+            1
+          ],
+          "confusion_matrix": [
+            [
+              556,
+              193
+            ],
+            [
+              406,
+              348
+            ]
+          ]
+        },
+        "window_coverage": {
+          "eligible_documents": 1503,
+          "documents_with_at_least_one_window": 1503,
+          "fully_covered_documents": 1503,
+          "fully_covered_document_rate": 1.0,
+          "total_windows": 9576,
+          "min_windows_per_document": 1,
+          "median_windows_per_document": 5,
+          "max_windows_per_document": 68
+        }
+      }
+    },
+    "E3_E4_evidence_augmented_prediction": {
+      "config": {
+        "path": "config/e3_e4_evidence_augmented_prediction.json",
+        "sha256": "ec0fe15e6514635d89561ea7db4e39f68b6cff6c7be49a13d8f7b526208b8ef5",
+        "bytes": 2185
+      },
+      "implementation": {
+        "src/legal_xai/evidence_augmented_prediction.py": {
+          "path": "src/legal_xai/evidence_augmented_prediction.py",
+          "sha256": "1aceee9e37ae6aaaface15cde022285f7de5be2a7805a8463902b7e13670cdd5",
+          "bytes": 9712
+        },
+        "scripts/run_evidence_pipeline.py": {
+          "path": "scripts/run_evidence_pipeline.py",
+          "sha256": "8742290cb4c2e83cc2564d11d43f0beb3a9febf3dc4ea33451414396b07f81d3",
+          "bytes": 3028
+        },
+        "scripts/run_grounded_answer_pipeline.py": {
+          "path": "scripts/run_grounded_answer_pipeline.py",
+          "sha256": "7799b5768986399747f9f601907bc5f42d4f8b29f0124368c6ca5cb109849ab9",
+          "bytes": 7322
+        },
+        "scripts/run_e3_e4_evidence_augmented_evaluation.py": {
+          "path": "scripts/run_e3_e4_evidence_augmented_evaluation.py",
+          "sha256": "6c285f00dc55b0e91238421c39062a1e2680e29e9d63911cefd93e371780bd85",
+          "bytes": 13345
+        },
+        "scripts/replay_e3_e4_evidence_augmented_evaluation.py": {
+          "path": "scripts/replay_e3_e4_evidence_augmented_evaluation.py",
+          "sha256": "a2e76abda21d4c2529de070d7d2ccbb6894776edad52ec0e1a93a97ba674375b",
+          "bytes": 2786
+        }
+      },
+      "result": {
+        "path": "artifacts/e3_e4_evidence_augmented_evaluation.json",
+        "sha256": "e28ea37e67e5d2b4a3d35e448bddba14b35573ed170f0726c394dc2aa0a16270",
+        "bytes": 1440754
+      },
+      "error_analysis": {
+        "path": "artifacts/e3_e4_prediction_error_analysis.json",
+        "sha256": "dbd2178aeadf14838484652972466d926170852a889e60a9465cf8a7883350bf",
+        "bytes": 1463
+      },
+      "config_id": "e3e4-evidence-augmented-inlegalbert-checkpoint6318-v1",
+      "method": "Inference-time evidence augmentation using the existing frozen E2 sequence-classification checkpoint; no additional training or fine-tuning.",
+      "checkpoint_reuse": {
+        "source_experiment": "E2_corrected",
+        "checkpoint_path": "artifacts/e2_chunk_pool_checkpoints_cached/checkpoint-6318",
+        "weights": {
+          "path": "artifacts/e2_chunk_pool_checkpoints_cached/checkpoint-6318/model.safetensors",
+          "sha256": "924a5bb9078bcc212ef07acb9f08dfaa8593e880ae3868203deb28586dbdc773",
+          "bytes": 437958648
+        },
+        "new_training_or_fine_tuning": false
+      },
+      "shared_E3_E4_inference": {
+        "seed": 202607,
+        "batch_size": 2,
+        "device": "cuda",
+        "precision": "fp16 autocast with float32 logits",
+        "pooling": "mean logits across all windows",
+        "decision_rule": "argmax(mean(window_logits, axis=0))",
+        "threshold": null,
+        "threshold_note": "Not applicable: the frozen E2 primary rule is two-class argmax over mean logits, not scalar thresholding."
+      },
+      "shared_E3_E4_input": {
+        "construction": "facts extract followed by selected verbatim evidence passages in selection order, separated by two newline characters",
+        "excluded_metadata": [
+          "gold label",
+          "citation identifier",
+          "retrieval score",
+          "decision date",
+          "provenance fields",
+          "rendered explanation boilerplate"
+        ],
+        "max_length": 512,
+        "overlap_tokens": 50,
+        "windowing": "full-coverage overlapping windows using the corrected E2 construction rule"
+      },
+      "population": {
+        "n": 30,
+        "description": "frozen 30-case answer-key-covered subset of the ILDC test split"
+      },
+      "metrics": {
+        "E3": {
+          "n": 30,
+          "accuracy": 0.666667,
+          "macro_f1": 0.603175,
+          "confusion_matrix_labels": [
+            0,
+            1
+          ],
+          "confusion_matrix": [
+            [
+              4,
+              3
+            ],
+            [
+              7,
+              16
+            ]
+          ]
+        },
+        "E4": {
+          "n": 30,
+          "accuracy": 0.666667,
+          "macro_f1": 0.603175,
+          "confusion_matrix_labels": [
+            0,
+            1
+          ],
+          "confusion_matrix": [
+            [
+              4,
+              3
+            ],
+            [
+              7,
+              16
+            ]
+          ]
+        }
+      },
+      "replay_verification": {
+        "date": "2026-09-06",
+        "status": "PASS",
+        "stable_sha256": "852b42d1f971b71a7b614d4aa7802a2107339760290581a5e72c1f1688a993ca0",
+        "excluded_nondeterministic_fields": [
+          "retrieval_run_id"
+        ]
+      },
+      "canonical_prediction_delta": false
+    },
+    "E4": {
+      "implementation": {
+        "src/legal_xai/retrieval.py": {
+          "path": "src/legal_xai/retrieval.py",
+          "sha256": "a08da2f560ce1107ea519f7c4e99e70d59afd7f8a29503342e3496978ee5701d",
+          "bytes": 8271
+        },
+        "src/legal_xai/evidence_pipeline.py": {
+          "path": "src/legal_xai/evidence_pipeline.py",
+          "sha256": "a9efc520358df64946101fb02398b546f160ae406efd1d685b6f9ff3cc27b468",
+          "bytes": 8368
+        },
+        "src/legal_xai/grounded_answer.py": {
+          "path": "src/legal_xai/grounded_answer.py",
+          "sha256": "2843b021e1e79ca62aa045689924598ceee25247fdcc58c3184dc7748bb8dccb",
+          "bytes": 8572
+        },
+        "src/legal_xai/citation_verifier.py": {
+          "path": "src/legal_xai/citation_verifier.py",
+          "sha256": "a9e17ee52109f17cbbd49068babb835be42f95e8b7559fbb3fe2791ef618cb09",
+          "bytes": 9634
+        },
+        "scripts/run_grounded_answer_pipeline.py": {
+          "path": "scripts/run_grounded_answer_pipeline.py",
+          "sha256": "7799b5768986399747f9f601907bc5f42d4f8b29f0124368c6ca5cb109849ab9",
+          "bytes": 7322
+        }
+      },
+      "answer_renderer": {
+        "answer_version": "week10-verified-explanation-renderer-v1",
+        "experiment": "E4",
+        "generation_mode": "controlled_extract_only",
+        "input_contract": "Accept only the Week 7 selected, temporally eligible evidence candidates and the user query; never retrieve, rank, infer, or add authorities.",
+        "required_output_sections": [
+          "legal_issue",
+          "applicable_law_and_cases",
+          "supporting_evidence",
+          "conclusion",
+          "uncertainty"
+        ],
+        "grounding_rule": "Every material legal statement is an exact selected-evidence passage with its stable provenance. The conclusion is frozen non-inferential boilerplate tied only to the displayed evidence IDs; static labels and uncertainty wording are non-material boilerplate. When no eligible evidence is selected, output no authority and state the insufficiency explicitly.",
+        "disallowed_output": [
+          "new legal facts or authorities",
+          "uncited paraphrased legal conclusions",
+          "citations absent from the supplied evidence",
+          "same-year, later, missing-date, or query-duplicate evidence"
+        ],
+        "uncertainty_text": "This is an evidence-grounded research brief, not legal advice. It reports only the selected retrieved passages and does not infer conclusions beyond them. Missing or incomplete evidence should be reviewed by a human."
+      },
+      "citation_verifier": {
+        "verification_version": "week9-citation-evidence-verifier-v2",
+        "experiment": "E4_foundation",
+        "input_contract": "A Week 8 controlled answer together with its retrieval run ID, query ID, query year, and persisted corpus provenance.",
+        "required_checks": [
+          "case citation resolves to an existing corpus chunk",
+          "displayed passage and provenance exactly match the corpus record",
+          "chunk was recorded in the retrieval run for this query",
+          "candidate is neither an exact target-case nor an audited near duplicate",
+          "candidate decision year is strictly earlier than the ILDC query year"
+        ],
+        "answer_key_measurement": "For test-split queries, reconcile expected authorities using the verified authority source ID, citation, or title plus exact decision date when the corpus stores a parallel reporter citation. Record retrieved-but-not-selected authorities separately from authorities absent from the retrieved candidates, and displayed citations that fail verification.",
+        "unsupported_citation_policy": "The controlled E3 renderer emits corpus case citations only. Any citation without a linked evidence chunk, including an unsupported case-name field, is rejected; statutes or other source types are not silently treated as verified."
+      },
+      "retrieval_selection": {
+        "selection_version": "week11-bm25-salient-terms-preranked-temporal-v3",
+        "candidate_k": 100,
+        "max_selected_evidence": 5,
+        "query_construction_version": "tfidf-segment-salient-terms-v1",
+        "query_construction": "deterministic TF-IDF salient-term extraction over the full frozen facts-only text: segment by sentence/paragraph, remove procedural-report boilerplate, score unigrams by segment TF-IDF with a mild within-document frequency factor, retain section/article cues, and select at most 32 unique terms",
+        "legacy_query_construction": "legacy-first-32-terms-v1 (retained only to reproduce the Week 9 final regression)",
+        "eligibility_requirement": "strictly earlier decision year; applied to the BM25 candidate relation before ORDER BY/LIMIT 100",
+        "temporal_filter_stage": "pre_ranking",
+        "redundancy_rule": "select at most one chunk per source_id",
+        "ordering": "descending BM25 score; retain original retrieval rank as deterministic tie-breaker",
+        "direct_content_self_match_rule": "Exclude a content self-match only when at least 100 six-token phrase occurrences overlap and at least 80% of the candidate source's unique six-token fingerprints occur in the query case. This preserves true self-copy protection while retaining an earlier authority substantially quoted in a later query judgment.",
+        "rationale": "A small, source-diverse evidence set is easier to inspect and reduces adjacent-passage duplication without adding a learned reranker. The final bounded temporal-ordering test applies the existing strict earlier-year rule before BM25 ranking so future and same-year documents cannot consume the top-100 depth. On the 30-case frozen answer-key cohort it improved Recall@5 from 5/30 to 12/30, Recall@100 from 12/30 to 15/30, and expected authorities selected from 11/30 to 12/30, with no regression among the original 12 retrieval successes. No further retrieval configuration changes are permitted."
+      },
+      "query_builder_final_regression": {
+        "artifact": {
+          "path": "artifacts/week10_post_selfmatch_freeze_regression.json",
+          "sha256": "84357553e57767899f2fea2054b7b348f940e46eb91b50a28d512e4898a2e317",
+          "bytes": 8530
+        },
+        "method_comparison": "legacy_first_32 versus salient_tfidf on six pre-specified real answer-key controls at k=100 and k=500, using identical full facts-only inputs and the unchanged BM25 index/safety filters.",
+        "results": [
+          {
+            "query_case_id": "1995_412",
+            "legacy_k100": null,
+            "legacy_k500": null,
+            "salient_k100": null,
+            "salient_k500": null,
+            "non_worsening": true
+          },
+          {
+            "query_case_id": "1986_397",
+            "legacy_k100": null,
+            "legacy_k500": null,
+            "salient_k100": null,
+            "salient_k500": null,
+            "non_worsening": true
+          },
+          {
+            "query_case_id": "2008_1629",
+            "legacy_k100": null,
+            "legacy_k500": 230,
+            "salient_k100": 1,
+            "salient_k500": 1,
+            "non_worsening": true
+          },
+          {
+            "query_case_id": "1995_425",
+            "legacy_k100": null,
+            "legacy_k500": null,
+            "salient_k100": 1,
+            "salient_k500": 1,
+            "non_worsening": true
+          },
+          {
+            "query_case_id": "2002_944",
+            "legacy_k100": null,
+            "legacy_k500": null,
+            "salient_k100": 6,
+            "salient_k500": 6,
+            "non_worsening": true
+          },
+          {
+            "query_case_id": "1988_96",
+            "legacy_k100": null,
+            "legacy_k500": null,
+            "salient_k100": 13,
+            "salient_k500": 13,
+            "non_worsening": true
+          }
+        ],
+        "decision": "adopt_salient_tfidf",
+        "decision_basis": "After the direct self-match false-positive repair, salient terms were non-worsening on all six controls and retrieved/selected 2008_1629, 1995_425, and 2002_944 at ranks 1, 1, and 6. No further query-construction variation is permitted after this check."
+      },
+      "dev_probe_selfmatch_recheck": {
+        "artifact": {
+          "path": "artifacts/week10_dev_probe_selfmatch_recheck.json",
+          "sha256": "ffb92f8b3992de060f035d625eddb6e1c7ce2e02e1140fc57d73bf5cac57c0ec",
+          "bytes": 4771
+        },
+        "summary": {
+          "before_found_at_k100": 3,
+          "before_found_at_k500": 4,
+          "after_found_at_k100": 6,
+          "after_found_at_k500": 7,
+          "newly_retrieved_after_fix": [
+            "1984_62",
+            "1988_238",
+            "1992_137"
+          ]
+        },
+        "interpretation": "The pre-fix broad lexical-mismatch conclusion is withdrawn: the self-match rule was a material contributor. The corrected configuration retrieves 6/9 expected authorities at k=100 and 7/9 at k=500; newly retrieved after the repair are 1984_62, 1988_238, 1992_137. Only the remaining absent cases are residual retrieval failures, not evidence for a corpus-wide lexical-mismatch claim."
+      },
+      "final_temporal_preranking_trial": {
+        "artifact": {
+          "path": "artifacts/week11_temporal_prerank_evaluation.json",
+          "sha256": "9a475febf1e0256deb3ace54d6257fab92985e94c165fd921e0bdec7b86a227d",
+          "bytes": 60403
+        },
+        "investigation": {
+          "path": "artifacts/week11_temporal_preranking_investigation.md",
+          "sha256": "dbb60c27fb0b14c75979b7517c25ec6de166acb50403bada314707e206859e2b",
+          "bytes": 3151
+        },
+        "decision": "adopt_pre_ranking_temporal_filter",
+        "result": {
+          "recall_at_5": 0.4,
+          "recall_at_100": 0.5,
+          "selected_expected_authorities": 12,
+          "regressions_among_original_12_retrieval_successes": 0
+        }
+      },
+      "temporal_policy": "precedent_decision_year < ildc_query_year; same-year is ambiguous and excluded; missing decision date is excluded.",
+      "duplicate_policy": "Exclude alignment-gated target/near-case source IDs. Direct text self-match additionally requires at least 100 shared six-token phrase occurrences and 80% unique source-phrase coverage, preventing a quoted earlier authority from being treated as the query case.",
+      "answer_key": {
+        "record": {
+          "path": "answer_key/authority_answer_key.json",
+          "sha256": "f4ccb0fa8bfc11425988eb0b615b491c9908a97cb9d2c8a5343a14dae8600e81",
+          "bytes": 43544
+        },
+        "evaluation_entries": 30,
+        "evaluation_target": 40,
+        "dev_example_entries": 3
+      }
+    }
+  },
+  "environment": {
+    "python": "3.11.9",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "packages": {
+      "scikit-learn": "1.9.0",
+      "pyarrow": "21.0.0",
+      "psycopg": "3.3.4",
+      "pytest": "9.1.1",
+      "torch": "2.13.0+cu130",
+      "transformers": "5.15.0"
+    },
+    "database_url_source": "LEGAL_XAI_DATABASE_URL environment variable or scripts/load_provenance.py default; credentials are intentionally not frozen in the repository.",
+    "cuda_visible_devices": "not-set",
+    "transformers_runtime_roles": {
+      "host_replay_environment": {
+        "transformers": "5.15.0",
+        "role": "The Week 16 clean-checkout E2 inference replay used the host environment and reproduced the frozen checkpoint metrics exactly."
+      },
+      "E2_training_image": {
+        "dockerfile": {
+          "path": "docker/e2.Dockerfile",
+          "sha256": "330ebd999830665b51f83deeacf8c8558f0274b0f772e31e26315b0525ec9ed8",
+          "bytes": 308
+        },
+        "transformers": "4.46.3",
+        "role": "The frozen E2 checkpoint was trained under this Dockerfile's pinned training dependency set."
+      },
+      "resolution": "The two versions coexist by role, not as an unresolved dependency conflict: 4.46.3 identifies the original E2 training container, while host 5.15.0 is the later replay environment that exactly reproduced its inference output. Re-pinning the host at this late frozen stage is unnecessary and could destabilize the verified replay."
+    },
+    "postgresql": {
+      "server_version_observed": "16.15",
+      "compose_definition": {
+        "path": "compose.yaml",
+        "sha256": "10e373be01febafb869d7e8839cd7a344faec3bf16a9126f319caaac12781016",
+        "bytes": 532
+      },
+      "declared_tag": "postgres:16-alpine",
+      "resolved_image_digest_observed": "postgres@sha256:cf78e76683b9ca8c5733cbbdce6c9262b45b6767934dd0a95e671f9a0fc20685",
+      "resolved_image_created_at_utc": "2026-08-13T19:18:09.513955733Z"
+    },
+    "container_image_policy": {
+      "scope": "local research deployment, not production infrastructure",
+      "build_definitions_last_committed": {
+        "commit": "d80114784ba814a0770b75098ce3abf872da6b51",
+        "committed_at": "2026-08-28T22:30:00+05:30",
+        "files": {
+          "compose": {
+            "path": "compose.yaml",
+            "sha256": "10e373be01febafb869d7e8839cd7a344faec3bf16a9126f319caaac12781016",
+            "bytes": 532
+          },
+          "ocr": {
+            "path": "docker/Dockerfile.ocr",
+            "sha256": "c74526c1197be57a56fd5daadcd0088d6f1ea79efd9ee3db1081b8c4e91870f0",
+            "bytes": 254
+          },
+          "E2_training": {
+            "path": "docker/e2.Dockerfile",
+            "sha256": "330ebd999830665b51f83deeacf8c8558f0274b0f772e31e26315b0525ec9ed8",
+            "bytes": 308
+          }
+        }
+      },
+      "mutable_tag_limitation": "The PostgreSQL service, OCR base image (python:3.11-slim), and E2 base image (pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime) are recorded as tags. The observed PostgreSQL digest is included above, but external base-image tags are not pinned to digests. This is an accepted limitation for the frozen local research workflow; the Dockerfile/compose hashes and last build-definition commit identify the build instructions, not an immutable remote image snapshot."
+    }
+  },
+  "replay_contract": {
+    "bounded_E4_evidence_replay": {
+      "script": "scripts/run_week10_reproducibility_replay.py",
+      "query": {
+        "query_id": "week10-replay-01",
+        "query_year": 2020,
+        "query": "anticipatory bail section 438"
+      },
+      "comparison": "Two independent E4 runs must match after excluding generated retrieval run IDs; selected chunks, answer structure, citations, temporal counts, and provenance must be identical."
+    },
+    "E3_E4_prediction_replay": {
+      "script": "scripts/replay_e3_e4_evidence_augmented_evaluation.py",
+      "population_n": 30,
+      "comparison": "A fresh E3/E4-only retrieval, verification, and prediction run must match the versioned reference artifact after excluding generated retrieval-run IDs."
+    }
+  }
+}

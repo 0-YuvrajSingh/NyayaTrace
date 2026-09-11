@@ -1,0 +1,44 @@
+{
+  "config_id": "e3e4-evidence-augmented-inlegalbert-checkpoint6318-v1",
+  "revision_date": "2026-09-06",
+  "experiments": ["E3", "E4"],
+  "method": "Inference-time evidence augmentation using the existing frozen E2 sequence-classification checkpoint; no additional training or fine-tuning.",
+  "retrieval_dependency": {
+    "config": "config/evidence_selection.json",
+    "selection_version": "week11-bm25-salient-terms-preranked-temporal-v3",
+    "max_selected_evidence": 5
+  },
+  "model": {
+    "id": "law-ai/InLegalBERT",
+    "revision": "b5ecfed8ed6cf9d25a3cb8225a8c52f161f7401a",
+    "checkpoint": "artifacts/e2_chunk_pool_checkpoints_cached/checkpoint-6318",
+    "checkpoint_sha256": "924a5bb9078bcc212ef07acb9f08dfaa8593e880ae3868203deb28586dbdc773",
+    "source_config": "config/e2_chunk_pool.json",
+    "reuse_constraint": "E3 and E4 use this identical checkpoint and inference configuration. The E2 checkpoint and E2 result remain unchanged."
+  },
+  "input": {
+    "construction": "facts extract followed by selected verbatim evidence passages in selection order, separated by two newline characters",
+    "excluded_metadata": ["gold label", "citation identifier", "retrieval score", "decision date", "provenance fields", "rendered explanation boilerplate"],
+    "max_length": 512,
+    "overlap_tokens": 50,
+    "windowing": "full-coverage overlapping windows using the corrected E2 construction rule"
+  },
+  "inference": {
+    "seed": 202607,
+    "batch_size": 2,
+    "device": "cuda",
+    "precision": "fp16 autocast with float32 logits",
+    "pooling": "mean logits across all windows",
+    "decision_rule": "argmax(mean(window_logits, axis=0))",
+    "threshold": null,
+    "threshold_note": "Not applicable: the frozen E2 primary rule is two-class argmax over mean logits, not scalar thresholding."
+  },
+  "evaluation": {
+    "population": "existing frozen 30-case answer-key-covered ILDC test subset",
+    "answer_key": "answer_key/authority_answer_key.json",
+    "test_split": "corpus/ildc/single_test.parquet",
+    "metrics": ["accuracy", "macro_f1"],
+    "prediction_delta_canonical": false,
+    "output": "artifacts/e3_e4_evidence_augmented_evaluation.json"
+  }
+}

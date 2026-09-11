@@ -1,0 +1,269 @@
+{
+  "root": "C:\\Users\\uvi58\\OneDrive\\Documents\\NyayaTrace",
+  "A_ildc": {
+    "single_train.parquet": {
+      "exists": true,
+      "bytes": 56421032,
+      "rows": 5082,
+      "row_groups": 12,
+      "columns": [
+        "id",
+        "text",
+        "label",
+        "expert_1",
+        "expert_2",
+        "expert_3",
+        "expert_4",
+        "expert_5"
+      ],
+      "num_columns": 8,
+      "sha256": "0d878add7371ad0d9ed41f59b0753d6c45b5fb6ebaec78b2d6284fe2a884f4b3",
+      "readable": true
+    },
+    "single_validation.parquet": {
+      "exists": true,
+      "bytes": 10770658,
+      "rows": 994,
+      "row_groups": 1,
+      "columns": [
+        "id",
+        "text",
+        "label",
+        "expert_1",
+        "expert_2",
+        "expert_3",
+        "expert_4",
+        "expert_5"
+      ],
+      "num_columns": 8,
+      "sha256": "2140d52ecf8f9af5554c0ca9a8f15ca59994383d1e722298c1bb7ef419ca8fa1",
+      "readable": true
+    },
+    "single_test.parquet": {
+      "exists": true,
+      "bytes": 16839899,
+      "rows": 1517,
+      "row_groups": 4,
+      "columns": [
+        "id",
+        "text",
+        "label",
+        "expert_1",
+        "expert_2",
+        "expert_3",
+        "expert_4",
+        "expert_5"
+      ],
+      "num_columns": 8,
+      "sha256": "10cddb021db95645799c22a7db000234bde5f7657d54e5c8e2c70688b0a36efc",
+      "readable": true
+    },
+    "canonical_validation_filename": "single_validation.parquet",
+    "revision_recorded": "d16219ad0423cc181ec8460d930fd10a907664b6"
+  },
+  "B_ecourts": {
+    "cleaned_year_dirs": 71,
+    "year_range": [
+      "year=1950",
+      "year=2020"
+    ],
+    "chunks_jsonl_files": 71,
+    "missing_chunks_files": [],
+    "chunk_records": 2343435,
+    "cleaned_bytes": 2712095037,
+    "metadata_files": 71,
+    "metadata_rows": 39073,
+    "pdf_count": 39069,
+    "pdf_bytes": 20969922800,
+    "dedup_matches_exists": true,
+    "dedup_matches_bytes": 386115,
+    "dataset_manifest_exists": true,
+    "identity_aggregate_sha256": "f0229bbb1242548abd57c4f8ec86a03d4edef4d2182d0ed6cbc442ee708f000f",
+    "identity_file_count": 71,
+    "identity_record_count": 2343435
+  },
+  "C_bm25": {
+    "exists": true,
+    "bytes": 2269376512,
+    "readable": true,
+    "tables": [
+      "chunk_temporal_metadata",
+      "chunks_fts",
+      "chunks_fts_config",
+      "chunks_fts_content",
+      "chunks_fts_data",
+      "chunks_fts_docsize",
+      "chunks_fts_idx"
+    ],
+    "fts_count": 2036981,
+    "temporal_count": 2036981,
+    "year_minmax": [
+      1950,
+      2020
+    ],
+    "sha256": "3187f7fce824ea8ccc5a26d908936ce4b78e81238289ea69348cb861350d65fb"
+  },
+  "D_checkpoint": {
+    "files": {
+      "model.safetensors": {
+        "exists": true,
+        "bytes": 437958648,
+        "sha256": "924a5bb9078bcc212ef07acb9f08dfaa8593e880ae3868203deb28586dbdc773"
+      },
+      "config.json": {
+        "exists": true,
+        "bytes": 760
+      },
+      "trainer_state.json": {
+        "exists": true,
+        "bytes": 12931
+      },
+      "training_args.bin": {
+        "exists": true,
+        "bytes": 5304
+      }
+    },
+    "model_type": "bert",
+    "architectures": [
+      "BertForSequenceClassification"
+    ],
+    "tokenizer_files_in_ckpt_dir": [
+      "config.json",
+      "model.safetensors",
+      "trainer_state.json",
+      "training_args.bin"
+    ],
+    "note": "tokenizer served from artifacts/e2_hf_cache hub blobs at inference (see prep report)"
+  },
+  "E_answerkey": {
+    "total": 33,
+    "evaluation": 30,
+    "dev_example": 3,
+    "entry_keys": [
+      "authority_citation",
+      "authority_decision_date",
+      "authority_title",
+      "independent_of_system_retrieval",
+      "not",
+      "query_case_id",
+      "query_case_title",
+      "query_decision_date",
+      "query_source_url",
+      "relationship",
+      "source",
+      "source_locator",
+      "status",
+      "temporal_status",
+      "verification_method",
+      "verification_source_url",
+      "verified_on"
+    ],
+    "query_years": [
+      "1971",
+      "1974",
+      "1977",
+      "1978",
+      "1980",
+      "1981",
+      "1982",
+      "1984",
+      "1985",
+      "1986",
+      "1988",
+      "1992",
+      "1993",
+      "1994",
+      "1995",
+      "1997",
+      "2002",
+      "2008",
+      "2013"
+    ],
+    "all_have_source_url": true,
+    "all_have_dates": true,
+    "all_independent": true,
+    "sha256": "f4ccb0fa8bfc11425988eb0b615b491c9908a97cb9d2c8a5343a14dae8600e81",
+    "manifest_exists": true
+  },
+  "F_config": {
+    "files": [
+      "authority_answer_key_schema.json",
+      "citation_verification.json",
+      "datasets.json",
+      "e1_baseline.json",
+      "e2_baseline.json",
+      "e2_chunk_pool.json",
+      "e3_e4_evidence_augmented_prediction.json",
+      "evidence_selection.json",
+      "facts_extraction.json",
+      "grounded_answer.json",
+      "model.json",
+      "reproducibility_freeze.json",
+      "retrieval_qa_queries.json",
+      "week11_evaluation_round.json",
+      "week7_evidence_selection_queries.json",
+      "week8_grounded_answer_queries.json"
+    ],
+    "freeze_version": "final-reproducibility-freeze-v4-e3e4-prediction"
+  },
+  "G_results": {
+    "e1": {
+      "exists": true,
+      "bytes": 5610,
+      "top_keys": [
+        "experiment",
+        "config_path",
+        "config_sha256",
+        "facts_rule_version",
+        "facts_extraction_config_sha256",
+        "selection_protocol",
+        "selected_C",
+        "validation_candidates"
+      ],
+      "checks": {
+        "has_splits_shas": true,
+        "has_versions_env": true,
+        "has_selection_protocol": true,
+        "verdict": "executed_result"
+      }
+    },
+    "e2": {
+      "exists": true,
+      "bytes": 5052,
+      "top_keys": [
+        "experiment",
+        "config_path",
+        "config_sha256",
+        "model",
+        "facts_rule_version",
+        "facts_extraction_config_sha256",
+        "selection_protocol",
+        "best_checkpoint"
+      ],
+      "checks": {
+        "has_window_coverage": true,
+        "verdict": "executed_result"
+      }
+    },
+    "e3e4": {
+      "exists": true,
+      "bytes": 1426960,
+      "top_keys": [
+        "evaluation_version",
+        "prediction_config",
+        "population",
+        "E3_outcome_prediction",
+        "E4_outcome_prediction",
+        "E3_retrieval",
+        "E4_verified_evidence",
+        "per_case_records"
+      ],
+      "checks": {
+        "per_case": 30,
+        "has_run_ids": true,
+        "has_logits": true,
+        "verdict": "executed_result"
+      }
+    }
+  }
+}

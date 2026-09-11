@@ -1,0 +1,512 @@
+[
+  {
+    "experiment": "E1",
+    "metric": "accuracy",
+    "frozen": 0.61344,
+    "reproduced": 0.61344,
+    "difference": 0.0,
+    "population": "N=1503 ILDC test eligible",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E1",
+    "metric": "macro_f1",
+    "frozen": 0.612342,
+    "reproduced": 0.612342,
+    "difference": 0.0,
+    "population": "N=1503 ILDC test eligible",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E1",
+    "metric": "class_0_f1",
+    "frozen": 0.632975,
+    "reproduced": 0.632975,
+    "difference": 0.0,
+    "population": "N=1503 ILDC test eligible",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E1",
+    "metric": "class_1_f1",
+    "frozen": 0.591708,
+    "reproduced": 0.591708,
+    "difference": 0.0,
+    "population": "N=1503 ILDC test eligible",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E1",
+    "metric": "confusion_matrix",
+    "frozen": [
+      [
+        501,
+        248
+      ],
+      [
+        333,
+        421
+      ]
+    ],
+    "reproduced": [
+      [
+        501,
+        248
+      ],
+      [
+        333,
+        421
+      ]
+    ],
+    "difference": "",
+    "population": "N=1503",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E1",
+    "metric": "selected_C",
+    "frozen": 10.0,
+    "reproduced": 10.0,
+    "difference": 0.0,
+    "population": "val N=983",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E2-mean-logits",
+    "metric": "accuracy",
+    "frozen": 0.596806,
+    "reproduced": 0.596806,
+    "difference": 0.0,
+    "population": "N=1503, 9576 windows",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E2-mean-logits",
+    "metric": "macro_f1",
+    "frozen": 0.592358,
+    "reproduced": 0.592358,
+    "difference": 0.0,
+    "population": "N=1503, 9576 windows",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E2-mean-logits",
+    "metric": "class_0_f1",
+    "frozen": 0.63494,
+    "reproduced": 0.63494,
+    "difference": 0.0,
+    "population": "N=1503, 9576 windows",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E2-mean-logits",
+    "metric": "class_1_f1",
+    "frozen": 0.549777,
+    "reproduced": 0.549777,
+    "difference": 0.0,
+    "population": "N=1503, 9576 windows",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E2-mean-logits",
+    "metric": "confusion_matrix",
+    "frozen": [
+      [
+        527,
+        222
+      ],
+      [
+        384,
+        370
+      ]
+    ],
+    "reproduced": [
+      [
+        527,
+        222
+      ],
+      [
+        384,
+        370
+      ]
+    ],
+    "difference": "",
+    "population": "N=1503",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E2-majority-vote",
+    "metric": "accuracy",
+    "frozen": 0.601464,
+    "reproduced": 0.601464,
+    "difference": 0.0,
+    "population": "N=1503, 9576 windows",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E2-majority-vote",
+    "metric": "macro_f1",
+    "frozen": 0.593682,
+    "reproduced": 0.593682,
+    "difference": 0.0,
+    "population": "N=1503, 9576 windows",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E2-majority-vote",
+    "metric": "class_0_f1",
+    "frozen": 0.649912,
+    "reproduced": 0.649912,
+    "difference": 0.0,
+    "population": "N=1503, 9576 windows",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E2-majority-vote",
+    "metric": "class_1_f1",
+    "frozen": 0.537452,
+    "reproduced": 0.537452,
+    "difference": 0.0,
+    "population": "N=1503, 9576 windows",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E2-majority-vote",
+    "metric": "confusion_matrix",
+    "frozen": [
+      [
+        556,
+        193
+      ],
+      [
+        406,
+        348
+      ]
+    ],
+    "reproduced": [
+      [
+        556,
+        193
+      ],
+      [
+        406,
+        348
+      ]
+    ],
+    "difference": "",
+    "population": "N=1503",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E2",
+    "metric": "per_case_records_identical",
+    "frozen": true,
+    "reproduced": true,
+    "difference": "",
+    "population": "N=1503",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E3",
+    "metric": "recall_at_5",
+    "frozen": 0.4,
+    "reproduced": 0.4,
+    "difference": 0.0,
+    "population": "N=30 cases / 150 citations",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E3",
+    "metric": "recall_at_100",
+    "frozen": 0.5,
+    "reproduced": 0.5,
+    "difference": 0.0,
+    "population": "N=30 cases / 150 citations",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E3",
+    "metric": "authority_consistent_precision",
+    "frozen": 0.08,
+    "reproduced": 0.08,
+    "difference": 0.0,
+    "population": "N=30 cases / 150 citations",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E3",
+    "metric": "authority_consistent_recall",
+    "frozen": 0.4,
+    "reproduced": 0.4,
+    "difference": 0.0,
+    "population": "N=30 cases / 150 citations",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E3",
+    "metric": "authority_consistent_f1",
+    "frozen": 0.133333,
+    "reproduced": 0.133333,
+    "difference": 0.0,
+    "population": "N=30 cases / 150 citations",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E3",
+    "metric": "citation_groundedness_rate",
+    "frozen": 1.0,
+    "reproduced": 1.0,
+    "difference": 0.0,
+    "population": "N=30 cases / 150 citations",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E3",
+    "metric": "citation_provenance_validity",
+    "frozen": 1.0,
+    "reproduced": 1.0,
+    "difference": 0.0,
+    "population": "N=30 cases / 150 citations",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E3",
+    "metric": "temporal_violation_rate",
+    "frozen": 0.0,
+    "reproduced": 0.0,
+    "difference": 0.0,
+    "population": "N=30 cases / 150 citations",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E3",
+    "metric": "unsupported_claim_rate",
+    "frozen": 0.0,
+    "reproduced": 0.0,
+    "difference": 0.0,
+    "population": "N=30 cases / 150 citations",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E4",
+    "metric": "recall_at_5",
+    "frozen": 0.4,
+    "reproduced": 0.4,
+    "difference": 0.0,
+    "population": "N=30 cases / 150 citations",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E4",
+    "metric": "recall_at_100",
+    "frozen": 0.5,
+    "reproduced": 0.5,
+    "difference": 0.0,
+    "population": "N=30 cases / 150 citations",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E4",
+    "metric": "authority_consistent_precision",
+    "frozen": 0.08,
+    "reproduced": 0.08,
+    "difference": 0.0,
+    "population": "N=30 cases / 150 citations",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E4",
+    "metric": "authority_consistent_recall",
+    "frozen": 0.4,
+    "reproduced": 0.4,
+    "difference": 0.0,
+    "population": "N=30 cases / 150 citations",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E4",
+    "metric": "authority_consistent_f1",
+    "frozen": 0.133333,
+    "reproduced": 0.133333,
+    "difference": 0.0,
+    "population": "N=30 cases / 150 citations",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E4",
+    "metric": "citation_groundedness_rate",
+    "frozen": 1.0,
+    "reproduced": 1.0,
+    "difference": 0.0,
+    "population": "N=30 cases / 150 citations",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E4",
+    "metric": "citation_provenance_validity",
+    "frozen": 1.0,
+    "reproduced": 1.0,
+    "difference": 0.0,
+    "population": "N=30 cases / 150 citations",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E4",
+    "metric": "temporal_violation_rate",
+    "frozen": 0.0,
+    "reproduced": 0.0,
+    "difference": 0.0,
+    "population": "N=30 cases / 150 citations",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E4",
+    "metric": "unsupported_claim_rate",
+    "frozen": 0.0,
+    "reproduced": 0.0,
+    "difference": 0.0,
+    "population": "N=30 cases / 150 citations",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E3-pred",
+    "metric": "accuracy",
+    "frozen": 0.666667,
+    "reproduced": 0.666667,
+    "difference": 0.0,
+    "population": "N=30",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E3-pred",
+    "metric": "macro_f1",
+    "frozen": 0.603175,
+    "reproduced": 0.603175,
+    "difference": 0.0,
+    "population": "N=30",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E3-pred",
+    "metric": "confusion_matrix",
+    "frozen": [
+      [
+        4,
+        3
+      ],
+      [
+        7,
+        16
+      ]
+    ],
+    "reproduced": [
+      [
+        4,
+        3
+      ],
+      [
+        7,
+        16
+      ]
+    ],
+    "difference": "",
+    "population": "N=30",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E4-pred",
+    "metric": "accuracy",
+    "frozen": 0.666667,
+    "reproduced": 0.666667,
+    "difference": 0.0,
+    "population": "N=30",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E4-pred",
+    "metric": "macro_f1",
+    "frozen": 0.603175,
+    "reproduced": 0.603175,
+    "difference": 0.0,
+    "population": "N=30",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E4-pred",
+    "metric": "confusion_matrix",
+    "frozen": [
+      [
+        4,
+        3
+      ],
+      [
+        7,
+        16
+      ]
+    ],
+    "reproduced": [
+      [
+        4,
+        3
+      ],
+      [
+        7,
+        16
+      ]
+    ],
+    "difference": "",
+    "population": "N=30",
+    "status": "EXACT_REPRODUCTION",
+    "explanation": ""
+  },
+  {
+    "experiment": "E3/E4",
+    "metric": "per_case_stable_records",
+    "frozen": true,
+    "reproduced": false,
+    "difference": "",
+    "population": "N=30",
+    "status": "MINOR_NUMERICAL_DRIFT",
+    "explanation": "5/30 cases differ ONLY in raw mean_logits at ~1e-4 (e.g. -0.63845319 vs -0.63823956); predicted labels, accuracies, F1, CM, retrieval ranks, citations and provenance identical. Cause: torch/cuDNN kernel nondeterminism across environments (frozen: torch 2.13.0+cu130 host replay; reproduced: torch 2.5.1+cu124 E2 image). No reported metric affected."
+  }
+]

@@ -1,0 +1,37 @@
+{
+  "version": "week7-authority-key-v3",
+  "purpose": "Independent gold references for later authority-retrieval evaluation; never generated from the project's retrieval output.",
+  "query_population": "ILDC fixed test split only",
+  "inclusion_standard": [
+    "Identify the query judgment from an external judgment source, not project retrieval output.",
+    "Record only an authority explicitly cited or applied in the source judgment, with a page or paragraph locator.",
+    "Store a direct, publicly accessible source URL and the verification date.",
+    "For retrieval evaluation, an authority must satisfy the pre-query temporal rule; same-year authorities require an explicit ambiguity note."
+  ],
+  "required_entry_fields": [
+    "query_case_id",
+    "query_case_title",
+    "query_decision_date",
+    "query_source_url",
+    "authority_title",
+    "authority_citation",
+    "authority_decision_date",
+    "relationship",
+    "source_locator",
+    "verification_source_url",
+    "verified_on",
+    "independent_of_system_retrieval",
+    "status"
+  ],
+  "allowed_statuses": ["evaluation", "dev_example"],
+  "source_policy": {
+    "preferred": "Live court portal or Supreme Court Reports host when convenient.",
+    "accepted_primary_fallback": "eCourts mirror, scraped from scr.sci.gov.in; it must carry its Week 3 native-text/OCR-repaired status and must not be a residual low-quality exclusion.",
+    "not_accepted": "Third-party aggregators, case-law blogs, summaries, or citations proposed by this project's retrieval system."
+  },
+  "ecourts_mirror_entry_required_fields": ["source", "verification_method", "not"],
+  "evaluation_target_test_cases": 40,
+  "evaluation_pacing": {"week_7": 10, "week_8": 10, "week_9": 10, "week_10": 9},
+  "allowed_relationships": ["applied", "relied_on", "distinguished", "quoted_for_principle"],
+  "prohibited_source": "Any citation returned, ranked, or suggested by this project's retrieval system."
+}

@@ -1,0 +1,21 @@
+{
+  "answer_version": "week10-verified-explanation-renderer-v1",
+  "experiment": "E4",
+  "generation_mode": "controlled_extract_only",
+  "input_contract": "Accept only the Week 7 selected, temporally eligible evidence candidates and the user query; never retrieve, rank, infer, or add authorities.",
+  "required_output_sections": [
+    "legal_issue",
+    "applicable_law_and_cases",
+    "supporting_evidence",
+    "conclusion",
+    "uncertainty"
+  ],
+  "grounding_rule": "Every material legal statement is an exact selected-evidence passage with its stable provenance. The conclusion is frozen non-inferential boilerplate tied only to the displayed evidence IDs; static labels and uncertainty wording are non-material boilerplate. When no eligible evidence is selected, output no authority and state the insufficiency explicitly.",
+  "disallowed_output": [
+    "new legal facts or authorities",
+    "uncited paraphrased legal conclusions",
+    "citations absent from the supplied evidence",
+    "same-year, later, missing-date, or query-duplicate evidence"
+  ],
+  "uncertainty_text": "This is an evidence-grounded research brief, not legal advice. It reports only the selected retrieved passages and does not infer conclusions beyond them. Missing or incomplete evidence should be reviewed by a human."
+}

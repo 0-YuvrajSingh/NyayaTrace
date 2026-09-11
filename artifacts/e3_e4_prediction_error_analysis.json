@@ -1,0 +1,59 @@
+{
+  "analysis_version": "e3e4-evidence-augmented-prediction-error-analysis-v1",
+  "source": "artifacts/e3_e4_evidence_augmented_evaluation.json",
+  "population_n": 30,
+  "categories": {
+    "E2_wrong_E3_E4_correct": {
+      "count": 2,
+      "case_ids": [
+        "1974_36",
+        "1984_136"
+      ]
+    },
+    "E3_correct_E4_wrong": {
+      "count": 0,
+      "case_ids": []
+    },
+    "E3_wrong_E4_correct": {
+      "count": 0,
+      "case_ids": []
+    },
+    "E3_E4_prediction_correct_citation_unsupported": {
+      "count": 0,
+      "case_ids": []
+    },
+    "expected_authority_retrieved_prediction_wrong": {
+      "count": 4,
+      "case_ids": [
+        "2008_1629",
+        "1981_187",
+        "1982_29",
+        "1985_40"
+      ]
+    },
+    "citation_traceable_but_expected_authority_not_selected": {
+      "count": 18,
+      "case_ids": [
+        "1997_792",
+        "1993_185",
+        "1971_295",
+        "1974_36",
+        "1986_378",
+        "1984_136",
+        "2013_35",
+        "1980_217",
+        "1980_133",
+        "1978_33",
+        "1977_145",
+        "1981_55",
+        "1995_412",
+        "1995_403",
+        "1986_397",
+        "1994_632",
+        "1985_40",
+        "1992_84"
+      ]
+    }
+  },
+  "interpretation": "Categories are computed from real E3/E4 outcome labels on the frozen 30-case subset. Zero counts are measured zeros, not structurally inapplicable categories."
+}

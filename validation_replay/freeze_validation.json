@@ -1,0 +1,160 @@
+{
+  "freeze_version": "final-reproducibility-freeze-v4-e3e4-prediction",
+  "verified_at_utc": "2026-09-11",
+  "items": [
+    {
+      "path": "corpus/ildc/single_train.parquet",
+      "status": "EXACT_MATCH",
+      "note": "sha+bytes+rows verified 2026-09-11"
+    },
+    {
+      "path": "corpus/ildc/single_validation.parquet",
+      "status": "EXACT_MATCH",
+      "note": "sha+bytes+rows verified 2026-09-11"
+    },
+    {
+      "path": "corpus/ildc/single_test.parquet",
+      "status": "EXACT_MATCH",
+      "note": "sha+bytes+rows verified 2026-09-11"
+    },
+    {
+      "path": "config/facts_extraction.json",
+      "status": "EXACT_MATCH",
+      "note": "prep-phase sha+bytes OK"
+    },
+    {
+      "path": "corpus/dataset_manifest.md",
+      "status": "BYTE_DRIFT",
+      "note": "18B line-ending drift; content counts verified (7593 splits)"
+    },
+    {
+      "path": "corpus/dedup_matches.csv",
+      "status": "EXACT_MATCH",
+      "note": "sha+bytes OK"
+    },
+    {
+      "path": "corpus/ecourts/cleaning_record.json",
+      "status": "EXACT_MATCH",
+      "note": "sha+bytes OK"
+    },
+    {
+      "path": "artifacts/ecourts_corpus_identity.json",
+      "status": "BYTE_DRIFT",
+      "note": "wrapper bytes differ; aggregate f0229bbb identical; 71 files/2343435 records verified live"
+    },
+    {
+      "path": "retrieval/bm25.sqlite",
+      "status": "EXACT_MATCH",
+      "note": "sha+bytes+2,036,981 rows verified 2026-09-11"
+    },
+    {
+      "path": "artifacts/bm25_index.json",
+      "status": "BYTE_DRIFT",
+      "note": "embeds built_at_utc by design; semantic fields identical"
+    },
+    {
+      "path": "config/e1_baseline.json",
+      "status": "EXACT_MATCH",
+      "note": "sha+bytes OK; E1 reproduced exactly"
+    },
+    {
+      "path": "artifacts/e1_baseline_results.json",
+      "status": "BYTE_DRIFT",
+      "note": "metrics/CM/splits identical; E1 reproduced exactly"
+    },
+    {
+      "path": "artifacts/e1_reconstructed_model.joblib",
+      "status": "EXACT_MATCH",
+      "note": "sha+bytes OK"
+    },
+    {
+      "path": "config/e2_chunk_pool.json",
+      "status": "EXACT_MATCH",
+      "note": "sha+bytes OK"
+    },
+    {
+      "path": "artifacts/e2_chunk_pool_results.json",
+      "status": "EXACT_MATCH",
+      "note": "sha+bytes OK; E2 inference reproduced exactly"
+    },
+    {
+      "path": "artifacts/e2_correction_manifest.json",
+      "status": "BYTE_DRIFT",
+      "note": "metrics identical (discarded-run record)"
+    },
+    {
+      "path": "artifacts/e2_chunk_pool_checkpoints_cached/checkpoint-6318/model.safetensors",
+      "status": "EXACT_MATCH",
+      "note": "sha+bytes verified 2026-09-11"
+    },
+    {
+      "path": "artifacts/e2_chunk_pool_checkpoints_cached/checkpoint-6318/config.json",
+      "status": "EXACT_MATCH",
+      "note": ""
+    },
+    {
+      "path": "artifacts/e2_chunk_pool_checkpoints_cached/checkpoint-6318/trainer_state.json",
+      "status": "EXACT_MATCH",
+      "note": ""
+    },
+    {
+      "path": "config/e3_e4_evidence_augmented_prediction.json",
+      "status": "EXACT_MATCH",
+      "note": "sha+bytes OK"
+    },
+    {
+      "path": "artifacts/e3_e4_evidence_augmented_evaluation.json",
+      "status": "BYTE_DRIFT",
+      "note": "all reported metrics identical; E3/E4 reproduced; raw logits ~1e-4 env drift only"
+    },
+    {
+      "path": "artifacts/e3_e4_prediction_error_analysis.json",
+      "status": "BYTE_DRIFT",
+      "note": "categories identical"
+    },
+    {
+      "path": "answer_key/authority_answer_key.json",
+      "status": "EXACT_MATCH",
+      "note": "sha verified; 30 eval + 3 dev; untouched"
+    },
+    {
+      "path": "compose.yaml",
+      "status": "EXACT_MATCH",
+      "note": "sha+bytes OK; service started from it"
+    },
+    {
+      "path": "docker/e2.Dockerfile",
+      "status": "BYTE_DRIFT",
+      "note": "12B CRLF delta; image built from it successfully"
+    },
+    {
+      "path": "src/legal_xai/evidence_augmented_prediction.py",
+      "status": "EXACT_MATCH",
+      "note": "impl sha OK"
+    },
+    {
+      "path": "src/legal_xai/retrieval.py",
+      "status": "EXACT_MATCH",
+      "note": "impl sha OK"
+    },
+    {
+      "path": "src/legal_xai/evidence_pipeline.py",
+      "status": "EXACT_MATCH",
+      "note": "impl sha OK"
+    },
+    {
+      "path": "src/legal_xai/grounded_answer.py",
+      "status": "EXACT_MATCH",
+      "note": "impl sha OK"
+    },
+    {
+      "path": "src/legal_xai/citation_verifier.py",
+      "status": "EXACT_MATCH",
+      "note": "impl sha OK"
+    }
+  ],
+  "summary": {
+    "EXACT_MATCH": 22,
+    "BYTE_DRIFT": 8
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "derived_artifact": true,
+  "frozen_inputs": {
+    "freeze_version": "final-reproducibility-freeze-v4-e3e4-prediction",
+    "artifacts": [
+      "artifacts/e1_test_predictions.json",
+      "artifacts/e2_test_predictions.json",
+      "artifacts/e3_e4_evidence_augmented_evaluation.json"
+    ]
+  },
+  "computed_at_utc": "2026-09-11T17:13:44.767465+00:00",
+  "accuracy_wilson95": {
+    "E1_n1503": {
+      "k": 922,
+      "n": 1503,
+      "point": 0.6134397870924817,
+      "ci95_low": 0.588561240154096,
+      "ci95_high": 0.6377399185078363,
+      "method": "wilson_95"
+    },
+    "E2_mean_logits_n1503": {
+      "k": 897,
+      "n": 1503,
+      "point": 0.5968063872255489,
+      "ci95_low": 0.5717900771284071,
+      "ci95_high": 0.6213290934599282,
+      "method": "wilson_95"
+    },
+    "E2_majority_vote_n1503": {
+      "k": 904,
+      "n": 1503,
+      "point": 0.6014637391882901,
+      "ci95_low": 0.5764830016145323,
+      "ci95_high": 0.6259271256344102,
+      "method": "wilson_95"
+    },
+    "E3_n30": {
+      "k": 20,
+      "n": 30,
+      "point": 0.6666666666666666,
+      "ci95_low": 0.48779725813830266,
+      "ci95_high": 0.807697044731538,
+      "method": "wilson_95"
+    },
+    "E4_n30": {
+      "k": 20,
+      "n": 30,
+      "point": 0.6666666666666666,
+      "ci95_low": 0.48779725813830266,
+      "ci95_high": 0.807697044731538,
+      "method": "wilson_95"
+    }
+  },
+  "macro_f1_bootstrap95": {
+    "E1_n1503": {
+      "point": 0.6123415115539359,
+      "ci95_low": 0.5878500940683682,
+      "ci95_high": 0.6367070877352042,
+      "method": "nonparametric_bootstrap_percentile_B10000",
+      "seed": 20260911,
+      "n": 1503
+    },
+    "E2_mean_logits_n1503": {
+      "point": 0.5923584382104943,
+      "ci95_low": 0.5668471234647705,
+      "ci95_high": 0.616895472234588,
+      "method": "nonparametric_bootstrap_percentile_B10000",
+      "seed": 20260911,
+      "n": 1503
+    },
+    "E2_majority_vote_n1503": {
+      "point": 0.5936820347106729,
+      "ci95_low": 0.5682267419442562,
+      "ci95_high": 0.6183856447639187,
+      "method": "nonparametric_bootstrap_percentile_B10000",
+      "seed": 20260911,
+      "n": 1503
+    },
+    "E3_n30": {
+      "point": 0.6031746031746031,
+      "ci95_low": 0.4034090909090909,
+      "ci95_high": 0.7777777777777777,
+      "method": "nonparametric_bootstrap_percentile_B10000",
+      "seed": 20260911,
+      "n": 30
+    },
+    "E4_n30": {
+      "point": 0.6031746031746031,
+      "ci95_low": 0.4034090909090909,
+      "ci95_high": 0.7777777777777777,
+      "method": "nonparametric_bootstrap_percentile_B10000",
+      "seed": 20260911,
+      "n": 30
+    }
+  },
+  "retrieval_integrity_wilson95": {
+    "recall_at_5": {
+      "k": 12,
+      "n": 30,
+      "point": 0.4,
+      "ci95_low": 0.24590394326083403,
+      "ci95_high": 0.5767994750172616,
+      "method": "wilson_95"
+    },
+    "recall_at_100": {
+      "k": 15,
+      "n": 30,
+      "point": 0.5,
+      "ci95_low": 0.33153851227173764,
+      "ci95_high": 0.6684614877282624,
+      "method": "wilson_95"
+    },
+    "authority_precision_12_150": {
+      "k": 12,
+      "n": 150,
+      "point": 0.08,
+      "ci95_low": 0.0463531819392169,
+      "ci95_high": 0.13462257494318683,
+      "method": "wilson_95"
+    },
+    "citation_groundedness_150_150": {
+      "k": 150,
+      "n": 150,
+      "point": 1.0,
+      "ci95_low": 0.9750288608542812,
+      "ci95_high": 1.0,
+      "method": "wilson_95"
+    },
+    "provenance_validity_150_150": {
+      "k": 150,
+      "n": 150,
+      "point": 1.0,
+      "ci95_low": 0.9750288608542812,
+      "ci95_high": 1.0,
+      "method": "wilson_95"
+    },
+    "temporal_violation_0_150": {
+      "k": 0,
+      "n": 150,
+      "point": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 0.02497113914571871,
+      "method": "wilson_95",
+      "rule_of_three_upper95": 0.02
+    },
+    "unsupported_claim_0_150": {
+      "k": 0,
+      "n": 150,
+      "point": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 0.02497113914571871,
+      "method": "wilson_95",
+      "rule_of_three_upper95": 0.02
+    }
+  },
+  "notes": [
+    "Wilson intervals are analytic for binomial rates; macro-F1 intervals are seeded bootstrap percentiles over frozen per-case pairs.",
+    "N=30 intervals are wide by construction; report them alongside (not instead of) point estimates and denominators.",
+    "E4 predictions reuse the identical shared predictor as E3 (verified identical in this run).",
+    "Zero-event upper bounds use Wilson; rule_of_three_upper95 shown additionally."
+  ]
+}

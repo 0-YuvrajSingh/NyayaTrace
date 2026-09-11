@@ -1,0 +1,75 @@
+{
+  "evaluation_round_version": "week11-reference-evidence-round-v2-temporal-prerank",
+  "frozen_at_utc": "2026-08-30T10:44:42.5117982Z",
+  "frozen_from_commit": "f6ea888d8a56352114d7ca7a672a7094854eb84c",
+  "reference_evidence_set": {
+    "answer_key_path": "answer_key/authority_answer_key.json",
+    "evaluation_status": "evaluation",
+    "final_case_count": 30,
+    "original_aspirational_target": 40,
+    "remaining_cases_deferred_to_post_week11_backlog": 10,
+    "rationale": "The 40-case coverage target was aspirational rather than a hard evaluation gate. These 30 cases have passed fixed-test-split membership, source-first verification, and the corrected content-alignment gate after the identifier-collision and self-match corrections."
+  },
+  "metric_scope": {
+    "E1_E2_outcome_prediction": {
+      "n": 1503,
+      "population": "eligible cases in the full frozen ILDC test split"
+    },
+    "E3_E4_evidence_citation_grounding_provenance": {
+      "n": 30,
+      "population": "frozen source-verified answer-key-covered subset of the ILDC test split"
+    },
+    "E3_E4_outcome_prediction": {
+      "available": false,
+      "reason": "The frozen E3/E4 retrieval-and-evidence pipeline does not emit outcome labels; outcome prediction remains an E1/E2 measure."
+    }
+  },
+  "alignment_sanity_artifact": "artifacts/week11_answer_key_sanity_check.json",
+  "final_results": {
+    "finalized_at_utc": "2026-09-01T11:39:44.6074224Z",
+    "artifact": "artifacts/week11_temporal_prerank_evaluation.json",
+    "superseded_post_ranking_artifact": "artifacts/week11_initial_evaluation.json",
+    "error_analysis_artifact": "artifacts/week12_error_analysis.json",
+    "E3_E4_reference_authority_outcomes": {
+      "expected_authorities": 30,
+      "retrieved_and_selected": 12,
+      "retrieved_but_not_selected": 3,
+      "absent_at_k100": 15,
+      "recall_at_5": {
+        "numerator": 12,
+        "denominator": 30,
+        "value": 0.4
+      },
+      "recall_at_100": {
+        "numerator": 15,
+        "denominator": 30,
+        "value": 0.5
+      },
+      "authority_consistent_precision": {
+        "numerator": 12,
+        "denominator": 150,
+        "value": 0.08,
+        "population": "final selected and displayed evidence items, not raw top-k candidates"
+      }
+    }
+  },
+  "result_finality": {
+    "E1_E2_full_test_n1503": "Final for this evaluation round. The deferred answer-key cases do not affect outcome-prediction metrics and will not trigger a rerun.",
+    "E3_E4_answer_key_subset_n30": "Final for this evaluation round. A future 10-case answer-key extension must be reported as a separate evaluation extension or round, not overwrite these frozen n=30 results."
+  },
+  "revised_reporting_framework": {
+    "artifact": "artifacts/week11_reporting_framework.json",
+    "temporal_filter_stage": "pre_ranking",
+    "superseded_post_ranking_candidate_status_counts": {"eligible": 764, "later_year_ineligible": 1712, "same_year_ambiguous": 267},
+    "final_candidate_status_counts": {"eligible": 3000, "later_year_ineligible": 0, "same_year_ambiguous": 0},
+    "final_displayed_citation_status_counts": {"eligible": 150, "later_year_ineligible": 0, "same_year_ambiguous": 0},
+    "reporting_revision": "Two temporal exposure-rate metrics were removed on the project mentor's guidance; direct status counts remain."
+  },
+  "status": "finalized_week11_evaluation_round",
+  "later_e3_e4_prediction_revision": {
+    "date": "2026-09-06",
+    "config_id": "e3e4-evidence-augmented-inlegalbert-checkpoint6318-v1",
+    "artifact": "artifacts/e3_e4_evidence_augmented_evaluation.json",
+    "note": "This later revision adds E3/E4 outcome labels without overwriting the historical evidence-only evaluation recorded above."
+  }
+}
