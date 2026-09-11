@@ -1,0 +1,217 @@
+{
+  "run": "rq1-37-case-reference-evidence-v1",
+  "result_file": "experiments/rq1/rq1_results.json",
+  "case_csv": "experiments/rq1/rq1_case_results.csv",
+  "driver": "experiments/rq1/run_rq1_37.py (additive; frozen 30-case script untouched)",
+  "reference_set": {
+    "base_cases": 30,
+    "extension_cases": 7,
+    "combined_cases": 37,
+    "base_sha256": "f4ccb0fa8bfc11425988eb0b615b491c9908a97cb9d2c8a5343a14dae8600e81",
+    "extension_sha256": "afa0329f49afc7041cc824bcbee0e4469097588b03bc3f9009b547bb2ff4495d",
+    "assembly": "read-time concatenation; both sources unmodified"
+  },
+  "controlled_conditions": {
+    "same_cases": true,
+    "same_preprocessing": "ildc-predecision-facts-v1",
+    "same_checkpoint": "checkpoint-6318",
+    "same_seed": 202607,
+    "same_corpus": true,
+    "same_index": "fts5-bm25-unicode61-temporal-v2",
+    "same_topk": 100,
+    "same_selection": "top5-1-per-source",
+    "same_temporal_policy": "precedent_year<query_year pre-rank",
+    "controlled_change": "E2 no retrieved evidence; E3 retrieved evidence added"
+  },
+  "run_manifest_base": {
+    "baseline_commit": "2bd02b3",
+    "baseline_tag": "v4-baseline-reproduced",
+    "run_at_utc": "2026-09-11T20:02:14.657124+00:00",
+    "python": "3.11.10",
+    "platform": "Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "command": "run_rq1_37.py --output experiments/rq1/rq1_results.json (container nyayatrace-e2:repro --gpus all)"
+  },
+  "environment": {
+    "note": "executed in container nyayatrace-e2:repro --gpus all (torch 2.5.1+cu124, transformers 4.46.3, pyarrow 18.1.0, sklearn 1.5.2; runtime-added pinned psycopg 3.3.4 + rank-bm25 0.2.2)",
+    "database": "local Docker PostgreSQL 16.15 (compose.yaml unmodified)",
+    "bm25_index": "retrieval/bm25.sqlite (frozen)",
+    "checkpoint": "checkpoint-6318 (frozen, hash in freeze v4)"
+  },
+  "e2_source": "artifacts/e2_test_predictions.json (frozen; reproduced exactly in baseline phase)",
+  "strata": {
+    "base30": {
+      "n": 30,
+      "e3_retrieval": {
+        "n": 30,
+        "recall_at_5": 0.4,
+        "recall_at_100": 0.5,
+        "authority_consistent_precision": 0.08,
+        "authority_consistent_recall": 0.4,
+        "authority_consistent_f1": 0.133333,
+        "citation_groundedness_rate": 1.0,
+        "citation_provenance_validity": 1.0,
+        "temporal_violation_rate": 0.0,
+        "unsupported_claim_rate": 0.0,
+        "denominators": {
+          "expected_authorities": 30,
+          "selected_evidence_items": 150,
+          "displayed_citation_checks": 150
+        }
+      },
+      "e3_prediction": {
+        "n": 30,
+        "accuracy": 0.666667,
+        "macro_f1": 0.603175,
+        "confusion_matrix_labels": [
+          0,
+          1
+        ],
+        "confusion_matrix": [
+          [
+            4,
+            3
+          ],
+          [
+            7,
+            16
+          ]
+        ]
+      },
+      "e2_facts_only": {
+        "n": 30,
+        "accuracy": 0.7,
+        "macro_f1": 0.653402,
+        "confusion_matrix_labels": [
+          0,
+          1
+        ],
+        "confusion_matrix": [
+          [
+            5,
+            2
+          ],
+          [
+            7,
+            16
+          ]
+        ]
+      }
+    },
+    "extension7": {
+      "n": 7,
+      "e3_retrieval": {
+        "n": 7,
+        "recall_at_5": 0.0,
+        "recall_at_100": 0.714286,
+        "authority_consistent_precision": 0.0,
+        "authority_consistent_recall": 0.0,
+        "authority_consistent_f1": null,
+        "citation_groundedness_rate": 1.0,
+        "citation_provenance_validity": 1.0,
+        "temporal_violation_rate": 0.0,
+        "unsupported_claim_rate": 0.0,
+        "denominators": {
+          "expected_authorities": 7,
+          "selected_evidence_items": 35,
+          "displayed_citation_checks": 35
+        }
+      },
+      "e3_prediction": {
+        "n": 7,
+        "accuracy": 0.571429,
+        "macro_f1": 0.571429,
+        "confusion_matrix_labels": [
+          0,
+          1
+        ],
+        "confusion_matrix": [
+          [
+            2,
+            0
+          ],
+          [
+            3,
+            2
+          ]
+        ]
+      },
+      "e2_facts_only": {
+        "n": 7,
+        "accuracy": 0.571429,
+        "macro_f1": 0.571429,
+        "confusion_matrix_labels": [
+          0,
+          1
+        ],
+        "confusion_matrix": [
+          [
+            2,
+            0
+          ],
+          [
+            3,
+            2
+          ]
+        ]
+      }
+    },
+    "combined37": {
+      "n": 37,
+      "e3_retrieval": {
+        "n": 37,
+        "recall_at_5": 0.324324,
+        "recall_at_100": 0.540541,
+        "authority_consistent_precision": 0.064865,
+        "authority_consistent_recall": 0.324324,
+        "authority_consistent_f1": 0.108108,
+        "citation_groundedness_rate": 1.0,
+        "citation_provenance_validity": 1.0,
+        "temporal_violation_rate": 0.0,
+        "unsupported_claim_rate": 0.0,
+        "denominators": {
+          "expected_authorities": 37,
+          "selected_evidence_items": 185,
+          "displayed_citation_checks": 185
+        }
+      },
+      "e3_prediction": {
+        "n": 37,
+        "accuracy": 0.648649,
+        "macro_f1": 0.607347,
+        "confusion_matrix_labels": [
+          0,
+          1
+        ],
+        "confusion_matrix": [
+          [
+            6,
+            3
+          ],
+          [
+            10,
+            18
+          ]
+        ]
+      },
+      "e2_facts_only": {
+        "n": 37,
+        "accuracy": 0.675676,
+        "macro_f1": 0.644231,
+        "confusion_matrix_labels": [
+          0,
+          1
+        ],
+        "confusion_matrix": [
+          [
+            7,
+            2
+          ],
+          [
+            10,
+            18
+          ]
+        ]
+      }
+    }
+  }
+}

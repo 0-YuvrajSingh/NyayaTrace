@@ -1,0 +1,36 @@
+candidate_case_id,source_role,source_url,source_type,source_id,case_name,citation,decision_date,verification_method,verified_on,notes
+1991_87,query_ILDC,unavailable,corpus-parquet,N/A,N/A,N/A,N/A,exact record + facts eligibility,2026-09-11,test split record; year-only date
+1991_87,query_mirror,unavailable,corpus-crosswalk,1991 INSC 70,N/A,N/A,N/A,crosswalk pair passed=True,2026-09-11,corroborating mirror
+1991_87,authority_corpus,unavailable,corpus-chunks,1964_3_506_519,Khardah Co. Ltd. v. Their Workmen,[1964] 3 S.C.R. 506,02-05-1963,metadata exact + chunk passage p0002 c004,2026-09-11,52 chunks; passage supports enquiry-findings ratio
+1991_87,authority_external,unavailable,external-review,N/A,Khardah Co. Ltd. v. Their Workmen,[1964] 3 S.C.R. 506,02-05-1963,independent authority-reality confirmation,2026-09-11,supplementary; no URL available
+1991_198,query_ILDC,unavailable,corpus-parquet,N/A,N/A,N/A,N/A,exact record + facts eligibility,2026-09-11,test split record; year-only date; no mirror
+1991_198,authority_corpus,unavailable,corpus-chunks,1977_2_944_951,Manjusri Raha & Ors v. B.L. Gupta & Ors,[1977] 2 S.C.R. 944,09-02-1977,metadata exact (61 chunks),2026-09-11,identity exact; listing-only use
+1991_198,authority_external,unavailable,external-review,N/A,Manjusri Raha v. B.L. Gupta,[1977] 2 S.C.R. 944,09-02-1977,independent authority-reality confirmation,2026-09-11,supplementary; no URL available
+1991_136,query_ILDC,unavailable,corpus-parquet,N/A,N/A,N/A,N/A,exact record + facts eligibility,2026-09-11,test split record; year-only date
+1991_136,query_mirror,unavailable,corpus-crosswalk,1991 INSC 102,N/A,N/A,N/A,crosswalk pair passed=True,2026-09-11,corroborating mirror
+1991_136,authority_corpus,unavailable,corpus-chunks,1961_1_591_599,B.V. Patankar & Ors v. C.G. Sastry,[1961] 1 S.C.R. 591,08-09-1960,metadata exact + chunk passage p0002 c002,2026-09-11,44 chunks; ss.9/16 Mysore Order proposition
+1991_136,authority_external,unavailable,external-review,N/A,B.V. Patankar v. C.G. Sastry,[1961] 1 S.C.R. 591,08-09-1960,independent authority-reality confirmation,2026-09-11,supplementary; no URL available
+1990_234,query_ILDC,unavailable,corpus-parquet,N/A,N/A,N/A,N/A,exact record + facts eligibility,2026-09-11,test split record; year-only date
+1990_234,query_mirror,unavailable,corpus-crosswalk,1990 INSC 210,N/A,N/A,N/A,crosswalk pair passed=True,2026-09-11,corroborating mirror
+1990_234,authority_corpus,unavailable,corpus-chunks,1973_1_258_276,Balmadies Plantations Ltd. & Anr v. State of Tamil Nadu,[1973] 1 S.C.R. 258,19-04-1972,metadata exact + chunk passage p0001 c003,2026-09-11,87 chunks; agrarian-reform headnote
+1990_234,authority_external,unavailable,external-review,N/A,Balmadies Plantations Ltd. v. State of Tamil Nadu,[1973] 1 S.C.R. 258,19-04-1972,independent authority-reality confirmation,2026-09-11,supplementary; no URL available
+1990_324,query_ILDC,unavailable,corpus-parquet,N/A,N/A,N/A,N/A,exact record + facts eligibility,2026-09-11,test split record; year-only date; no mirror
+1990_324,authority_corpus,unavailable,corpus-chunks,1977_2_633_635,Prithvi Raj Taneja v. State of Madhya Pradesh,[1977] 2 S.C.R. 633,18-01-1977,metadata exact + chunk passage p0001 c002; OCR normalization documented,2026-09-11,18 chunks; small-plot market-value principle
+1990_324,authority_external,unavailable,external-review,N/A,Prithvi Raj Taneja v. State of Madhya Pradesh,[1977] 2 S.C.R. 633,18-01-1977,independent authority-reality confirmation,2026-09-11,supplementary; no URL available
+1992_286,query_ILDC,unavailable,corpus-parquet,N/A,N/A,N/A,N/A,exact record + facts eligibility,2026-09-11,test split record; year-only date
+1992_286,query_mirror,unavailable,corpus-crosswalk,1992 INSC 186,N/A,N/A,N/A,crosswalk pair passed=True,2026-09-11,corroborating mirror
+1992_286,authority_corpus,unavailable,corpus-chunks,1984_2_67_175,Bandhua Mukti Morcha v. Union of India,[1984] 2 S.C.R. 67,16-12-1983,metadata exact + chunk passage p0003 c003 (verbatim match),2026-09-11,407 chunks; Article 21 dignity passage
+1992_286,authority_external,unavailable,external-review,N/A,Bandhua Mukti Morcha v. Union of India,[1984] 2 S.C.R. 67,16-12-1983,independent verbatim passage corroboration,2026-09-11,supplementary-strong; no URL available
+1993_89,query_ILDC,unavailable,corpus-parquet,N/A,N/A,N/A,N/A,exact record + facts eligibility,2026-09-11,test split record; year-only date; no mirror
+1993_89,authority_corpus,unavailable,corpus-chunks,1972_2_33_140,Union of India v. H.S. Dhillon,[1972] 2 S.C.R. 33,21-10-1971,metadata exact (491 chunks),2026-09-11,identity exact; court treatment unresolved
+1993_89,authority_external,unavailable,external-review,N/A,Union of India v. H.S. Dhillon,[1972] 2 S.C.R. 33,21-10-1971,independent authority-reality confirmation,2026-09-11,supplementary; no URL available
+1993_90,query_ILDC,unavailable,corpus-parquet,N/A,N/A,N/A,N/A,exact record + facts eligibility,2026-09-11,test split record; year-only date; no mirror
+1993_90,authority_corpus,unavailable,corpus-chunks,1983_3_438_469,Delhi Cloth & General Mills etc. v. Union of India etc.,[1983] 3 S.C.R. 438,21-07-1983,metadata exact + chunk passage p0001 c005; abbreviation normalization documented,2026-09-11,139 chunks; s.58A validity holding
+1993_90,authority_external,unavailable,external-review,N/A,Delhi Cloth & General Mills Co. Ltd. v. Union of India,[1983] 3 S.C.R. 438,21-07-1983,independent authority-reality confirmation,2026-09-11,supplementary; no URL available
+1990_188,query_ILDC,unavailable,corpus-parquet,N/A,N/A,N/A,N/A,exact record + facts eligibility,2026-09-11,test split record; year-only date; no mirror
+1990_188,authority_corpus,unavailable,corpus-chunks,1976_3_369_378,Workmen of M/s Firestone Tyre & Rubber Co. v. Firestone Tyre & Rubber Co.,[1976] 3 S.C.R. 369,13-02-1976,metadata exact (59 chunks),2026-09-11,identity exact; party-only reliance
+1990_188,authority_external,unavailable,external-review,N/A,Workmen of Firestone Tyre & Rubber Co. v. Firestone Tyre & Rubber Co.,[1976] 3 S.C.R. 369,13-02-1976,independent authority-reality confirmation,2026-09-11,supplementary; no URL available
+1990_256,query_ILDC,unavailable,corpus-parquet,N/A,N/A,N/A,N/A,exact record + facts eligibility,2026-09-11,test split record; year-only date
+1990_256,query_mirror,unavailable,corpus-crosswalk,1990 INSC 240,N/A,N/A,N/A,crosswalk pair passed=True,2026-09-11,corroborating mirror
+1990_256,authority_corpus,unavailable,corpus-chunks,1964_1_639_655,Chandra Deo Singh v. Prokash Chandra Bose & Anr.,[1964] 1 S.C.R. 639,22-01-1963,metadata exact + chunk passage p0001 c003; spelling note recorded,2026-09-11,68 chunks; s.202/203 cognizance issues
+1990_256,authority_external,unavailable,external-review,N/A,Chandra Deo Singh v. Prokash/Prakash Chandra Bose,[1964] 1 S.C.R. 639,22-01-1963,independent authority-reality confirmation,2026-09-11,supplementary; no URL available

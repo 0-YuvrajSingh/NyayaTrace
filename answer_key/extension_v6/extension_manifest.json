@@ -1,0 +1,33 @@
+{
+  "base_answer_key_path": "answer_key/authority_answer_key.json",
+  "base_answer_key_sha256": "f4ccb0fa8bfc11425988eb0b615b491c9908a97cb9d2c8a5343a14dae8600e81",
+  "base_cases": 30,
+  "base_manifest_path": "answer_key/authority_answer_key_manifest.md",
+  "base_manifest_sha256": "302182ec58741230331fa317f2e7479b89ce2f3cee8ec6eca5f67e837c4576ce",
+  "baseline_commit": "2bd02b3",
+  "baseline_frozen_assets_modified": false,
+  "baseline_tag": "v4-baseline-reproduced",
+  "combined_cases": 37,
+  "created_utc": "2026-09-11T19:24:09.792333+00:00",
+  "excluded_needs_review_ids": [
+    "1990_188",
+    "1991_198",
+    "1993_89"
+  ],
+  "extension_cases": 7,
+  "extension_file": "answer_key/extension_v6/verified_7_case_extension.json",
+  "extension_file_sha256": "afa0329f49afc7041cc824bcbee0e4469097588b03bc3f9009b547bb2ff4495d",
+  "extension_version": "extension-v6-37-case-reference-evidence-v1",
+  "promoted_case_ids": [
+    "1990_234",
+    "1990_256",
+    "1990_324",
+    "1991_136",
+    "1991_87",
+    "1992_286",
+    "1993_90"
+  ],
+  "statement": "Additive extension only. No baseline frozen asset was modified; original 30-case key is byte-identical before and after.",
+  "verification_results_file": "answer_key/expansion_v5/verification/verification_results.json",
+  "verification_results_sha256": "8939dba56b714449bfe540ce7c50f949bb9b2282ab9355a1b27633a12016a1d9"
+}

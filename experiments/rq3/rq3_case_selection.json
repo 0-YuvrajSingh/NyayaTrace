@@ -1,0 +1,92 @@
+{
+  "rule": "base7 = the 7 frozen packet cases (pre-stratified: 2 success, 3 retrieved-not-selected r15/r28/r78, 1 traceability-failure, 1 absent); ext7 = ALL 7 verified extension cases (no cherry-picking; 5 retrieved-only r14/16/26/32/89, 2 absent). All evaluators rate all 14 cases (fully crossed).",
+  "n": 14,
+  "cases": [
+    {
+      "case_id": "2008_1629",
+      "stratum": "base7",
+      "presentation_order": "unstructured_first",
+      "packet_status": "frozen packet exists"
+    },
+    {
+      "case_id": "1980_105",
+      "stratum": "base7",
+      "presentation_order": "unstructured_first",
+      "packet_status": "frozen packet exists"
+    },
+    {
+      "case_id": "1980_133",
+      "stratum": "base7",
+      "presentation_order": "structured_first",
+      "packet_status": "frozen packet exists"
+    },
+    {
+      "case_id": "1981_55",
+      "stratum": "base7",
+      "presentation_order": "structured_first",
+      "packet_status": "frozen packet exists"
+    },
+    {
+      "case_id": "1985_40",
+      "stratum": "base7",
+      "presentation_order": "unstructured_first",
+      "packet_status": "frozen packet exists"
+    },
+    {
+      "case_id": "1997_792",
+      "stratum": "base7",
+      "presentation_order": "unstructured_first",
+      "packet_status": "frozen packet exists"
+    },
+    {
+      "case_id": "2013_35",
+      "stratum": "base7",
+      "presentation_order": "structured_first",
+      "packet_status": "frozen packet exists"
+    },
+    {
+      "case_id": "1990_234",
+      "stratum": "extension7",
+      "presentation_order": "unstructured_first",
+      "packet_status": "renderable on demand from RQ1 evidence + parity rule"
+    },
+    {
+      "case_id": "1990_256",
+      "stratum": "extension7",
+      "presentation_order": "unstructured_first",
+      "packet_status": "renderable on demand from RQ1 evidence + parity rule"
+    },
+    {
+      "case_id": "1990_324",
+      "stratum": "extension7",
+      "presentation_order": "structured_first",
+      "packet_status": "renderable on demand from RQ1 evidence + parity rule"
+    },
+    {
+      "case_id": "1991_136",
+      "stratum": "extension7",
+      "presentation_order": "structured_first",
+      "packet_status": "renderable on demand from RQ1 evidence + parity rule"
+    },
+    {
+      "case_id": "1991_87",
+      "stratum": "extension7",
+      "presentation_order": "structured_first",
+      "packet_status": "renderable on demand from RQ1 evidence + parity rule"
+    },
+    {
+      "case_id": "1992_286",
+      "stratum": "extension7",
+      "presentation_order": "structured_first",
+      "packet_status": "renderable on demand from RQ1 evidence + parity rule"
+    },
+    {
+      "case_id": "1993_90",
+      "stratum": "extension7",
+      "presentation_order": "unstructured_first",
+      "packet_status": "renderable on demand from RQ1 evidence + parity rule"
+    }
+  ],
+  "blinding": "condition labels hidden (Display 1/2); order from seed 20260903 (base7 replicates frozen orders; ext7 continues the same stream); raters not told the expected direction",
+  "ratings_recorded": 0
+}

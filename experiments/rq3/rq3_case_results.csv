@@ -1,0 +1,113 @@
+evaluator_id,case_id,display,condition,evidence_linkage,citation_verifiability,traceability,explanation_clarity,transparency_inspectability,overall_mean
+Gemini,2008_1629,Display 1,unstructured,2,3,2,2,2,2.2
+Gemini,2008_1629,Display 2,structured,5,5,5,5,5,5.0
+Gemini,1980_105,Display 1,unstructured,2,3,2,2,2,2.2
+Gemini,1980_105,Display 2,structured,5,5,5,5,5,5.0
+Gemini,1980_133,Display 1,structured,5,5,5,5,5,5.0
+Gemini,1980_133,Display 2,unstructured,2,3,2,2,2,2.2
+Gemini,1981_55,Display 1,structured,5,5,5,5,5,5.0
+Gemini,1981_55,Display 2,unstructured,2,3,2,2,2,2.2
+Gemini,1985_40,Display 1,unstructured,2,3,2,2,2,2.2
+Gemini,1985_40,Display 2,structured,5,5,5,5,5,5.0
+Gemini,1997_792,Display 1,unstructured,2,3,2,2,2,2.2
+Gemini,1997_792,Display 2,structured,5,5,5,5,5,5.0
+Gemini,2013_35,Display 1,structured,5,5,5,5,5,5.0
+Gemini,2013_35,Display 2,unstructured,2,3,2,2,2,2.2
+Gemini,1990_234,Display 1,unstructured,2,3,2,2,2,2.2
+Gemini,1990_234,Display 2,structured,5,5,5,5,5,5.0
+Gemini,1990_256,Display 1,unstructured,2,3,2,2,2,2.2
+Gemini,1990_256,Display 2,structured,5,5,5,5,5,5.0
+Gemini,1990_324,Display 1,structured,5,5,5,5,5,5.0
+Gemini,1990_324,Display 2,unstructured,2,3,2,2,2,2.2
+Gemini,1991_136,Display 1,structured,5,5,5,5,5,5.0
+Gemini,1991_136,Display 2,unstructured,2,3,2,2,2,2.2
+Gemini,1991_87,Display 1,structured,5,5,5,5,5,5.0
+Gemini,1991_87,Display 2,unstructured,2,3,2,2,2,2.2
+Gemini,1992_286,Display 1,structured,5,5,5,5,5,5.0
+Gemini,1992_286,Display 2,unstructured,2,3,2,2,2,2.2
+Gemini,1993_90,Display 1,unstructured,2,3,2,2,2,2.2
+Gemini,1993_90,Display 2,structured,5,5,5,5,5,5.0
+Claude Sonnet 4.6,2008_1629,Display 1,unstructured,4,4,3,3,3,3.4
+Claude Sonnet 4.6,2008_1629,Display 2,structured,4,4,4,4,4,4.0
+Claude Sonnet 4.6,1980_105,Display 1,unstructured,4,4,3,3,3,3.4
+Claude Sonnet 4.6,1980_105,Display 2,structured,4,4,4,4,4,4.0
+Claude Sonnet 4.6,1980_133,Display 1,structured,4,4,4,4,4,4.0
+Claude Sonnet 4.6,1980_133,Display 2,unstructured,4,4,3,3,3,3.4
+Claude Sonnet 4.6,1981_55,Display 1,structured,4,4,4,4,4,4.0
+Claude Sonnet 4.6,1981_55,Display 2,unstructured,4,4,3,3,3,3.4
+Claude Sonnet 4.6,1985_40,Display 1,unstructured,3,4,2,3,2,2.8
+Claude Sonnet 4.6,1985_40,Display 2,structured,3,4,3,4,3,3.4
+Claude Sonnet 4.6,1997_792,Display 1,unstructured,2,4,2,3,2,2.6
+Claude Sonnet 4.6,1997_792,Display 2,structured,2,4,3,4,3,3.2
+Claude Sonnet 4.6,2013_35,Display 1,structured,4,4,4,4,4,4.0
+Claude Sonnet 4.6,2013_35,Display 2,unstructured,4,4,3,3,3,3.4
+Claude Sonnet 4.6,1990_234,Display 1,unstructured,4,4,3,3,3,3.4
+Claude Sonnet 4.6,1990_234,Display 2,structured,4,4,4,4,4,4.0
+Claude Sonnet 4.6,1990_256,Display 1,unstructured,3,4,3,3,2,3.0
+Claude Sonnet 4.6,1990_256,Display 2,structured,3,4,4,4,3,3.6
+Claude Sonnet 4.6,1990_324,Display 1,structured,4,4,4,4,4,4.0
+Claude Sonnet 4.6,1990_324,Display 2,unstructured,4,4,3,3,3,3.4
+Claude Sonnet 4.6,1991_136,Display 1,structured,4,4,4,4,4,4.0
+Claude Sonnet 4.6,1991_136,Display 2,unstructured,4,4,3,3,3,3.4
+Claude Sonnet 4.6,1991_87,Display 1,structured,4,4,4,4,4,4.0
+Claude Sonnet 4.6,1991_87,Display 2,unstructured,4,4,3,3,3,3.4
+Claude Sonnet 4.6,1992_286,Display 1,structured,2,3,2,4,3,2.8
+Claude Sonnet 4.6,1992_286,Display 2,unstructured,2,3,2,2,2,2.2
+Claude Sonnet 4.6,1993_90,Display 1,unstructured,1,2,1,2,2,1.6
+Claude Sonnet 4.6,1993_90,Display 2,structured,1,2,2,3,2,2.0
+DeepSeek,2008_1629,Display 1,unstructured,3,4,2,2,3,2.8
+DeepSeek,2008_1629,Display 2,structured,5,5,5,5,5,5.0
+DeepSeek,1980_105,Display 1,unstructured,3,4,2,2,3,2.8
+DeepSeek,1980_105,Display 2,structured,5,5,5,5,5,5.0
+DeepSeek,1980_133,Display 1,structured,5,5,5,5,5,5.0
+DeepSeek,1980_133,Display 2,unstructured,3,4,2,2,3,2.8
+DeepSeek,1981_55,Display 1,structured,5,5,5,5,5,5.0
+DeepSeek,1981_55,Display 2,unstructured,3,4,2,2,3,2.8
+DeepSeek,1985_40,Display 1,unstructured,3,4,2,2,3,2.8
+DeepSeek,1985_40,Display 2,structured,5,5,5,5,5,5.0
+DeepSeek,1997_792,Display 1,unstructured,3,4,2,2,3,2.8
+DeepSeek,1997_792,Display 2,structured,5,5,5,5,5,5.0
+DeepSeek,2013_35,Display 1,structured,5,5,5,5,5,5.0
+DeepSeek,2013_35,Display 2,unstructured,3,4,2,2,3,2.8
+DeepSeek,1990_234,Display 1,unstructured,3,4,2,2,3,2.8
+DeepSeek,1990_234,Display 2,structured,5,5,5,5,5,5.0
+DeepSeek,1990_256,Display 1,unstructured,3,4,2,2,3,2.8
+DeepSeek,1990_256,Display 2,structured,5,5,5,5,5,5.0
+DeepSeek,1990_324,Display 1,structured,5,5,5,5,5,5.0
+DeepSeek,1990_324,Display 2,unstructured,3,4,2,2,3,2.8
+DeepSeek,1991_136,Display 1,structured,5,5,5,5,5,5.0
+DeepSeek,1991_136,Display 2,unstructured,3,4,2,2,3,2.8
+DeepSeek,1991_87,Display 1,structured,5,5,5,5,5,5.0
+DeepSeek,1991_87,Display 2,unstructured,3,4,2,2,3,2.8
+DeepSeek,1992_286,Display 1,structured,5,5,5,5,5,5.0
+DeepSeek,1992_286,Display 2,unstructured,3,4,2,2,3,2.8
+DeepSeek,1993_90,Display 1,unstructured,3,4,2,2,3,2.8
+DeepSeek,1993_90,Display 2,structured,5,5,5,5,5,5.0
+GPT-5.6 Luna,2008_1629,Display 1,unstructured,3,4,2,2,3,2.8
+GPT-5.6 Luna,2008_1629,Display 2,structured,5,5,5,5,5,5.0
+GPT-5.6 Luna,1980_105,Display 1,unstructured,3,4,2,2,3,2.8
+GPT-5.6 Luna,1980_105,Display 2,structured,5,5,5,5,5,5.0
+GPT-5.6 Luna,1980_133,Display 1,structured,5,5,5,5,5,5.0
+GPT-5.6 Luna,1980_133,Display 2,unstructured,3,4,2,2,3,2.8
+GPT-5.6 Luna,1981_55,Display 1,structured,5,5,5,5,5,5.0
+GPT-5.6 Luna,1981_55,Display 2,unstructured,3,4,2,2,3,2.8
+GPT-5.6 Luna,1985_40,Display 1,unstructured,3,4,2,2,3,2.8
+GPT-5.6 Luna,1985_40,Display 2,structured,5,5,5,5,5,5.0
+GPT-5.6 Luna,1997_792,Display 1,unstructured,3,4,2,2,3,2.8
+GPT-5.6 Luna,1997_792,Display 2,structured,5,5,5,5,5,5.0
+GPT-5.6 Luna,2013_35,Display 1,structured,5,5,5,5,5,5.0
+GPT-5.6 Luna,2013_35,Display 2,unstructured,3,4,2,2,3,2.8
+GPT-5.6 Luna,1990_234,Display 1,unstructured,3,4,2,2,3,2.8
+GPT-5.6 Luna,1990_234,Display 2,structured,5,5,5,5,5,5.0
+GPT-5.6 Luna,1990_256,Display 1,unstructured,3,4,2,2,3,2.8
+GPT-5.6 Luna,1990_256,Display 2,structured,5,5,5,5,5,5.0
+GPT-5.6 Luna,1990_324,Display 1,structured,5,5,5,5,5,5.0
+GPT-5.6 Luna,1990_324,Display 2,unstructured,3,4,2,2,3,2.8
+GPT-5.6 Luna,1991_136,Display 1,structured,5,5,5,5,5,5.0
+GPT-5.6 Luna,1991_136,Display 2,unstructured,3,4,2,2,3,2.8
+GPT-5.6 Luna,1991_87,Display 1,structured,5,5,5,5,5,5.0
+GPT-5.6 Luna,1991_87,Display 2,unstructured,3,4,2,2,3,2.8
+GPT-5.6 Luna,1992_286,Display 1,structured,5,5,5,5,5,5.0
+GPT-5.6 Luna,1992_286,Display 2,unstructured,3,4,2,2,3,2.8
+GPT-5.6 Luna,1993_90,Display 1,unstructured,3,4,2,2,3,2.8
+GPT-5.6 Luna,1993_90,Display 2,structured,5,5,5,5,5,5.0

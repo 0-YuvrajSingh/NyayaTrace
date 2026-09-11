@@ -1,0 +1,319 @@
+{
+  "packet_version": "rq3-blinded-packet-v1",
+  "seed": 20260903,
+  "generated_utc": "2026-09-11T21:22:20.251019+00:00",
+  "generator": {
+    "baseline_commit": "2bd02b3",
+    "baseline_tag": "v4-baseline-reproduced",
+    "note": "additive packet generation; no frozen file modified"
+  },
+  "source_hashes": {
+    "answer_key/authority_answer_key.json": "f4ccb0fa8bfc11425988eb0b615b491c9908a97cb9d2c8a5343a14dae8600e81",
+    "answer_key/extension_v6/verified_7_case_extension.json": "afa0329f49afc7041cc824bcbee0e4469097588b03bc3f9009b547bb2ff4495d",
+    "answer_key/expansion_v5/verification/verification_results.json": "8939dba56b714449bfe540ce7c50f949bb9b2282ab9355a1b27633a12016a1d9",
+    "experiments/rq1/rq1_results.json": "ea6201c3db28a4d89617b281fe682645e4b378c7dbb62406dacd84eb22b4ea43",
+    "experiments/rq1/rq1_case_results.csv": "1efe222b13b8f2d0f4b8d779234e4a9de683a8e1e508e43fa23bb3cf4d4fce5d",
+    "artifacts/week13_review_packet.md": "ce28a87e5c01abce08419b2859dd4acd6a090c4b1a5a787727dbc659634ee99b",
+    "artifacts/week13_rq3_ablation_parity.json": "1b13235a178de21b5c4bec69bbcd87e3688dded3072219849e6e2b91ae265717",
+    "experiments/rq3/rq3_protocol.md": "680229c0a778fb20881f9cde6ad72078d64d10164ef93aa07dd8c7b34b8dd9c0",
+    "src/legal_xai/grounded_answer.py": "2843b021e1e79ca62aa045689924598ceee25247fdcc58c3184dc7748bb8dccb",
+    "scripts/build_week13_rq3_review_packet.py": "8fe78b1c1c24ec01c802997c3a3c0be7897ce6e2bb6f9dce3e81ff2d3db0e23a",
+    "experiments/rq3/rq3_case_selection.json": "afaae25aedb284088563e9e203a3dad51bea7f288c76a4d094f68eac969bdb65"
+  },
+  "cases": [
+    {
+      "case_id": "2008_1629",
+      "display_1_condition": "unstructured",
+      "display_2_condition": "structured",
+      "display1_evidence_ids": [
+        "S_2006_2_582_600::p0015::c004",
+        "S_2005_5_223_237::p0001::c003",
+        "S_1993_1_514_522::p0007::c001",
+        "S_2006_7_58_80::p0006::c004",
+        "S_2005_1_426_436::p0005::c003"
+      ],
+      "display2_evidence_ids": [
+        "S_2006_2_582_600::p0015::c004",
+        "S_2005_5_223_237::p0001::c003",
+        "S_1993_1_514_522::p0007::c001",
+        "S_2006_7_58_80::p0006::c004",
+        "S_2005_1_426_436::p0005::c003"
+      ],
+      "parity_pass": true,
+      "evidence_source": "frozen week13 packet (verbatim body; condition header stripped)"
+    },
+    {
+      "case_id": "1980_105",
+      "display_1_condition": "unstructured",
+      "display_2_condition": "structured",
+      "display1_evidence_ids": [
+        "1973_3_117_122::p0002::c004",
+        "1972_3_898_905::p0004::c002",
+        "1977_1_702_708::p0004::c002",
+        "1980_1_209_227::p0013::c003",
+        "1979_3_242_253::p0007::c001"
+      ],
+      "display2_evidence_ids": [
+        "1973_3_117_122::p0002::c004",
+        "1972_3_898_905::p0004::c002",
+        "1977_1_702_708::p0004::c002",
+        "1980_1_209_227::p0013::c003",
+        "1979_3_242_253::p0007::c001"
+      ],
+      "parity_pass": true,
+      "evidence_source": "frozen week13 packet (verbatim body; condition header stripped)"
+    },
+    {
+      "case_id": "1980_133",
+      "display_1_condition": "structured",
+      "display_2_condition": "unstructured",
+      "display1_evidence_ids": [
+        "1967_3_727_735::p0003::c002",
+        "1970_1_507_522::p0009::c004",
+        "1973_3_303_312::p0001::c002",
+        "1965_3_448_452::p0002::c005",
+        "1964_5_379_387::p0005::c003"
+      ],
+      "display2_evidence_ids": [
+        "1967_3_727_735::p0003::c002",
+        "1970_1_507_522::p0009::c004",
+        "1973_3_303_312::p0001::c002",
+        "1965_3_448_452::p0002::c005",
+        "1964_5_379_387::p0005::c003"
+      ],
+      "parity_pass": true,
+      "evidence_source": "frozen week13 packet (verbatim body; condition header stripped)"
+    },
+    {
+      "case_id": "1981_55",
+      "display_1_condition": "structured",
+      "display_2_condition": "unstructured",
+      "display1_evidence_ids": [
+        "1979_2_75_81::p0001::c002",
+        "1980_3_1127_1142::p0002::c006",
+        "1979_2_282_291::p0002::c006",
+        "1975_2_483_490::p0004::c001",
+        "1960_3_431_440::p0007::c001"
+      ],
+      "display2_evidence_ids": [
+        "1979_2_75_81::p0001::c002",
+        "1980_3_1127_1142::p0002::c006",
+        "1979_2_282_291::p0002::c006",
+        "1975_2_483_490::p0004::c001",
+        "1960_3_431_440::p0007::c001"
+      ],
+      "parity_pass": true,
+      "evidence_source": "frozen week13 packet (verbatim body; condition header stripped)"
+    },
+    {
+      "case_id": "1985_40",
+      "display_1_condition": "unstructured",
+      "display_2_condition": "structured",
+      "display1_evidence_ids": [
+        "1984_3_930_941::p0009::c001",
+        "1972_3_770_783::p0005::c001",
+        "1980_3_1109_1121::p0001::c005",
+        "1971_3_506_521::p0003::c002",
+        "1973_1_822_840::p0004::c004"
+      ],
+      "display2_evidence_ids": [
+        "1984_3_930_941::p0009::c001",
+        "1972_3_770_783::p0005::c001",
+        "1980_3_1109_1121::p0001::c005",
+        "1971_3_506_521::p0003::c002",
+        "1973_1_822_840::p0004::c004"
+      ],
+      "parity_pass": true,
+      "evidence_source": "frozen week13 packet (verbatim body; condition header stripped)"
+    },
+    {
+      "case_id": "1997_792",
+      "display_1_condition": "unstructured",
+      "display_2_condition": "structured",
+      "display1_evidence_ids": [
+        "1995_2_396_403::p0002::c002",
+        "S_1992_2_389_417::p0025::c003",
+        "1991_2_105_187::p0001::c005",
+        "1991_2_188_190::p0001::c002",
+        "1993_2_114_120::p0003::c002"
+      ],
+      "display2_evidence_ids": [
+        "1995_2_396_403::p0002::c002",
+        "S_1992_2_389_417::p0025::c003",
+        "1991_2_105_187::p0001::c005",
+        "1991_2_188_190::p0001::c002",
+        "1993_2_114_120::p0003::c002"
+      ],
+      "parity_pass": true,
+      "evidence_source": "frozen week13 packet (verbatim body; condition header stripped)"
+    },
+    {
+      "case_id": "2013_35",
+      "display_1_condition": "structured",
+      "display_2_condition": "unstructured",
+      "display1_evidence_ids": [
+        "S_2006_6_393_403::p0001::c002",
+        "2007_1_671_676::p0004::c003",
+        "2004_2_52_64::p0005::c004",
+        "2006_3_348_360::p0001::c002",
+        "S_2002_1_366_378::p0012::c004"
+      ],
+      "display2_evidence_ids": [
+        "S_2006_6_393_403::p0001::c002",
+        "2007_1_671_676::p0004::c003",
+        "2004_2_52_64::p0005::c004",
+        "2006_3_348_360::p0001::c002",
+        "S_2002_1_366_378::p0012::c004"
+      ],
+      "parity_pass": true,
+      "evidence_source": "frozen week13 packet (verbatim body; condition header stripped)"
+    },
+    {
+      "case_id": "1990_234",
+      "display_1_condition": "unstructured",
+      "display_2_condition": "structured",
+      "display1_evidence_ids": [
+        "1981_1_206_342::p0060::c001",
+        "1983_3_536_544::p0001::c002",
+        "S_1973_1_1_1002::p0461::c004",
+        "S_1971_1_661_670::p0006::c003",
+        "1980_3_1209_1242::p0003::c003"
+      ],
+      "display2_evidence_ids": [
+        "1981_1_206_342::p0060::c001",
+        "1983_3_536_544::p0001::c002",
+        "S_1973_1_1_1002::p0461::c004",
+        "S_1971_1_661_670::p0006::c003",
+        "1980_3_1209_1242::p0003::c003"
+      ],
+      "parity_pass": true,
+      "evidence_source": "deterministic render from RQ1-selected evidence (RQ1-identical, parity-checked)"
+    },
+    {
+      "case_id": "1990_256",
+      "display_1_condition": "unstructured",
+      "display_2_condition": "structured",
+      "display1_evidence_ids": [
+        "S_1962_2_297_366::p0001::c002",
+        "S_1962_2_276_297::p0022::c003",
+        "1971_1_734_747::p0003::c023",
+        "1989_1_718_729::p0001::c002",
+        "1972_2_671_673::p0003::c003"
+      ],
+      "display2_evidence_ids": [
+        "S_1962_2_297_366::p0001::c002",
+        "S_1962_2_276_297::p0022::c003",
+        "1971_1_734_747::p0003::c023",
+        "1989_1_718_729::p0001::c002",
+        "1972_2_671_673::p0003::c003"
+      ],
+      "parity_pass": true,
+      "evidence_source": "deterministic render from RQ1-selected evidence (RQ1-identical, parity-checked)"
+    },
+    {
+      "case_id": "1990_324",
+      "display_1_condition": "structured",
+      "display_2_condition": "unstructured",
+      "display1_evidence_ids": [
+        "1988_2_1025_1042::p0009::c004",
+        "1976_3_565_578::p0009::c001",
+        "S_1989_2_336_347::p0010::c001",
+        "1989_3_743_749::p0001::c001",
+        "1976_3_585_587::p0002::c004"
+      ],
+      "display2_evidence_ids": [
+        "1988_2_1025_1042::p0009::c004",
+        "1976_3_565_578::p0009::c001",
+        "S_1989_2_336_347::p0010::c001",
+        "1989_3_743_749::p0001::c001",
+        "1976_3_585_587::p0002::c004"
+      ],
+      "parity_pass": true,
+      "evidence_source": "deterministic render from RQ1-selected evidence (RQ1-identical, parity-checked)"
+    },
+    {
+      "case_id": "1991_136",
+      "display_1_condition": "structured",
+      "display_2_condition": "unstructured",
+      "display1_evidence_ids": [
+        "1980_3_915_928::p0014::c001",
+        "1985_2_643_685::p0036::c004",
+        "S_1990_2_615_637::p0011::c001",
+        "1968_3_158_162::p0002::c006",
+        "1990_1_315_319::p0002::c002"
+      ],
+      "display2_evidence_ids": [
+        "1980_3_915_928::p0014::c001",
+        "1985_2_643_685::p0036::c004",
+        "S_1990_2_615_637::p0011::c001",
+        "1968_3_158_162::p0002::c006",
+        "1990_1_315_319::p0002::c002"
+      ],
+      "parity_pass": true,
+      "evidence_source": "deterministic render from RQ1-selected evidence (RQ1-identical, parity-checked)"
+    },
+    {
+      "case_id": "1991_87",
+      "display_1_condition": "structured",
+      "display_2_condition": "unstructured",
+      "display1_evidence_ids": [
+        "1985_1_29_62::p0012::c001",
+        "1970_3_963_969::p0002::c006",
+        "1982_1_283_287::p0001::c004",
+        "1979_2_974_996::p0021::c002",
+        "1974_3_624_651::p0007::c002"
+      ],
+      "display2_evidence_ids": [
+        "1985_1_29_62::p0012::c001",
+        "1970_3_963_969::p0002::c006",
+        "1982_1_283_287::p0001::c004",
+        "1979_2_974_996::p0021::c002",
+        "1974_3_624_651::p0007::c002"
+      ],
+      "parity_pass": true,
+      "evidence_source": "deterministic render from RQ1-selected evidence (RQ1-identical, parity-checked)"
+    },
+    {
+      "case_id": "1992_286",
+      "display_1_condition": "structured",
+      "display_2_condition": "unstructured",
+      "display1_evidence_ids": [
+        "S_1991_2_267_304::p0007::c002",
+        "1991_3_149_158::p0001::c001",
+        "S_1985_2_51_99::p0001::c003",
+        "S_1988_3_870_877::p0001::c001",
+        "1982_2_246_271::p0001::c003"
+      ],
+      "display2_evidence_ids": [
+        "S_1991_2_267_304::p0007::c002",
+        "1991_3_149_158::p0001::c001",
+        "S_1985_2_51_99::p0001::c003",
+        "S_1988_3_870_877::p0001::c001",
+        "1982_2_246_271::p0001::c003"
+      ],
+      "parity_pass": true,
+      "evidence_source": "deterministic render from RQ1-selected evidence (RQ1-identical, parity-checked)"
+    },
+    {
+      "case_id": "1993_90",
+      "display_1_condition": "unstructured",
+      "display_2_condition": "structured",
+      "display1_evidence_ids": [
+        "1982_3_9_37::p0008::c002",
+        "1980_1_491_497::p0002::c007",
+        "1968_2_311_352::p0040::c001",
+        "1982_3_411_443::p0007::c005",
+        "1987_2_1_46::p0004::c002"
+      ],
+      "display2_evidence_ids": [
+        "1982_3_9_37::p0008::c002",
+        "1980_1_491_497::p0002::c007",
+        "1968_2_311_352::p0040::c001",
+        "1982_3_411_443::p0007::c005",
+        "1987_2_1_46::p0004::c002"
+      ],
+      "parity_pass": true,
+      "evidence_source": "deterministic render from RQ1-selected evidence (RQ1-identical, parity-checked)"
+    }
+  ]
+}

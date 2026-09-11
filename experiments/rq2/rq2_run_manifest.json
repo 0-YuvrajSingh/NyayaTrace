@@ -1,0 +1,238 @@
+{
+  "run": "rq2-ablation-37-case-v1",
+  "result_file": "experiments/rq2/rq2_results.json",
+  "case_csv": "experiments/rq2/rq2_case_results.csv",
+  "design_audit": "experiments/rq2/rq2_design_audit.md",
+  "driver": "experiments/rq2/run_rq2_37.py (additive; frozen E3/E4 scripts untouched)",
+  "reference_set": {
+    "base_cases": 30,
+    "extension_cases": 7,
+    "combined_cases": 37
+  },
+  "conditions": {
+    "A": "E3 selection only; zero verification checks (frozen E3 path)",
+    "D": "full E4: render + assert + 5-check verifier, fail-closed (frozen E4 path)"
+  },
+  "positive_control_probes": {
+    "passage_mutation": {
+      "rejected": 37,
+      "denominator": 37
+    },
+    "authority_mutation": {
+      "rejected": 37,
+      "denominator": 37
+    },
+    "temporal_backdate": {
+      "rejected": 37,
+      "denominator": 37
+    }
+  },
+  "strata": {
+    "base30": {
+      "n": 30,
+      "a_checks_performed": 0,
+      "d_citation_groundedness_rate": {
+        "num": 30,
+        "den": 30,
+        "value": 1.0
+      },
+      "d_citation_provenance_validity": {
+        "num": 150,
+        "den": 150,
+        "value": 1.0
+      },
+      "d_temporal_violation_rate": {
+        "num": 0,
+        "den": 150,
+        "value": 0.0
+      },
+      "d_unsupported_claim_rate": {
+        "num": 0,
+        "den": 30,
+        "value": 0.0
+      },
+      "d_rejected_items_total": 0,
+      "cases_where_d_rejected": 0,
+      "e3_prediction": {
+        "n": 30,
+        "accuracy": 0.666667,
+        "macro_f1": 0.603175,
+        "confusion_matrix_labels": [
+          0,
+          1
+        ],
+        "confusion_matrix": [
+          [
+            4,
+            3
+          ],
+          [
+            7,
+            16
+          ]
+        ]
+      },
+      "e4_prediction": {
+        "n": 30,
+        "accuracy": 0.666667,
+        "macro_f1": 0.603175,
+        "confusion_matrix_labels": [
+          0,
+          1
+        ],
+        "confusion_matrix": [
+          [
+            4,
+            3
+          ],
+          [
+            7,
+            16
+          ]
+        ]
+      }
+    },
+    "extension7": {
+      "n": 7,
+      "a_checks_performed": 0,
+      "d_citation_groundedness_rate": {
+        "num": 7,
+        "den": 7,
+        "value": 1.0
+      },
+      "d_citation_provenance_validity": {
+        "num": 35,
+        "den": 35,
+        "value": 1.0
+      },
+      "d_temporal_violation_rate": {
+        "num": 0,
+        "den": 35,
+        "value": 0.0
+      },
+      "d_unsupported_claim_rate": {
+        "num": 0,
+        "den": 7,
+        "value": 0.0
+      },
+      "d_rejected_items_total": 0,
+      "cases_where_d_rejected": 0,
+      "e3_prediction": {
+        "n": 7,
+        "accuracy": 0.571429,
+        "macro_f1": 0.571429,
+        "confusion_matrix_labels": [
+          0,
+          1
+        ],
+        "confusion_matrix": [
+          [
+            2,
+            0
+          ],
+          [
+            3,
+            2
+          ]
+        ]
+      },
+      "e4_prediction": {
+        "n": 7,
+        "accuracy": 0.571429,
+        "macro_f1": 0.571429,
+        "confusion_matrix_labels": [
+          0,
+          1
+        ],
+        "confusion_matrix": [
+          [
+            2,
+            0
+          ],
+          [
+            3,
+            2
+          ]
+        ]
+      }
+    },
+    "combined37": {
+      "n": 37,
+      "a_checks_performed": 0,
+      "d_citation_groundedness_rate": {
+        "num": 37,
+        "den": 37,
+        "value": 1.0
+      },
+      "d_citation_provenance_validity": {
+        "num": 185,
+        "den": 185,
+        "value": 1.0
+      },
+      "d_temporal_violation_rate": {
+        "num": 0,
+        "den": 185,
+        "value": 0.0
+      },
+      "d_unsupported_claim_rate": {
+        "num": 0,
+        "den": 37,
+        "value": 0.0
+      },
+      "d_rejected_items_total": 0,
+      "cases_where_d_rejected": 0,
+      "e3_prediction": {
+        "n": 37,
+        "accuracy": 0.648649,
+        "macro_f1": 0.607347,
+        "confusion_matrix_labels": [
+          0,
+          1
+        ],
+        "confusion_matrix": [
+          [
+            6,
+            3
+          ],
+          [
+            10,
+            18
+          ]
+        ]
+      },
+      "e4_prediction": {
+        "n": 37,
+        "accuracy": 0.648649,
+        "macro_f1": 0.607347,
+        "confusion_matrix_labels": [
+          0,
+          1
+        ],
+        "confusion_matrix": [
+          [
+            6,
+            3
+          ],
+          [
+            10,
+            18
+          ]
+        ]
+      }
+    }
+  },
+  "run_manifest_base": {
+    "baseline_commit": "2bd02b3",
+    "baseline_tag": "v4-baseline-reproduced",
+    "run_at_utc": "2026-09-11T20:59:06.229671+00:00",
+    "python": "3.11.10",
+    "platform": "Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+    "command": "run_rq2_37.py --output experiments/rq2/rq2_results.json (container nyayatrace-e2:repro --gpus all)"
+  },
+  "environment": {
+    "note": "container nyayatrace-e2:repro --gpus all (torch 2.5.1+cu124, transformers 4.46.3; runtime-added pinned psycopg 3.3.4 + rank-bm25 0.2.2)",
+    "database": "local Docker PostgreSQL 16.15 (compose.yaml unmodified)",
+    "bm25_index": "retrieval/bm25.sqlite (frozen)",
+    "checkpoint": "checkpoint-6318 (frozen)"
+  }
+}

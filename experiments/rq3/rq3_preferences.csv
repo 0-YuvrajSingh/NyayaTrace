@@ -1,0 +1,57 @@
+evaluator_id,case_id,preferred_display,preferred_condition
+Gemini,2008_1629,Display 2,structured
+Gemini,1980_105,Display 2,structured
+Gemini,1980_133,Display 1,structured
+Gemini,1981_55,Display 1,structured
+Gemini,1985_40,Display 2,structured
+Gemini,1997_792,Display 2,structured
+Gemini,2013_35,Display 1,structured
+Gemini,1990_234,Display 2,structured
+Gemini,1990_256,Display 2,structured
+Gemini,1990_324,Display 1,structured
+Gemini,1991_136,Display 1,structured
+Gemini,1991_87,Display 1,structured
+Gemini,1992_286,Display 1,structured
+Gemini,1993_90,Display 2,structured
+Claude Sonnet 4.6,2008_1629,Display 2,structured
+Claude Sonnet 4.6,1980_105,Display 2,structured
+Claude Sonnet 4.6,1980_133,Display 1,structured
+Claude Sonnet 4.6,1981_55,Display 1,structured
+Claude Sonnet 4.6,1985_40,Display 2,structured
+Claude Sonnet 4.6,1997_792,Display 2,structured
+Claude Sonnet 4.6,2013_35,Display 1,structured
+Claude Sonnet 4.6,1990_234,Display 2,structured
+Claude Sonnet 4.6,1990_256,Display 2,structured
+Claude Sonnet 4.6,1990_324,Display 1,structured
+Claude Sonnet 4.6,1991_136,Display 1,structured
+Claude Sonnet 4.6,1991_87,Display 1,structured
+Claude Sonnet 4.6,1992_286,Display 1,structured
+Claude Sonnet 4.6,1993_90,Display 2,structured
+DeepSeek,2008_1629,Display 2,structured
+DeepSeek,1980_105,Display 2,structured
+DeepSeek,1980_133,Display 1,structured
+DeepSeek,1981_55,Display 1,structured
+DeepSeek,1985_40,Display 2,structured
+DeepSeek,1997_792,Display 2,structured
+DeepSeek,2013_35,Display 1,structured
+DeepSeek,1990_234,Display 2,structured
+DeepSeek,1990_256,Display 2,structured
+DeepSeek,1990_324,Display 1,structured
+DeepSeek,1991_136,Display 1,structured
+DeepSeek,1991_87,Display 1,structured
+DeepSeek,1992_286,Display 1,structured
+DeepSeek,1993_90,Display 2,structured
+GPT-5.6 Luna,2008_1629,Display 2,structured
+GPT-5.6 Luna,1980_105,Display 2,structured
+GPT-5.6 Luna,1980_133,Display 1,structured
+GPT-5.6 Luna,1981_55,Display 1,structured
+GPT-5.6 Luna,1985_40,Display 2,structured
+GPT-5.6 Luna,1997_792,Display 2,structured
+GPT-5.6 Luna,2013_35,Display 1,structured
+GPT-5.6 Luna,1990_234,Display 2,structured
+GPT-5.6 Luna,1990_256,Display 2,structured
+GPT-5.6 Luna,1990_324,Display 1,structured
+GPT-5.6 Luna,1991_136,Display 1,structured
+GPT-5.6 Luna,1991_87,Display 1,structured
+GPT-5.6 Luna,1992_286,Display 1,structured
+GPT-5.6 Luna,1993_90,Display 2,structured

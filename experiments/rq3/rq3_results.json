@@ -1,0 +1,157 @@
+{
+  "experiment": "RQ3",
+  "title": "Exploratory LLM-based transparency comparison",
+  "evaluation_type": "LLM_based_exploratory",
+  "n_cases": 14,
+  "n_evaluators": 4,
+  "n_display_ratings": 112,
+  "conditions": {
+    "structured": "evidence-linked structured presentation",
+    "unstructured": "flat evidence/citation presentation"
+  },
+  "evaluators": [
+    "Gemini",
+    "Claude Sonnet 4.6",
+    "DeepSeek",
+    "GPT-5.6 Luna"
+  ],
+  "preference_counts_across_56_case_evaluations": {
+    "structured": 56,
+    "unstructured": 0,
+    "tie": 0
+  },
+  "preference_rate": {
+    "structured": 1.0,
+    "unstructured": 0.0,
+    "tie": 0.0
+  },
+  "all_4_evaluators_agree_per_case": true,
+  "case_level_unanimous_preferences": [
+    {
+      "case_id": "2008_1629",
+      "all_four_same": true,
+      "preferred_condition": "structured"
+    },
+    {
+      "case_id": "1980_105",
+      "all_four_same": true,
+      "preferred_condition": "structured"
+    },
+    {
+      "case_id": "1980_133",
+      "all_four_same": true,
+      "preferred_condition": "structured"
+    },
+    {
+      "case_id": "1981_55",
+      "all_four_same": true,
+      "preferred_condition": "structured"
+    },
+    {
+      "case_id": "1985_40",
+      "all_four_same": true,
+      "preferred_condition": "structured"
+    },
+    {
+      "case_id": "1997_792",
+      "all_four_same": true,
+      "preferred_condition": "structured"
+    },
+    {
+      "case_id": "2013_35",
+      "all_four_same": true,
+      "preferred_condition": "structured"
+    },
+    {
+      "case_id": "1990_234",
+      "all_four_same": true,
+      "preferred_condition": "structured"
+    },
+    {
+      "case_id": "1990_256",
+      "all_four_same": true,
+      "preferred_condition": "structured"
+    },
+    {
+      "case_id": "1990_324",
+      "all_four_same": true,
+      "preferred_condition": "structured"
+    },
+    {
+      "case_id": "1991_136",
+      "all_four_same": true,
+      "preferred_condition": "structured"
+    },
+    {
+      "case_id": "1991_87",
+      "all_four_same": true,
+      "preferred_condition": "structured"
+    },
+    {
+      "case_id": "1992_286",
+      "all_four_same": true,
+      "preferred_condition": "structured"
+    },
+    {
+      "case_id": "1993_90",
+      "all_four_same": true,
+      "preferred_condition": "structured"
+    }
+  ],
+  "dimension_summary": {
+    "evidence_linkage": {
+      "structured_mean": 4.589286,
+      "unstructured_mean": 2.839286,
+      "difference_structured_minus_unstructured": 1.75
+    },
+    "citation_verifiability": {
+      "structured_mean": 4.696429,
+      "unstructured_mean": 3.696429,
+      "difference_structured_minus_unstructured": 1.0
+    },
+    "traceability": {
+      "structured_mean": 4.642857,
+      "unstructured_mean": 2.160714,
+      "difference_structured_minus_unstructured": 2.482143
+    },
+    "explanation_clarity": {
+      "structured_mean": 4.732143,
+      "unstructured_mean": 2.214286,
+      "difference_structured_minus_unstructured": 2.517857
+    },
+    "transparency_inspectability": {
+      "structured_mean": 4.642857,
+      "unstructured_mean": 2.660714,
+      "difference_structured_minus_unstructured": 1.982143
+    },
+    "overall_mean": {
+      "structured_mean": 4.660714,
+      "unstructured_mean": 2.714286,
+      "difference_structured_minus_unstructured": 1.946429
+    }
+  },
+  "evaluator_overall_mean_by_condition": {
+    "Gemini": {
+      "structured": 5.0,
+      "unstructured": 2.2
+    },
+    "Claude Sonnet 4.6": {
+      "structured": 3.642857,
+      "unstructured": 3.057143
+    },
+    "DeepSeek": {
+      "structured": 5.0,
+      "unstructured": 2.8
+    },
+    "GPT-5.6 Luna": {
+      "structured": 5.0,
+      "unstructured": 2.8
+    }
+  },
+  "notes": [
+    "Display 1/2 condition labels were hidden from evaluators and mapped only after evaluation.",
+    "The same underlying evidence set was used in both displays.",
+    "Results are exploratory LLM-based judgments and are not independent human-subject ratings.",
+    "DeepSeek and GPT-5.6 Luna produced identical rating outputs in the supplied runs; both runs are retained and reported separately."
+  ]
+}

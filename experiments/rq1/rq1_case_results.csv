@@ -1,0 +1,38 @@
+query_case_id,stratum,query_year,true_label,expected_authority,expected_relationship,retrieved_at_5,retrieved_at_100,expected_rank,selected_expected,n_selected,temporally_eligible_selected,identity_match,provenance_checks_passed,e2_predicted_label,e3_predicted_label
+1971_295,base30,1971,1,[1967] 2 S.C.R. 496,applied,0,0,,0,5,5,0,5/5,1,1
+1974_36,base30,1974,1,[1966] Supp. 1 S.C.R. 63,applied,0,0,,0,5,5,0,5/5,0,1
+1977_145,base30,1977,1,[1965] 1 S.C.R. 686,distinguished,0,0,,0,5,5,0,5/5,1,1
+1977_99,base30,1977,1,[1966] 3 S.C.R. 527,relied_on,1,1,1,1,5,5,1,5/5,1,1
+1978_33,base30,1978,1,[1962] 1 S.C.R. 574,relied_on,0,0,,0,5,5,0,5/5,1,1
+1980_105,base30,1980,0,[1973] 3 S.C.R. 117,quoted_for_principle,1,1,1,1,5,5,1,5/5,0,0
+1980_133,base30,1980,1,[1957] 1 S.C.R. 121,applied,0,1,15,0,5,5,1,5/5,1,1
+1980_217,base30,1980,1,[1978] 3 S.C.R. 370,relied_on,0,0,,0,5,5,0,5/5,1,0
+1980_222,base30,1980,1,[1979] 2 S.C.R. 75,relied_on,1,1,1,1,5,5,1,5/5,1,1
+1981_187,base30,1981,1,[1958] 1 S.C.R. 1495,relied_on,1,1,2,1,5,5,1,5/5,0,0
+1981_55,base30,1981,1,[1970] 1 S.C.R. 565,relied_on,0,1,28,0,5,5,1,5/5,1,1
+1982_29,base30,1982,1,[1976] 3 S.C.R. 160,applied,1,1,1,1,5,5,1,5/5,0,0
+1984_136,base30,1984,1,[1958] 1 S.C.R. 828,quoted_for_principle,0,0,,0,5,5,0,5/5,0,1
+1985_40,base30,1985,1,[1964] 2 S.C.R. 888,distinguished,0,1,78,0,5,5,1,5/5,1,0
+1986_176,base30,1986,1,[1963] 3 S.C.R. 884,applied,1,1,2,1,5,5,1,5/5,1,1
+1986_378,base30,1986,1,[1985] 1 SCC 305,relied_on,0,0,,0,5,5,0,5/5,0,0
+1986_397,base30,1986,1,(1978) 3 SCC 119,relied_on,0,0,,0,5,5,0,5/5,1,1
+1988_96,base30,1988,0,[1980] 46 STC 63,applied,1,1,1,1,5,5,1,5/5,0,0
+1990_234,extension7,1990,0,[1973] 1 S.C.R. 258,see-extension-record,0,1,32,0,5,5,1,5/5,0,0
+1990_256,extension7,1990,1,[1964] 1 S.C.R. 639,see-extension-record,0,1,26,0,5,5,1,5/5,1,1
+1990_324,extension7,1990,1,[1977] 2 S.C.R. 633,see-extension-record,0,1,89,0,5,5,1,5/5,1,1
+1991_136,extension7,1991,1,[1961] 1 S.C.R. 591,see-extension-record,0,0,,0,5,5,0,5/5,0,0
+1991_87,extension7,1991,1,[1964] 3 S.C.R. 506,see-extension-record,0,0,,0,5,5,0,5/5,0,0
+1992_286,extension7,1992,1,[1984] 2 S.C.R. 67,see-extension-record,0,1,14,0,5,5,1,5/5,0,0
+1992_84,base30,1992,1,(1981) 4 SCC 173,quoted_for_principle,0,0,,0,5,5,0,5/5,0,0
+1993_185,base30,1993,1,AIR 1987 SC 454,relied_on,0,0,,0,5,5,0,5/5,1,1
+1993_90,extension7,1993,0,[1983] 3 S.C.R. 438,see-extension-record,0,1,16,0,5,5,1,5/5,0,0
+1994_632,base30,1994,0,[1979] 2 S.C.R. 953,quoted_for_principle,0,0,,0,5,5,0,5/5,0,1
+1995_322,base30,1995,0,AIR 1986 SC 794,relied_on,1,1,1,1,5,5,1,5/5,0,0
+1995_375,base30,1995,1,JT (1993) 5 SC 681,applied,1,1,2,1,5,5,1,5/5,1,1
+1995_403,base30,1995,0,AIR 1965 SC 202,quoted_for_principle,0,0,,0,5,5,0,5/5,1,1
+1995_412,base30,1995,1,(1986) 4 SCC 566,relied_on,0,0,,0,5,5,0,5/5,1,1
+1995_425,base30,1995,1,[1967] 1 S.C.R. 679,applied,1,1,1,1,5,5,1,5/5,1,1
+1997_792,base30,1997,1,(1979) 2 SCC 409,quoted_for_principle,0,0,,0,5,5,0,5/5,0,0
+2002_944,base30,2002,0,(1994) Supp. 1 SCC 324,quoted_for_principle,1,1,1,1,5,5,1,5/5,0,0
+2008_1629,base30,2008,0,(2006) 9 SCC 630,quoted_for_principle,1,1,1,1,5,5,1,5/5,1,1
+2013_35,base30,2013,1,(1992) 3 SCC 161,relied_on,0,0,,0,5,5,0,5/5,1,1
