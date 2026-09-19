@@ -18,6 +18,13 @@ __pycache__/
 # Local PostgreSQL credentials
 .env
 
+# Optional local-only files (never committed, retained untouched in worktree)
+.vscode/
+/Indian_Legal_XAI.docx
+
+# Removed nested corpus staging path (must stay ignored if recreated)
+/corpus/corpus/
+
 # Local retrieval index (rebuild from PostgreSQL provenance)
 /retrieval/
 
