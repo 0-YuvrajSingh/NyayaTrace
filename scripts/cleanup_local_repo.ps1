@@ -3,14 +3,14 @@
     NyayaTrace Local Repository Cleanup Script (Resumable, Safe, Frozen-Preserving).
 .DESCRIPTION
     Consolidates 11,747 unique eCourts research PDFs from nested corpus paths into canonical
-    corpus/ecourts/pdfs/year=YYYY/, verifies total unique corpus of 39,068 PDFs, removes proven
+    corpus/ecourts/pdfs/year=YYYY/, verifies the canonical file-count/year-distribution of 39,068 usable/unadorned PDFs, removes proven
     byte-identical duplicate files (redundant PDFs, duplicate chunks, duplicate BM25 database,
     and Python caches), and verifies all frozen scientific assets against the specification.
 
     EXECUTION ORDER:
       1. DryRun: full inventory → complete manifest (artifacts/local_cleanup/) → validate all
          collisions → STOP (no disk changes).
-      2. Apply: execute strictly from the verified manifest → verify 39,068 unique PDFs →
+      2. Apply: execute strictly from the verified manifest → verify 39,068 usable/unadorned PDFs (file-count/year-distribution) →
          remove duplicates → remove caches → post-cleanup frozen-asset hash check.
       3. Rollback: read the manifest and reverse each MOVE_UNIQUE_RESEARCH_DATA back to source.
 
@@ -442,7 +442,7 @@ if ($collisionCount -gt 0) {
     throw "CRITICAL COLLISION DETECTED: $collisionCount file(s) in nested corpus differ from canonical equivalents! Aborting without modifying disk."
 }
 
-# FIX 5: Use $expectedUniquePdfCount (not $expectedTotal = 39069)
+# FIX 5: File-count gate $expectedUniquePdfCount = 39068 usable/unadorned files (not $expectedTotal = 39069; not unique-content gate)
 $expectedUniquePdfCount = 39068
 
 # Save manifest (always, even in DryRun — but written to gitignored artifacts/local_cleanup/)
@@ -466,7 +466,7 @@ Write-Host "  Canonical download duplicate PDFs to remove:       $($dupsCanon.Co
 Write-Host "  Nested duplicate chunks.jsonl to remove:           $($dupsChunks.Count)"
 Write-Host "  Redundant BM25 database to remove:                 $($dupsBm25.Count) (2.27 GB each)"
 Write-Host "  Python cache directories to remove:                $($caches.Count)"
-Write-Host "  Expected unique PDF content count after apply:     $expectedUniquePdfCount"
+Write-Host "  Expected usable/unadorned PDF file count after apply: $expectedUniquePdfCount"
 Write-Host "------------------------`n"
 
 if ($DryRun -and -not $Apply) {
@@ -539,9 +539,9 @@ foreach ($m in $moves) {
 Write-Host "  [OK] Consolidated $moveCount unique PDFs (already consolidated from prior run: $alreadyConsolidatedCount)." -ForegroundColor Green
 
 # ---------------------------------------------------------------------------
-# STEP 5: VERIFY CANONICAL 39,068 UNIQUE PDF CONTENTS
+# STEP 5: VERIFY CANONICAL 39,068 USABLE/UNADORNED PDF FILES
 # ---------------------------------------------------------------------------
-Write-Host "`n[Step 5/7] Verifying canonical eCourts corpus content & unique count..." -ForegroundColor Cyan
+Write-Host "`n[Step 5/7] Verifying canonical eCourts corpus file-count/year-distribution..." -ForegroundColor Cyan
 
 Write-Host "  Scanning canonical corpus/ecourts/pdfs/..."
 $finalCanonPdfs = Get-ChildItem -Path "corpus/ecourts/pdfs" -Filter *.pdf -Recurse
@@ -658,7 +658,12 @@ Write-Host "  Unique content hashes found: $($uniqueContentHashes.Count) (inform
 if ($uniqueContentHashes.Count -ne $expectedUniquePdfCount) {
     Write-Host "  [INFO] Unique content count ($($uniqueContentHashes.Count)) differs from file count ($expectedUniquePdfCount). This reflects legitimate cross-year byte-duplicate source PDFs and does not block cleanup." -ForegroundColor Yellow
 } else {
-    Write-Host "  [OK] EXACT MATCH: Canonical corpus contains exactly $expectedUniquePdfCount unique PDF contents (1950-2020)!" -ForegroundColor Green
+    Write-Host "  [OK] File-count gate passed: canonical corpus contains 39,068 usable/unadorned PDFs across 1950-2020 (71 years)." -ForegroundColor Green
+    Write-Host "  Canonical eCourts corpus:" -ForegroundColor Cyan
+    Write-Host "    39,068 usable/unadorned PDFs" -ForegroundColor Cyan
+    Write-Host "    1950-2020" -ForegroundColor Cyan
+    Write-Host "    71 years" -ForegroundColor Cyan
+    Write-Host "    $($uniqueContentHashes.Count) unique SHA-256 contents (informational)" -ForegroundColor Cyan
 }
 
 # ---------------------------------------------------------------------------
