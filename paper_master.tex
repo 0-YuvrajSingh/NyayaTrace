@@ -24,29 +24,18 @@
 \title{Temporally Constrained, Provenance-Verified Evidence Retrieval for Indian Legal Research}
 
 \author{
-\IEEEauthorblockN{Yuvraj Singh}
-\IEEEauthorblockA{\textit{Department of Computer Science and Engineering} \\
-\textit{Ajay Kumar Garg Engineering College} \\
-Ghaziabad, India \\
-yuvraj2312026@akgec.ac.in}
-\and
-\IEEEauthorblockN{RishiRaj Jaiswal}
-\IEEEauthorblockA{\textit{Department of Computer Science and Engineering} \\
-\textit{Ajay Kumar Garg Engineering College} \\
-Ghaziabad, India \\
-rishi2312003@akgec.ac.in}
-\and
-\IEEEauthorblockN{Rahul Ranjan}
-\IEEEauthorblockA{\textit{Department of Computer Science and Engineering} \\
-\textit{Ajay Kumar Garg Engineering College} \\
-Ghaziabad, India \\
-rahul2312151@akgec.ac.in}
-\and
-\IEEEauthorblockN{Saurav Kumar Chaudhary}
-\IEEEauthorblockA{\textit{Department of Computer Science and Engineering} \\
-\textit{Ajay Kumar Garg Engineering College} \\
-Ghaziabad, India \\
-saurav2312023@akgec.ac.in}
+\begin{tabular}{c@{\hspace{2.5em}}c}
+Yuvraj Singh & RishiRaj Jaiswal \\
+\textit{Department of Computer Science and Engineering} & \textit{Department of Computer Science and Engineering} \\
+\textit{Ajay Kumar Garg Engineering College} & \textit{Ajay Kumar Garg Engineering College} \\
+Ghaziabad, India & Ghaziabad, India \\
+yuvraj2312026@akgec.ac.in & rishi2312003@akgec.ac.in \\[2ex]
+Rahul Ranjan & Saurav Kumar Chaudhary \\
+\textit{Department of Computer Science and Engineering} & \textit{Department of Computer Science and Engineering} \\
+\textit{Ajay Kumar Garg Engineering College} & \textit{Ajay Kumar Garg Engineering College} \\
+Ghaziabad, India & Ghaziabad, India \\
+rahul2312151@akgec.ac.in & saurav2312023@akgec.ac.in
+\end{tabular}
 }
 
 \maketitle
@@ -461,7 +450,7 @@ the prediction branch.
 
 \subsection{Shared facts-only input}
 
-E1 and E2 share the extraction configuration \texttt{ildc-predecision-facts-v1}.
+E1 and E2 share the extraction configuration \texttt{ildc-\allowbreak predecision-\allowbreak facts-\allowbreak v1}.
 The extractor retains text preceding the earlier of a recognised dispositive cue
 and 60\% of the document, moving the boundary to a preceding sentence end when
 sufficient text remains. Cases below 10\% retention or 100 words are excluded.
@@ -497,13 +486,13 @@ is reported as a secondary comparison, not a post-hoc selection rule. All
 \subsection{E3: temporally constrained retrieval}
 \label{sec:e3}
 
-The query builder \texttt{tfidf-segment-salient-terms-v1} segments the full
+The query builder \texttt{tfidf-\allowbreak segment-\allowbreak salient-\allowbreak terms-\allowbreak v1} segments the full
 facts-only input, removes procedural-report boilerplate, scores terms
 deterministically, retains section and article cues, and emits at most 32 unique
 terms. These query a SQLite FTS5 BM25 index backed by PostgreSQL provenance.
 
 The frozen configuration is
-\texttt{week11-bm25-salient-terms-preranked-temporal-v3}: only judgments with decision year strictly earlier than the
+\texttt{week11-\allowbreak bm25-\allowbreak salient-\allowbreak terms-\allowbreak preranked-\allowbreak temporal-\allowbreak v3}: only judgments with decision year strictly earlier than the
 query year enter the candidate relation \emph{before} BM25 ordering and the
 top-100 cutoff, so the full depth is spent on eligible material rather than
 discarded ineligible depth.
@@ -535,7 +524,7 @@ same 512-token windows with 50-token overlap, pools window logits by their mean,
 and selects the class by \texttt{argmax}. Gold labels, scores, dates,
 provenance, and boilerplate
 are excluded from model input. Seed 202607; configuration
-\texttt{e3e4-evidence-augmented-inlegalbert-checkpoint6318-v1}.
+\texttt{e3e4-\allowbreak evidence-\allowbreak augmented-\allowbreak inlegalbert-\allowbreak checkpoint6318-\allowbreak v1}.
 
 We note the methodological caveat plainly: the checkpoint was trained on
 facts-only inputs, so applying it to facts plus retrieved passages is an
@@ -674,7 +663,7 @@ combined row is the principal evaluation; strata are never pooled silently.}
 \label{tab:rq1strata}
 \centering
 \footnotesize
-\setlength{\tabcolsep}{2.5pt}
+\setlength{\tabcolsep}{2pt}
 \begin{tabular}{lrrrrr}
 \toprule
 \textbf{Population} & \textbf{$n$} & \textbf{R@5} & \textbf{R@100} &
@@ -689,7 +678,7 @@ Combined-37      & 37 & 0.324324 (12/37) & 0.540541 (20/37) & 0.648649 & 0.60734
 
 Figure~\ref{fig:funnel} shows the recovery funnel. Base-30 integrity is
 150/150 grounded and provenance-valid with 0/150 temporal violations and 0/30
-unsupported claims (Table~\ref{tab:integrity}, Figure~\ref{fig:integrity});
+unsupported claims (Table~\ref{tab:integrity}, Fig.~\ref{fig:integrity});
 the candidate log held 3{,}000/3{,}000 eligible candidates, and a five-case
 faithfulness check resolved every reference to its persisted chunk. Combined-37
 holds the same profile at 185/185, 0/185, and 0/37.
@@ -807,7 +796,7 @@ display ratings and 56 preferences. The structured presentation was preferred in
 ($+$1.75 linkage,
 $+$1.00 verifiability, $+$2.48 traceability, $+$2.52
 clarity, $+$1.98 transparency; overall
-$+$1.95, 4.66 vs.\ 2.71); see Figure~\ref{fig:explanation}.
+$+$1.95, 4.66 vs.\ 2.71); see Fig.~\ref{fig:explanation}.
 
 \begin{figure}[t]
 \centering

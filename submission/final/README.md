@@ -1,4 +1,4 @@
-﻿# NyayaTrace — Final Submission Package
+# NyayaTrace — Final Submission Package
 
 This directory contains the self-contained publication package for the paper:
 **"Temporally Constrained, Provenance-Verified Evidence Retrieval for Indian Legal Research"**
@@ -13,7 +13,11 @@ This directory contains the self-contained publication package for the paper:
 
 ## Compilation
 
-The package is fully self-contained. To rebuild using Tectonic:
+The package is fully self-contained. To rebuild using pdfTeX (TeX Live):
+```bash
+pdflatex paper_master.tex && pdflatex paper_master.tex && pdflatex paper_master.tex
+```
+Or using Tectonic:
 ```bash
 tectonic paper_master.tex
 ```
@@ -21,8 +25,8 @@ tectonic paper_master.tex
 ## Details
 
 - **Format:** IEEEtran conference (`\documentclass[conference]{IEEEtran}`)
-- **Length:** 10 pages
+- **Length:** 10 pages (US Letter)
 - **Research Questions:** 3 canonical RQs (RQ1, RQ2, RQ3)
 - **References:** 15 items embedded via `\begin{thebibliography}`
-- **Figures:** 5 PDF figures
+- **Figures:** 5 PDF figures (all TrueType / Type 1, zero Type 3 fonts)
 - **Tables:** 6 tables
