@@ -60,6 +60,7 @@ Outcome prediction was added to E3/E4 in a later revision, extending the origina
 ## Repository guide
 
 - **Paper and submission files:** [`submission/`](submission/), including the formatted PDF, editable Markdown source, HTML rendering, figures, and institutional declaration/certificate templates.
+- **IEEE Conference Submission Package:** [`submission/final/`](submission/final/), containing the camera-ready 10-page IEEEtran manuscript (`paper_master.tex`), compiled PDF (`paper_master.pdf`), vector figures, submission archive (`nyayatrace_submission_package.zip`), and `MANIFEST.md` built using pdfTeX 1.40.26 (TeX Live 2025).
 - **Current paper source:** [`submission/paper.md`](submission/paper.md). Earlier working drafts remain under [`artifacts/`](artifacts/) for traceability.
 - **Reproducibility configuration:** [`config/reproducibility_freeze.json`](config/reproducibility_freeze.json).
 - **Evaluation audit:** [`artifacts/week16_reproducibility_audit.md`](artifacts/week16_reproducibility_audit.md).

@@ -13,13 +13,9 @@ This directory contains the self-contained publication package for the paper:
 
 ## Compilation
 
-The package is fully self-contained. To rebuild using pdfTeX (TeX Live):
+The package is fully self-contained. To rebuild using pdfTeX 1.40.26 (TeX Live 2025):
 ```bash
 pdflatex paper_master.tex && pdflatex paper_master.tex && pdflatex paper_master.tex
-```
-Or using Tectonic:
-```bash
-tectonic paper_master.tex
 ```
 
 ## Details

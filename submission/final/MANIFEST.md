@@ -29,24 +29,20 @@ Ajay Kumar Garg Engineering College, Ghaziabad, India
 
 ## Cryptographic Hashes (SHA-256)
 
-- `paper_master.pdf`: `20da7444fd1ec289bcb72728447211b5edf82b10521f680a7678f46fb421d661`
+- `paper_master.pdf`: `52d5ba9884818deb1186a104e278644f270bcfe2810003e9e069e5a9a1eff6af`
 - `paper_master.tex`: `bcc60a3e6943f7037d575f1a0537245c2fcdeb1b0e43721437b416424dee65e0`
-- `nyayatrace_submission_package.zip`: `ebad2ef983122ef3f41be471fb59ab7eef6558cd3d9ae73045fd5e137ab9534d`
-- `figures/fig1_outcome.pdf`: `993811b286422d4552908153312bd6d96aea1bcd2abacde9fc6fc508427589f2`
-- `figures/fig2_funnel.pdf`: `37847d87430c7edc21f84631e26c1db2ae67c95f1101597e9797d5b364354119`
-- `figures/fig3_integrity.pdf`: `efffabc3af0225aa23a4263ea14c31f61c47062f22092fd12669ecbc8d913e79`
-- `figures/fig4_investigation.pdf`: `6582f864b915223524cf79adf02e092f6b66635432a66fb31308dbba68d8f720`
-- `figures/fig5_explanation.pdf`: `c1abbe74f2bbf3e53c9792abcc4a9b1d59349ed3f5291e08dd041e0e30abb6af`
+- `nyayatrace_submission_package.zip`: `80d16e35e5503acfe3095f401ad7f41ab0a5aa9cfe2c5b9fa77f9d451c905bdb`
+- `figures/fig1_outcome.pdf`: `d4fc9fed87e7285128e215f30f5e08adefddfae50c9a927b029413e2096930bb`
+- `figures/fig2_funnel.pdf`: `b8a7eb5c84d8657afd3906c75c30425811d99d8c962e8fd54107d3eb08f0ebcf`
+- `figures/fig3_integrity.pdf`: `54f85085364947c8df5829a9152f6e419e2f793b3408cf20a9b4c47833ed129c`
+- `figures/fig4_investigation.pdf`: `95a55ab8791698aa2ad78d3f3fbf861ce3d935f6fb63ff95700918c2b3960e79`
+- `figures/fig5_explanation.pdf`: `4f62b79c71a2a2b682bf98cf2cac8a54e50f6a40d3b7b2306399c772b9c6a13e`
 
 ## Rebuild Instructions
 
-To compile the paper from this self-contained directory using pdfTeX (TeX Live):
+To compile the paper from this self-contained directory using pdfTeX (TeX Live 2025):
 ```bash
 pdflatex paper_master.tex && pdflatex paper_master.tex && pdflatex paper_master.tex
-```
-Or using Tectonic:
-```bash
-tectonic paper_master.tex
 ```
 All figures are located in `figures/` relative to `paper_master.tex`. The bibliography is embedded directly within `paper_master.tex`. No external path dependencies or extra `.bib` files are required.
 

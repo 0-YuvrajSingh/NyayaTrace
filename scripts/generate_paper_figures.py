@@ -79,13 +79,14 @@ def make_fig2():
     
     ax.set_title("Authority recovery funnel, combined-37", fontsize=8.5, pad=6)
     ax.set_ylabel("Cases (combined n=37)", fontsize=7.5)
-    ax.set_ylim(0, 21)
-    ax.set_yticks([0, 5, 10, 15])
-    ax.set_yticklabels(["0", "5", "10", "15"], fontsize=7.5)
+    ax.set_ylim(0, 22)
+    ax.set_yticks([0, 5, 10, 15, 20])
+    ax.set_yticklabels(["0", "5", "10", "15", "20"], fontsize=7.5)
     ax.set_xticks(x)
     ax.set_xticklabels(cats, fontsize=7.5)
     
-    ax.legend(loc='upper right', fontsize=7, framealpha=0.9)
+    # Legend in upper left where bars are short (bar 1 is at 12); leaves "Absent at k=100" (bar 3, 17) completely clear
+    ax.legend(loc='upper left', fontsize=7, framealpha=0.9)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     
@@ -129,7 +130,7 @@ def make_fig3():
 def make_fig4():
     # Fig 4: Retrieval investigation pathway (historical)
     # 244.8 x 158.4 pts -> (3.4, 2.2) in
-    # Requirement: stop x-tick labels colliding, move legend so it doesn't cover 4th data point.
+    # Requirement: stop x-tick labels colliding, move legend so it doesn't cover data points.
     fig, ax = plt.subplots(figsize=(3.4, 2.2))
     
     dev_x = [0, 1, 2, 3]
@@ -146,7 +147,7 @@ def make_fig4():
     ax.plot(b30_r100_x, b30_r100_y, '^-', color=GREEN, label='Base-30 R@100 pre/post', markersize=5, linewidth=1.2)
     
     ax.set_title("Retrieval investigation pathway (historical)", fontsize=8.5, pad=6)
-    ax.set_ylim(-0.08, 1.08)
+    ax.set_ylim(-0.05, 1.40)
     ax.set_yticks([0.00, 0.25, 0.50, 0.75, 1.00])
     ax.set_yticklabels(["0.00", "0.25", "0.50", "0.75", "1.00"], fontsize=7.5)
     
@@ -155,8 +156,8 @@ def make_fig4():
     ax.set_xticks(tick_pos)
     ax.set_xticklabels(tick_labels, fontsize=6.5, rotation=25, ha='right')
     
-    # Legend moved to upper left (x=0 to ~1.6) - does not cover 4th data point (at x=3, y=0.778)
-    ax.legend(loc='upper left', bbox_to_anchor=(0.01, 0.99), fontsize=6.2, framealpha=0.85, handletextpad=0.3, borderpad=0.25)
+    # Legend placed in headroom (upper left), completely clear of all data points and lines
+    ax.legend(loc='upper left', bbox_to_anchor=(0.02, 0.98), fontsize=6.2, framealpha=0.9, handletextpad=0.3, borderpad=0.25)
     
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
