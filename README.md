@@ -34,6 +34,8 @@ python scripts/serve_week16_demo.py --port 8000
 
 Open <http://127.0.0.1:8000/demo/> while the server is running. It includes representative clean-success, near-miss, authority-consistency, and absent-at-k=100 cases. Detailed verification instructions are in [`demo/README.md`](demo/README.md).
 
+A connected local research stack (React + Spring Boot + FastAPI over the frozen pipeline) is also available via `docker compose -f compose.demo.yaml up --build`; see [`demo/README.md`](demo/README.md). It is loopback-only and not production.
+
 ## Reproduce the evaluation
 
 The replay contract and required environment are documented in [`config/reproducibility_freeze.json`](config/reproducibility_freeze.json) and [`artifacts/week16_reproducibility_audit.md`](artifacts/week16_reproducibility_audit.md). With the hash-checked ILDC files, eCourts/PostgreSQL provenance store, BM25 index, and locally cached E2 checkpoint available, run:

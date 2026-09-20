@@ -25,9 +25,9 @@ Ajay Kumar Garg Engineering College, Ghaziabad, India
 
 ## Cryptographic Hashes (SHA-256)
 
-- `paper_master.pdf`: `f06ed1df0d851dae02ca5e3951989192a319818236ef39d6e816dd86044ee01a`
-- `paper_master.tex`: `39f302010726a1038c7da54c45d0d111e706cdbefece65f67a0b652e27151d57`
-- `nyayatrace_submission_package.zip`: `b61fd50976aa950d325689feacb349be2e905b5eefb15ce69b442f33f1ad3616`
+- `paper_master.pdf`: `daae92333ea7399a90ffb66e7504a2f23d7ba68b26d7750f59e4666665baa5a9`
+- `paper_master.tex`: `e252d8895e4f53f4fed5c7c1a0e4e97a1eb5b85967a345fcc37978b7d00b2f19`
+- `nyayatrace_submission_package.zip`: `cfb167661275d2fbf67795623de908335452ac5f7e380614a733f76f92f4fc45`
 - `figures/fig1_outcome.pdf`: `9e3207b7db76831828ad8aff4aa7cfa15fd4b7bb5ce9ab923ccf96f77b677d08`
 - `figures/fig2_funnel.pdf`: `f3b50afd21b1dae3ef21f875f971991788adc51e682fbe433b2499b7ef95af64`
 - `figures/fig3_integrity.pdf`: `7de53a3b1a6e36599c3476614ca11500b80366df3e6b8722500f3c5fb494c369`
