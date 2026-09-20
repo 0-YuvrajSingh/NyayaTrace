@@ -997,7 +997,7 @@ review status are preserved. Populations and denominators remain
 separate, and alternative citations are not called irrelevant without
 annotation.
 
-Public judgments do not remove privacy or misuse concerns: no end-user search
+Public judgments do not remove privacy or misuse concerns: no public end-user search
 service is exposed and no consequential decision automated;
 any deployment would require access controls, licensing review, privacy
 assessment, independent evaluation, monitoring, and a correction process.
@@ -1048,10 +1048,23 @@ calibration weakness.
 
 All configurations, seeds, model revisions, corpus identities, and evaluation
 artifacts are frozen and machine-readable, including checkpoint-6318
-(\texttt{924a5bb9\ldots dbdc773}) with a stable replay hash. The implementation passes 81 automated tests and the documented
+(\texttt{924a5bb9\ldots dbdc773}) with a stable replay hash. The implementation passes 81 automated research-pipeline tests (75 host-runnable plus 6
+transformer/torch-only unit tests) and the documented
 reproducibility checks (14/14 documentation and 34/34 freeze-hash
-checks), replaying deterministically from a clean clone. Code and artifacts are available
+checks), replaying deterministically from a clean clone. Separately, the
+local demo stack is covered by 8/8 Spring Boot service tests, 6/6 FastAPI
+wrapper tests, and a passing TypeScript compile plus production frontend
+build; these exercise orchestration and contracts only, never the frozen
+scientific results. Code and artifacts are available
 at \url{https://github.com/0-YuvrajSingh/NyayaTrace}.
+
+A minimal connected local research demo (React 18 + TypeScript UI,
+Spring Boot 3.2.5 orchestration API, FastAPI wrapper around the frozen
+pipeline) exposes the E4 evidence path with bearer-token authentication,
+per-request audit records, and experiment-metadata references; the FastAPI
+layer delegates every research step to the frozen implementation and the
+static frozen-artifact viewer is retained as a fallback. The stack binds to
+loopback only and is not a production, multi-tenant, or autonomous system.
 
 % =====================================================================
 \begin{thebibliography}{00}
