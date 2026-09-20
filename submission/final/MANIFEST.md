@@ -1,4 +1,4 @@
-﻿# Final Submission Manifest — NyayaTrace
+# Final Submission Manifest — NyayaTrace
 
 - Active Manuscript: `paper_master.tex`
 - Active PDF: `paper_master.pdf`
@@ -23,11 +23,18 @@
 Department of Computer Science and Engineering,
 Ajay Kumar Garg Engineering College, Ghaziabad, India
 
+## Mentorship and Guidance
+
+- Kriti Mishra (Department of Computer Science and Engineering, AKGEC) — acknowledged in Section Acknowledgment
+
 ## Cryptographic Hashes (SHA-256)
 
 - `paper_master.pdf`: `daae92333ea7399a90ffb66e7504a2f23d7ba68b26d7750f59e4666665baa5a9`
 - `paper_master.tex`: `e252d8895e4f53f4fed5c7c1a0e4e97a1eb5b85967a345fcc37978b7d00b2f19`
 - `nyayatrace_submission_package.zip`: `cfb167661275d2fbf67795623de908335452ac5f7e380614a733f76f92f4fc45`
+- `paper_master.pdf`: `ff62004d417265bbb1fb7dce568f2f70d76eaa4370927049f8308fa1da5e3b98`
+- `paper_master.tex`: `021ad857a6ac57b61815e8e57b3cd8f740d5ec1479c7115d2aa86a26b92bdb6a`
+- `nyayatrace_submission_package.zip`: `40f1b4e1f42deaf7dd355eace7dbbecbba3b7d014b98847533c0a364134a90a2`
 - `figures/fig1_outcome.pdf`: `9e3207b7db76831828ad8aff4aa7cfa15fd4b7bb5ce9ab923ccf96f77b677d08`
 - `figures/fig2_funnel.pdf`: `f3b50afd21b1dae3ef21f875f971991788adc51e682fbe433b2499b7ef95af64`
 - `figures/fig3_integrity.pdf`: `7de53a3b1a6e36599c3476614ca11500b80366df3e6b8722500f3c5fb494c369`
