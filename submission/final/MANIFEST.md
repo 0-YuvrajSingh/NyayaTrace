@@ -18,25 +18,24 @@
 2. RishiRaj Jaiswal (rishi2312003@akgec.ac.in)
 3. Rahul Ranjan (rahul2312151@akgec.ac.in)
 4. Saurav Kumar Chaudhary (saurav2312023@akgec.ac.in)
-5. Kriti Mishra (kritimishra@akgec.ac.in)
 
 Department of Computer Science and Engineering,
 Ajay Kumar Garg Engineering College, Ghaziabad, India
 
-## Mentorship and Guidance
+## Faculty Mentorship and Guidance
 
 - Kriti Mishra (Department of Computer Science and Engineering, AKGEC) — acknowledged in Section Acknowledgment
 
 ## Cryptographic Hashes (SHA-256)
 
-- `paper_master.pdf`: `52d5ba9884818deb1186a104e278644f270bcfe2810003e9e069e5a9a1eff6af`
+- `paper_master.pdf`: `bb6ef314bdf0f4ab4e8899094ef4e90d76e58b0faa9f18ad738d3e4a7ed8cd7d`
 - `paper_master.tex`: `bcc60a3e6943f7037d575f1a0537245c2fcdeb1b0e43721437b416424dee65e0`
-- `nyayatrace_submission_package.zip`: `80d16e35e5503acfe3095f401ad7f41ab0a5aa9cfe2c5b9fa77f9d451c905bdb`
-- `figures/fig1_outcome.pdf`: `d4fc9fed87e7285128e215f30f5e08adefddfae50c9a927b029413e2096930bb`
-- `figures/fig2_funnel.pdf`: `b8a7eb5c84d8657afd3906c75c30425811d99d8c962e8fd54107d3eb08f0ebcf`
-- `figures/fig3_integrity.pdf`: `54f85085364947c8df5829a9152f6e419e2f793b3408cf20a9b4c47833ed129c`
-- `figures/fig4_investigation.pdf`: `95a55ab8791698aa2ad78d3f3fbf861ce3d935f6fb63ff95700918c2b3960e79`
-- `figures/fig5_explanation.pdf`: `4f62b79c71a2a2b682bf98cf2cac8a54e50f6a40d3b7b2306399c772b9c6a13e`
+- `nyayatrace_submission_package.zip`: `012c28baae51dd687da1eca5020130a3738a9d8d13970bd3a08944ea9f5221b4`
+- `figures/fig1_outcome.pdf`: `6a2c7776ed817ec4b595fd93d5bd26d61df3b38692d0495e0dfa60c8179844a2`
+- `figures/fig2_funnel.pdf`: `02287ec1da8ea1bc95d725a6cc211353535f82b781c1d06d1a309aeb414369cc`
+- `figures/fig3_integrity.pdf`: `34965becf10f273a968d5408087ccc3c7de7f82de2da28a422eb41400e597432`
+- `figures/fig4_investigation.pdf`: `3f4f97203b8173b91a67e8fa4620d266f6782d20ad50eb2e9f32c58214106d41`
+- `figures/fig5_explanation.pdf`: `cc457a5efd28988ce0e3eb8ca6e4c2c364087aea9b90be2fda863dbea6d9c25e`
 
 ## Rebuild Instructions
 

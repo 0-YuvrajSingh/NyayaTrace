@@ -161,6 +161,7 @@ def make_fig4():
     
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
+    ax.spines['left'].set_bounds(0, 1)
     
     plt.tight_layout()
     fig.savefig(FIG_DIR / "fig4_investigation.pdf")
