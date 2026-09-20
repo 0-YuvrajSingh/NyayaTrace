@@ -1,0 +1,83 @@
+# NyayaTrace connected-demo stack (local research only, not production).
+#
+# Separate from the frozen experiment services in compose.yaml: this file adds
+# the React/Spring/FastAPI demo layers plus its own throwaway PostgreSQL
+# volume. It never touches the frozen E2 training image, the curated
+# retrieval/bm25.sqlite bind expectations, or any scientific artifact.
+#
+# Required environment (never commit values; .env stays ignored):
+#   POSTGRES_PASSWORD  demo database password
+#   DEMO_API_TOKEN     bearer token for browser -> Spring research/audit calls
+#   ML_INTERNAL_TOKEN  caller token for Spring -> FastAPI calls
+#
+# Start (repository root):
+#   $env:POSTGRES_PASSWORD = "local-only-dev"
+#   $env:DEMO_API_TOKEN = "local-only-dev"
+#   $env:ML_INTERNAL_TOKEN = "local-only-dev"
+#   docker compose -f compose.demo.yaml up --build
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: nyayatrace-demo-postgres
+    environment:
+      POSTGRES_DB: legal_xai
+      POSTGRES_USER: legal_xai
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in the environment}
+    ports:
+      - "127.0.0.1:54330:5432"
+    volumes:
+      - nyayatrace_demo_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U legal_xai -d legal_xai"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+  python-ml:
+    build:
+      context: .
+      dockerfile: demo/ml-service/Dockerfile
+    container_name: nyayatrace-demo-ml
+    environment:
+      LEGAL_XAI_DATABASE_URL: postgresql://legal_xai:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in the environment}@postgres:5432/legal_xai
+      BM25_INDEX_PATH: /workspace/retrieval/bm25.sqlite
+      DEDUP_MATCHES_PATH: /workspace/corpus/dedup_matches.csv
+      ML_INTERNAL_TOKEN: ${ML_INTERNAL_TOKEN:?Set ML_INTERNAL_TOKEN in the environment}
+    ports:
+      - "127.0.0.1:8001:8001"
+    volumes:
+      - ./retrieval/bm25.sqlite:/workspace/retrieval/bm25.sqlite:ro
+      - ./corpus/dedup_matches.csv:/workspace/corpus/dedup_matches.csv:ro
+      - ./artifacts/e2_chunk_pool_checkpoints_cached:/workspace/artifacts/e2_chunk_pool_checkpoints_cached:ro
+      - ./artifacts/e2_hf_cache:/workspace/artifacts/e2_hf_cache:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  spring-api:
+    build:
+      context: ./demo/spring-api
+      dockerfile: Dockerfile
+    container_name: nyayatrace-demo-api
+    environment:
+      ML_BASE_URL: http://python-ml:8001
+      DEMO_API_TOKEN: ${DEMO_API_TOKEN:?Set DEMO_API_TOKEN in the environment}
+      ML_INTERNAL_TOKEN: ${ML_INTERNAL_TOKEN:?Set ML_INTERNAL_TOKEN in the environment}
+    ports:
+      - "127.0.0.1:8080:8080"
+    depends_on:
+      - python-ml
+
+  web:
+    build:
+      context: ./demo/web
+      dockerfile: Dockerfile
+    container_name: nyayatrace-demo-web
+    ports:
+      - "127.0.0.1:8081:80"
+    depends_on:
+      - spring-api
+
+volumes:
+  nyayatrace_demo_pgdata:

@@ -1,0 +1,46 @@
+{
+  "note": "Existing experiment references only. No new experiments are defined here; see config/ for frozen configurations and artifacts/ for frozen results.",
+  "experiments": [
+    {
+      "id": "E1",
+      "name": "TF-IDF + Logistic Regression facts-only baseline",
+      "purpose": "Traditional predictive baseline reported for context; does not itself answer RQ1.",
+      "status": "frozen baseline",
+      "config": "config/e1_baseline.json",
+      "result": "artifacts/e1_baseline_results.json",
+      "population": "1503 eligible ILDC test cases",
+      "metrics": {"accuracy": 0.61344, "macro_f1": 0.612342}
+    },
+    {
+      "id": "E2",
+      "name": "InLegalBERT chunk-and-pool facts-only baseline",
+      "purpose": "Legal-language baseline; the E2-vs-E3 comparison answers RQ1.",
+      "status": "frozen baseline (checkpoint-6318 reused by E3/E4 inference)",
+      "config": "config/e2_chunk_pool.json",
+      "result": "artifacts/e2_chunk_pool_results.json",
+      "population": "1503 eligible ILDC test cases, 9576 windows",
+      "metrics": {"mean_logit_accuracy": 0.596806, "mean_logit_macro_f1": 0.592358}
+    },
+    {
+      "id": "E3",
+      "name": "Temporally constrained retrieval and evidence presentation",
+      "purpose": "Retrieves and presents provenance-linked prior authorities; emits evidence-augmented prediction via the frozen E2 checkpoint.",
+      "status": "frozen retrieval configuration week11-bm25-salient-terms-preranked-temporal-v3",
+      "config": "config/evidence_selection.json",
+      "result": "artifacts/e3_e4_evidence_augmented_evaluation.json",
+      "population": "30 source-verified answer-key cases, 150 displayed citations",
+      "metrics": {"recall_at_5": 0.4, "recall_at_100": 0.5, "accuracy": 0.666667, "macro_f1": 0.603175}
+    },
+    {
+      "id": "E4",
+      "name": "Citation/provenance-verified explainable framework",
+      "purpose": "E3 plus fail-closed citation, provenance, duplicate, and temporal verification before the identical shared predictor.",
+      "status": "frozen verifier week9-citation-evidence-verifier-v2 with renderer week10-verified-explanation-renderer-v1",
+      "config": "config/citation_verification.json",
+      "result": "artifacts/e3_e4_evidence_augmented_evaluation.json",
+      "population": "30 source-verified answer-key cases, 150 displayed citations",
+      "metrics": {"groundedness": 1.0, "provenance_validity": 1.0, "temporal_violation_rate": 0.0,
+                  "unsupported_claim_rate": 0.0, "accuracy": 0.666667, "macro_f1": 0.603175}
+    }
+  ]
+}

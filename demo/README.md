@@ -33,3 +33,96 @@ node demo/verify-browser.mjs
 ```
 
 This verification uses an installed Microsoft Edge browser and checks the actual rendered passages and citations against the packet/evaluation. It also checks that paths outside the demo allowlist return 404.
+
+---
+
+# Connected demo stack (React + Spring Boot + FastAPI, local research only)
+
+The static viewer above is preserved as the frozen-artifact viewer and fallback.
+The connected stack adds the specification-required three layers over the
+**unchanged** research pipeline (`src/legal_xai`, frozen configs, BM25 index,
+provenance database, E2 checkpoint). No scientific logic was modified.
+
+## Architecture
+
+```text
+React web (demo/web, :8081)
+  ↓ GET /api/* with Bearer DEMO_API_TOKEN
+Spring Boot API (demo/spring-api, :8080)
+  ↓ POST /research/query with X-Internal-Token
+FastAPI ML service (demo/ml-service, :8001)
+  ↓ existing facts → salient query → temporal pre-rank BM25 → selection
+    → provenance → citation verification → extract-only explanation
+    (+ frozen-ckpt prediction only when GPU + checkpoint available)
+```
+
+Request / response flow returns the structured E4 result (issue, authorities,
+verbatim evidence + provenance, temporal status, citation verification,
+experimental prediction or skipped reason, uncertainty, human-review notice).
+
+## Prerequisites
+
+- Docker Desktop (for the full stack), or Node 20 + Java 17 + Maven + Python 3.11 for native runs.
+- Local assets already required by the reproducibility record: `retrieval/bm25.sqlite`,
+  `corpus/dedup_matches.csv`, E2 `checkpoint-6318` (read-only binds), and a PostgreSQL
+  provenance database (the demo compose file creates a separate throwaway volume;
+  load it with `scripts/load_provenance.py` pointed at port 54330 if needed).
+
+## Environment variables (never commit values; `.env` stays ignored)
+
+| Variable | Used by | Purpose |
+|---|---|---|
+| `POSTGRES_PASSWORD` | compose | demo database password (required, `${VAR:?…}` guard) |
+| `DEMO_API_TOKEN` | Spring, web UI field | browser → API bearer token (required; empty = all protected calls 401) |
+| `ML_INTERNAL_TOKEN` | Spring → FastAPI | internal caller token (required; empty = FastAPI research endpoint open locally) |
+| `LEGAL_XAI_DATABASE_URL` | FastAPI | provenance DB URL (defaults to the documented local default) |
+
+## Startup / shutdown
+
+```powershell
+# Repository root. No secrets are stored anywhere by these commands.
+$env:POSTGRES_PASSWORD = "local-only-dev"
+$env:DEMO_API_TOKEN = "local-only-dev"
+$env:ML_INTERNAL_TOKEN = "local-only-dev"
+docker compose -f compose.demo.yaml up --build
+# UI: http://127.0.0.1:8081/  (API: :8080, ML: :8001, demo DB: 127.0.0.1:54330)
+# Enter the same DEMO_API_TOKEN value in the UI token field.
+docker compose -f compose.demo.yaml down  # leaves the research volume alone
+```
+
+Native alternative (three terminals): `uvicorn app:app` in `demo/ml-service`
+(`PYTHONPATH=src`), `mvn spring-boot:run` in `demo/spring-api` (with env set),
+`npm install; npm run dev` in `demo/web`.
+
+## Example research request
+
+```powershell
+$headers = @{ Authorization = "Bearer local-only-dev" }
+$body = @{ query = "anticipatory bail section 438"; query_id = "week10-replay-01";
+           query_year = 2020; candidate_k = 100; top_k = 5 } | ConvertTo-Json
+Invoke-RestMethod -Uri http://127.0.0.1:8080/api/research/query -Method Post `
+  -Headers $headers -Body $body -ContentType "application/json"
+```
+
+## API endpoints
+
+| Method + path | Auth | Purpose |
+|---|---|---|
+| `GET /api/health` | open | API liveness + ML reachability (`ml_status`) |
+| `POST /api/research/query` | Bearer | E4 evidence path; `{request_id, result}` envelope |
+| `GET /api/experiments` | Bearer | E1–E4 metadata references (no new experiments) |
+| `GET /api/audit/{requestId}` | Bearer | Minimal audit record for one request |
+| `GET /health` (ML, :8001) | open | asset readiness (index/dedup/configs/checkpoint/CUDA flags) |
+| `POST /research/query` (ML, :8001) | internal token if configured | same E4 path, direct |
+
+## Research pipeline vs demo layer
+
+- Research pipeline (`src/`, `scripts/`, `config/`, corpora, index, checkpoint,
+  frozen results): unchanged and authoritative; the demo only calls it.
+- Demo layer (`demo/web`, `demo/spring-api`, `demo/ml-service`,
+  `compose.demo.yaml`): orchestration + presentation only; no BM25/provenance/model
+  logic re-implemented in Java or TypeScript.
+
+This demo is not production-ready: loopback-only, single shared local token, bounded
+in-memory audit (500 records), no multi-tenancy, no Kubernetes, no enterprise security.
+Scope conformance details: `demo/SCOPE_CONFORMANCE_DEMO.md`.

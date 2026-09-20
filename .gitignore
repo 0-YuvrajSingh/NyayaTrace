@@ -39,3 +39,8 @@ __pycache__/
 /artifacts/e2_model/
 /artifacts/e2_docker_build*.log
 /artifacts/e2_training*.log
+
+# Connected-demo build outputs (never committed; rebuild via Docker/npm).
+node_modules/
+dist/
+target/

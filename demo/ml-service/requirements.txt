@@ -1,0 +1,9 @@
+fastapi==0.115.6
+uvicorn==0.34.0
+# Research-pipeline runtime mirrors the frozen host pins in requirements.txt.
+psycopg[binary]==3.3.4
+scikit-learn==1.9.0
+pyarrow==21.0.0
+# Test-only (not needed to serve).
+pytest==9.1.1
+httpx==0.28.1
