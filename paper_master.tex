@@ -1034,11 +1034,6 @@ artifacts are frozen and machine-readable, including checkpoint-6318
 (\texttt{924a5bb9\ldots dbdc773}) with a stable replay hash. The implementation passes 81 automated
 research-pipeline tests (75 host-runnable plus 6
 transformer/torch-only unit tests) and the documented
-reproducibility checks (14/14 documentation and a freeze audit of 39 recorded
-entries: 28 byte-exact, 1 matching after line-ending normalisation,
-10 differing only in non-scientific metadata such as build timestamps,
-retrieval run UUIDs, and platform version strings, with all reported
-metrics verified identical). Separately, the
 reproducibility checks (14/14 documentation checks and a freeze audit of 39 recorded
 entries: 28 byte-exact, 1 after line-ending normalisation, and 10 differing only in
 non-scientific metadata, with all reported metrics verified identical;
@@ -1062,88 +1057,74 @@ loopback only and is not a production, multi-tenant, or autonomous system.
 
 The authors thank Kriti Mishra for her mentorship and guidance throughout this work.
 
+\IEEEtriggeratref{9}
+\IEEEtriggercmd{\enlargethispage{-6.9in}}
 \begin{thebibliography}{00}
-
+\bibitem{dahl2024}
+M. Dahl, V. Magesh, M. Suzgun, and D. E. Ho, ``Large Legal Fictions: Profiling
+Legal Hallucinations in Large Language Models,'' \emph{Journal of Legal
+Analysis}, vol.\ 16, no.\ 1, pp.\ 64--93, 2024.
+\bibitem{nay2023}
+J. J. Nay, ``Large Language Models as Fiduciaries: A Case Study Toward Robustly
+Communicating With Artificial Intelligence Through Legal Standards,''
+\emph{arXiv preprint arXiv:2301.10095}, 2023.
+\bibitem{poojasingh2026}
+Supreme Court of India, \emph{Pooja Ramesh Singh v. Jammu and Kashmir Bank Ltd.\
+\& Anr.}, 2026 INSC 668, 2026. Order copy:
+\url{https://ibbi.gov.in/uploads/order/8e1ccab8f7f445f81034223c1d0fe7b9.pdf}.
 \bibitem{malik2021}
 V. Malik, R. Sanjay, S. K. Nigam, K. Ghosh, S. K. Guha, A. Bhattacharya, and
 A. Modi, ``ILDC for CJPE: Indian Legal Documents Corpus for Court Judgment
 Prediction and Explanation,'' in \emph{Proc.\ 59th Annual Meeting of the
 Association for Computational Linguistics (ACL-IJCNLP)}, 2021, pp.\ 4046--4062.
-
 \bibitem{paul2023}
 S. Paul, A. Mandal, P. Goyal, and S. Ghosh, ``Pre-trained Language Models for
 the Legal Domain: A Case Study on Indian Law,'' in \emph{Proc.\ 19th Int.\
 Conf.\ on Artificial Intelligence and Law (ICAIL)}, 2023, pp.\ 187--196.
-
-\bibitem{taxflow2026}
-V. R. Karna, R. R. M., B. S. Babu, N. S., M. M., and H. V.,
-``A Hybrid RAG-LLaMA Framework for Scalable and Accurate Interpretation of Legal
-Texts,'' \emph{Applied Artificial Intelligence}, vol.\ 40, no.\ 1, art.\
-2626097, 2026.
-
-\bibitem{casefacts2026}
-A. R. Putta, J. Devasier, and C. Li, ``CaseFacts: A Benchmark for Legal
-Fact-Checking and Precedent Retrieval,'' in \emph{Proc.\ 64th Annual Meeting of
-the Association for Computational Linguistics}, 2026, pp.\ 17246--17265.
-
-\bibitem{lextime2025}
-C. Barale, L. Barrett, V. S. Bajaj, and M. Rovatsos, ``LexTime: A Benchmark for
-Temporal Ordering of Legal Events,'' in \emph{Findings of the Association for
-Computational Linguistics: EMNLP 2025}, 2025, pp.\ 5220--5236.
-
-\bibitem{poojasingh2026}
-Supreme Court of India, \emph{Pooja Ramesh Singh v. Jammu and Kashmir Bank Ltd.\
-\& Anr.}, 2026 INSC 668, 2026. Order copy:
-\url{https://ibbi.gov.in/uploads/order/8e1ccab8f7f445f81034223c1d0fe7b9.pdf}.
-
-\bibitem{robertson2009}
-S. Robertson and H. Zaragoza, ``The Probabilistic Relevance Framework: BM25 and
-Beyond,'' \emph{Foundations and Trends in Information Retrieval}, vol.\ 3, no.\
-4, pp.\ 333--389, 2009.
-
-\bibitem{smith2007}
-R. Smith, ``An Overview of the Tesseract OCR Engine,'' in \emph{Proc.\ 9th Int.\
-Conf.\ on Document Analysis and Recognition (ICDAR)}, vol.\ 2, 2007, pp.\
-629--633.
-
-\bibitem{coliee2023}
-R. Goebel, Y. Kano, M.-Y. Kim, J. Rabelo, K. Satoh, and M. Yoshioka, ``Summary
-of the Competition on Legal Information, Extraction/Entailment (COLIEE) 2023,''
-in \emph{Proc.\ 19th Int.\ Conf.\ on Artificial Intelligence and Law (ICAIL)},
-2023, pp.\ 472--480.
-
-\bibitem{legalbench2023}
-N. Guha et al., ``LegalBench: A Collaboratively Built Benchmark for Measuring
-Legal Reasoning in Large Language Models,'' in \emph{Advances in Neural
-Information Processing Systems 36, Datasets and Benchmarks Track}, 2023.
-
-\bibitem{casehold2021}
-L. Zheng, N. Guha, B. R. Anderson, P. Henderson, and D. E. Ho, ``When Does
-Pretraining Help? Assessing Self-Supervised Learning for Law and the CaseHOLD
-Dataset of 53,000+ Legal Holdings,'' in \emph{Proc.\ 18th Int.\ Conf.\ on
-Artificial Intelligence and Law (ICAIL)}, 2021, pp.\ 159--168.
-
 \bibitem{shukla2022}
 A. Shukla, P. Bhattacharya, S. Poddar, R. Mukherjee, K. Ghosh, P. Goyal, and
 S. Ghosh, ``Legal Case Document Summarization: Extractive and Abstractive
 Methods and their Evaluation,'' in \emph{Proc.\ 2nd Conf.\ of the Asia-Pacific
 Chapter of the ACL (AACL-IJCNLP)}, 2022, pp.\ 1048--1064.
-
-\bibitem{dahl2024}
-M. Dahl, V. Magesh, M. Suzgun, and D. E. Ho, ``Large Legal Fictions: Profiling
-Legal Hallucinations in Large Language Models,'' \emph{Journal of Legal
-Analysis}, vol.\ 16, no.\ 1, pp.\ 64--93, 2024.
-
-\bibitem{nay2023}
-J. J. Nay, ``Large Language Models as Fiduciaries: A Case Study Toward Robustly
-Communicating With Artificial Intelligence Through Legal Standards,''
-\emph{arXiv preprint arXiv:2301.10095}, 2023.
-
+\bibitem{coliee2023}
+R. Goebel, Y. Kano, M.-Y. Kim, J. Rabelo, K. Satoh, and M. Yoshioka, ``Summary
+of the Competition on Legal Information, Extraction/Entailment (COLIEE) 2023,''
+in \emph{Proc.\ 19th Int.\ Conf.\ on Artificial Intelligence and Law (ICAIL)},
+2023, pp.\ 472--480.
+\bibitem{legalbench2023}
+N. Guha et al., ``LegalBench: A Collaboratively Built Benchmark for Measuring
+Legal Reasoning in Large Language Models,'' in \emph{Advances in Neural
+Information Processing Systems 36, Datasets and Benchmarks Track}, 2023.
+\bibitem{casehold2021}
+L. Zheng, N. Guha, B. R. Anderson, P. Henderson, and D. E. Ho, ``When Does
+Pretraining Help? Assessing Self-Supervised Learning for Law and the CaseHOLD
+Dataset of 53,000+ Legal Holdings,'' in \emph{Proc.\ 18th Int.\ Conf.\ on
+Artificial Intelligence and Law (ICAIL)}, 2021, pp.\ 159--168.
+\bibitem{taxflow2026}
+V. R. Karna, R. R. M., B. S. Babu, N. S., M. M., and H. V.,
+``A Hybrid RAG-LLaMA Framework for Scalable and Accurate Interpretation of Legal
+Texts,'' \emph{Applied Artificial Intelligence}, vol.\ 40, no.\ 1, art.\
+2626097, 2026.
+\bibitem{casefacts2026}
+A. R. Putta, J. Devasier, and C. Li, ``CaseFacts: A Benchmark for Legal
+Fact-Checking and Precedent Retrieval,'' in \emph{Proc.\ 64th Annual Meeting of
+the Association for Computational Linguistics}, 2026, pp.\ 17246--17265.
+\bibitem{lextime2025}
+C. Barale, L. Barrett, V. S. Bajaj, and M. Rovatsos, ``LexTime: A Benchmark for
+Temporal Ordering of Legal Events,'' in \emph{Findings of the Association for
+Computational Linguistics: EMNLP 2025}, 2025, pp.\ 5220--5236.
 \bibitem{lewis2020}
 P. Lewis et al., ``Retrieval-Augmented Generation for Knowledge-Intensive NLP
 Tasks,'' in \emph{Advances in Neural Information Processing Systems 33}, 2020,
 pp.\ 9459--9474.
-
+\bibitem{robertson2009}
+S. Robertson and H. Zaragoza, ``The Probabilistic Relevance Framework: BM25 and
+Beyond,'' \emph{Foundations and Trends in Information Retrieval}, vol.\ 3, no.\
+4, pp.\ 333--389, 2009.
+\bibitem{smith2007}
+R. Smith, ``An Overview of the Tesseract OCR Engine,'' in \emph{Proc.\ 9th Int.\
+Conf.\ on Document Analysis and Recognition (ICDAR)}, vol.\ 2, 2007, pp.\
+629--633.
 \end{thebibliography}
 
 \end{document}
