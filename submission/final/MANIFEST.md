@@ -28,9 +28,12 @@ Ajay Kumar Garg Engineering College, Ghaziabad, India
 
 ## Cryptographic Hashes (SHA-256)
 
-- `paper_master.pdf`: `bb6ef314bdf0f4ab4e8899094ef4e90d76e58b0faa9f18ad738d3e4a7ed8cd7d`
-- `paper_master.tex`: `bcc60a3e6943f7037d575f1a0537245c2fcdeb1b0e43721437b416424dee65e0`
-- `nyayatrace_submission_package.zip`: `012c28baae51dd687da1eca5020130a3738a9d8d13970bd3a08944ea9f5221b4`
+- `paper_master.pdf`: `d68dd159e03e7946ae5c14468c322dfb3044a49871bb241be04764c463dd6d73`
+- `paper_master.tex`: `2ba3d769a755ccf3ac26ff1cfcd526d7c8f54f5aea7f4343dabccbf0a50ec828`
+- `nyayatrace_submission_package.zip`: `1a92de4fc63b01f75a7f6c21e7c001703d2e9346c99edc20be4ce57319c4a420`
+- `paper_master.pdf`: `47854421433e25a2633a4f79fadc36701084ddf3601dc145d15c17ed978acfed`
+- `paper_master.tex`: `a8d63b045e2514dc3392f22abb8ef82ff4988201914ce27fc40b75c2067530fd`
+- `nyayatrace_submission_package.zip`: `054f471bbaed245cf2913690d0e4778064ef1fff40cd4d8bdb78b2ad02412863`
 - `figures/fig1_outcome.pdf`: `6a2c7776ed817ec4b595fd93d5bd26d61df3b38692d0495e0dfa60c8179844a2`
 - `figures/fig2_funnel.pdf`: `02287ec1da8ea1bc95d725a6cc211353535f82b781c1d06d1a309aeb414369cc`
 - `figures/fig3_integrity.pdf`: `34965becf10f273a968d5408087ccc3c7de7f82de2da28a422eb41400e597432`

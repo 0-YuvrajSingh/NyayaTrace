@@ -174,7 +174,7 @@ COLIEE evaluates case-law and statute retrieval and entailment \cite{coliee2023}
 LegalBench measures LLM legal reasoning \cite{legalbench2023}; CaseHOLD tests
 holding selection and pre-training value \cite{casehold2021}. Each uses one
 fixed corpus and none requires a candidate to pre-date the query matter.
-TaxFlow applies hybrid RAG with temporal filtering to Indian statutory tax
+TaxFlow applies hybrid RAG with validity filtering to Indian tax-law
 question answering \cite{taxflow2026}; CaseFacts frames U.S.\ legal claim
 verification with Supported/Refuted/Overruled labels \cite{casefacts2026},
 showing validity evolves; LexTime benchmarks temporal event ordering
@@ -197,7 +197,7 @@ used as a numerical baseline. Per-work boundaries: ILDC/CJPE
 separate provenance-bearing corpus without reproducing its architecture);
 InLegalBERT \cite{paul2023} motivates the neural baseline (we correct
 truncation via chunk-and-pool without assuming it must win); TaxFlow
-\cite{taxflow2026} shares temporal-legal-retrieval concerns (we address
+\cite{taxflow2026} shares legal-retrieval concerns (statutory validity; we address
 precedent identity, passage provenance, and a verified key instead);
 CaseFacts \cite{casefacts2026} shows validity evolves with noisy open
 retrieval (we verify identity, eligibility, and provenance from case facts);
@@ -1031,12 +1031,15 @@ calibration weakness.
 
 All configurations, seeds, model revisions, corpus identities, and evaluation
 artifacts are frozen and machine-readable, including checkpoint-6318
-(\texttt{924a5bb9\ldots dbdc773}) with a stable replay hash. The implementation passes 81 automated research-pipeline tests (75 host-runnable plus 6
+(\texttt{924a5bb9\ldots dbdc773}) with a stable replay hash. The implementation passes 81 automated
+research-pipeline tests (75 host-runnable plus 6
 transformer/torch-only unit tests) and the documented
-reproducibility checks (14/14 documentation and 34/34 freeze-hash
-checks), replaying deterministically from a clean clone. Separately, the
-local demo stack is covered by 8/8 Spring Boot service tests, 6/6 FastAPI
-wrapper tests, and a passing TypeScript compile plus production frontend
+reproducibility checks (14/14 documentation checks and a freeze audit of 39 recorded
+entries: 28 byte-exact, 1 after line-ending normalisation, and 10 differing only in
+non-scientific metadata, with all reported metrics verified identical;
+per-file evidence in the repository audit). Separately, the
+  local demo stack is covered by 8/8 Spring Boot service tests, 6/6 FastAPI
+  wrapper tests, and a passing TypeScript compile plus production frontend
 build; these exercise orchestration and contracts only, never the frozen
 scientific results. Code and artifacts are available
 at \url{https://github.com/0-YuvrajSingh/NyayaTrace}.

@@ -64,6 +64,7 @@ Outcome prediction was added to E3/E4 in a later revision, extending the origina
 - **Current paper source:** [`submission/paper.md`](submission/paper.md). Earlier working drafts remain under [`artifacts/`](artifacts/) for traceability.
 - **Reproducibility configuration:** [`config/reproducibility_freeze.json`](config/reproducibility_freeze.json).
 - **Evaluation audit:** [`artifacts/week16_reproducibility_audit.md`](artifacts/week16_reproducibility_audit.md).
+- **Freeze drift audit:** [`docs/freeze_drift_audit.md`](docs/freeze_drift_audit.md).
 - **Results and figures:** [`artifacts/`](artifacts/) and [`artifacts/figures/`](artifacts/figures/).
 - **Evidence-augmented prediction:** [`config/e3_e4_evidence_augmented_prediction.json`](config/e3_e4_evidence_augmented_prediction.json), [`artifacts/e3_e4_evidence_augmented_evaluation.json`](artifacts/e3_e4_evidence_augmented_evaluation.json), and [`artifacts/e3_e4_prediction_error_analysis.md`](artifacts/e3_e4_prediction_error_analysis.md).
 - **Source modules and scripts:** [`src/legal_xai/`](src/legal_xai/) and [`scripts/`](scripts/).

@@ -67,3 +67,53 @@ Corrected replay output SHA-256 values:
 - E3/E4 canonical stable payload excluding generated run UUIDs: `7257e6a5a1c78d7c028e252f9ebcafb02a5d31630b5cdc05becb0b9ca608b6b6`
 
 Final clean-checkout replay status: **PASS**. The three documentation-completeness findings were closed in the freeze record before this final packaging pass. The runner bookkeeping defect is fixed, and the full evaluation replay reproduces the audited results exactly apart from generated run UUIDs and the intentionally corrected field.
+
+## Addendum 2026-09-21 - documented changes and deviations (Document 3 change control)
+
+### RR-01 - Freeze-audit drift (10 of 39 entries)
+Spec basis: Reproducibility Freeze; hash/version requirement; Week 16 audit.
+Observation: config/reproducibility_freeze.json lists 39 unique paths: 28
+byte-exact, 1 matching only after CRLF->LF (see RR-02), 10 differing.
+Classification: see docs/freeze_drift_audit.md. Causes: metadata timestamps (built_at_utc in artifacts/bm25_index.json), run UUIDs (retrieval_run_id / run_id in E3/E4 and week 10/11 evaluation JSONs), platform/environment version strings (in artifacts/e1_baseline_results.json), JSON serialization formatting (corpus identity, error analysis, discarded run records), and upstream transfer snapshot line-ending delta (corpus/dataset_manifest.md).
+Impact on frozen results: none - parsed content equal after removing volatile fields (built_at_utc, run_id, retrieval_run_id, versions, and ~1e-4 torch/cuDNN float logit tails). Headline metrics (paper Tables II-VI) re-checked identical: yes - programmatic verification via scratch/prove_drift.js and scratch/build_freeze_drift_audit.js; Table II (E1 acc=0.6134, F1=0.6123; E2 chunk acc=0.5968, F1=0.5924), Table III (E3 R@5=0.40, R@100=0.50, Prec=0.08, Rec=0.40, F1=0.133), Table IV (E4 150/150 grounded, 150/150 provenance-valid, 0 temporal violations, 0 unsupported claims), Table V (E1/E2/E3/E4 accuracy/macro-F1), and Table VI (prediction categories) all match exactly.
+Software dependency versions: Python 3.11.9 -> 3.13.14; scikit-learn 1.9.0 -> 1.9.1; pyarrow 21.0.0 -> 25.0.1; platform Windows-10 -> Windows-11; PyTorch 2.13.0+cu130 (host) -> 2.5.1+cu124 (container runtime).
+Action: no frozen file modified; freeze JSON hashes unchanged.
+Status: CLOSED - evidence documented in docs/freeze_drift_audit.md.
+
+### RR-02 - Line-ending normalisation of hashed text files
+Observation: docker/e2.Dockerfile matches its frozen SHA-256 only after CRLF->LF;
+cause: core.autocrlf on Windows checkouts.
+Change: .gitattributes "text eol=lf" for the text files listed in the freeze;
+"binary" for parquet/sqlite/safetensors/joblib. Content unchanged; bytes restored
+to the frozen form.
+Justification: technically necessary to make the freeze verifiable on a clean
+clone; preserves the research questions and evaluation design.
+Verification: freeze check re-run; entry now byte-exact: PASS - docker/e2.Dockerfile verified byte-exact (SHA-256: 330ebd999830665b51f83deeacf8c8558f0274b0f772e31e26315b0525ec9ed8).
+Status: CLOSED.
+
+### RR-03 - Post-freeze extension of the authority answer key (Extension-7)
+Spec basis: Evaluation Reference Evidence (reference defined and frozen before
+final scoring; not built from the system's retrieved output); Change Control.
+Observation: after the Base-30 key was frozen and scored, seven further
+fixed-test cases (1990_234, 1990_256, 1990_324, 1991_136, 1991_87, 1992_286,
+1993_90) were verified under the same alignment gates. The Base-30 key was not
+modified. Three further candidates were held back and are excluded from every
+evaluation. Authorities recorded independently of system retrieval: confirmed - authorities extracted and verified directly from judgment text under alignment gates before scoring, not generated from retrieval model output.
+Assessment: not a core-component repair; recorded as a documented deviation.
+Handling: Base-30, Extension-7 and Combined-37 always reported as strata;
+Combined-37 described as a later expanded analysis; Base-30 results unchanged.
+Impact: Base-30 frozen results unaffected; Combined-37 is not the frozen baseline.
+Approval: Yuvraj Singh / Project Lead / 2026-09-21.
+
+### RR-04 - RQ3 explanation evaluation by LLM raters
+Spec basis: H3 (human-rated, subject to reviewer availability); Timeline week 13
+(human/qualitative review where feasible); Limitations (reviewer availability).
+Observation: independent human reviewers were not used because external Indian legal practitioners and independent domain experts were unavailable within the academic evaluation timeline.
+Used instead: a seven-case author self-review (formative, non-independent) and a
+14-case comparison by four LLM raters.
+Disclosed in the paper: not human evaluation; no significance test; two raters
+produced byte-identical rating vectors.
+Assessment: documented deviation in how H3 is measured; RQ3 wording unchanged;
+reported as exploratory presentation evidence only.
+Approval: Yuvraj Singh / Project Lead / 2026-09-21.
+

@@ -1,0 +1,1151 @@
+Temporally Constrained, Provenance-Verified
+Evidence Retrieval for Indian Legal Research
+Yuvraj Singh
+Department of Computer Science and Engineering
+Ajay Kumar Garg Engineering College
+Ghaziabad, India
+yuvraj2312026@akgec.ac.in
+
+RishiRaj Jaiswal
+Department of Computer Science and Engineering
+Ajay Kumar Garg Engineering College
+Ghaziabad, India
+rishi2312003@akgec.ac.in
+
+Rahul Ranjan
+Department of Computer Science and Engineering
+Ajay Kumar Garg Engineering College
+Ghaziabad, India
+rahul2312151@akgec.ac.in
+
+Saurav Kumar Chaudhary
+Department of Computer Science and Engineering
+Ajay Kumar Garg Engineering College
+Ghaziabad, India
+saurav2312023@akgec.ac.in
+
+Abstract—AI-assisted legal research fails in ways that fluent
+output conceals: a cited authority may not exist, may lack the
+attributed passage, may post-date the matter, or may never
+have been retrieved. A 2026 Supreme Court of India ruling
+overturned tribunal findings built on exactly these defects,
+making citation verifiability a functional requirement. This paper
+presents an evidence pipeline for historical Indian Supreme
+Court judgments in which every displayed citation is temporally eligible, provenance-bound, and mechanically verifiable
+against the persisted corpus. The design is extractive: material
+propositions are shown verbatim with locators, and outcome
+prediction is kept separate so a classification score can never
+stand in for evidence quality. We report three findings on a
+combined 37-case reference-evidence population (frozen 30-case
+base plus additive 7-case extension, analysed in strata). First,
+naive identifier matching between ILDC and an eCourts-derived
+judgment archive is unsafe: of 5,391 syntactic matches only 11
+survived content alignment, motivating a reusable gate. Second,
+pre-ranking temporal eligibility with salient-term queries and
+a self-match guard raised Recall@5 from 5/30 to 12/30 and Recall@100 from 12/30 to 15/30 on the frozen base (12/37 and 20/37
+combined). Third, all 185 displayed citations passed grounding,
+provenance, and temporal verification, with zero unsupported
+claims across the 37 cases, while 17 expected authorities remained
+absent at k=100: verification and retrieval must be measured on
+separate denominators. Outcome baselines on 1,503 ILDC cases
+and inference-time evidence augmentation are reported with their
+own populations and limits. A blinded 14-case, four-LLM-rater
+exploratory comparison favoured structured presentation 56/56,
+reported as presentation evidence only.
+Index Terms—legal information retrieval, explainable AI,
+provenance verification, temporal filtering, retrieval-augmented
+systems, Indian legal NLP, BM25, InLegalBERT
+
+Empirical profiling of legal hallucination in large language
+models has established that these failures are frequent rather
+than exceptional [13], and related work has probed how far
+explicit legal standards can be communicated to language
+models at all [14].
+The problem is no longer confined to the literature. In
+Pooja Ramesh Singh v. Jammu and Kashmir Bank Ltd. &
+Anr., 2026 INSC 668, the Supreme Court of India set aside
+tribunal decisions after identifying nonexistent authorities, incorrect citations, and fabricated passages apparently produced
+through AI-assisted research [6]. A legal research tool must
+therefore produce evidence a reviewer can locate, inspect, and
+independently verify.
+This paper treats that requirement as the primary design
+constraint over historical Indian Supreme Court judgments:
+case facts are retrieved with stable locators, duplicates excluded, only selected verbatim passages rendered, each citation
+verified against the persisted corpus and retrieval run, and
+outcome prediction kept in a separate field that never alters
+the evidence-bound conclusion.
+The central empirical observation is a dissociation that a
+single aggregate score would erase. Under the final configuration, all 185 displayed citations across the combined 37
+cases cleared grounding, provenance, duplicate, and temporal
+checks, with no unsupported claim among the 37 cases; at
+the same time, 17 of the 37 independently verified expected
+authorities never appeared among the top 100 candidates
+returned by the retriever. Correctness of what is shown and
+completeness of what is found are therefore separate properties. Reporting only a combined “citation correctness” figure
+would hide exactly the gap a reader needs in order to decide
+how much to trust the output.
+Contributions. This work makes four contributions, each
+bounded to the evaluated setting.
+1) A quantified cross-corpus identity failure and its
+
+I. I NTRODUCTION
+Legal research operates in a domain where fluency is not
+evidence. A generated response can be linguistically convincing while citing a judgment that does not exist, attributing a
+passage to a real judgment that does not contain it, or relying
+on law that was unavailable at the time the matter arose.
+
+remedy. Converting eCourts identifiers of the form
+YYYY INSC N to ILDC-style YYYY_N produced 5,391
+syntactic candidates, of which only 11 passed content
+alignment (Section IV-C): identifier equality is unsafe
+for this dataset pair. We supply a reusable contentalignment gate based on title/party identity plus direct
+phrase overlap.
+2) Pre-ranking temporal eligibility. We implement historical availability as a predicate inside the BM25
+candidate relation rather than as a post-hoc filter, so
+that ineligible judgments cannot consume retrieval depth
+(Section VI-D). On the held-out evidence set this change
+moved Recall@5 from 5/30 to 12/30 without regressing
+any prior success.
+3) A four-state citation protocol with separate denominators. Fabricated, real-but-unretrieved, policyviolating, and valid-but-unexpected citations (Section VII) — four states that a single correctness label
+collapses.
+4) An evaluation that keeps recovery and integrity
+apart. Authority recovery, citation integrity, outcome
+prediction, and explanation presentation are reported
+on their own populations, documenting the resulting
+dissociation rather than resolving it into a headline
+number (Section VIII).
+Scope. Claims are deliberately narrow: no legal correctness
+for retrieved authorities, no autonomous legal advisor, no claim
+that evidence retrieval improves outcome prediction. Ours is
+a researcher-facing prototype on four non-pooled populations:
+1,503 outcome cases, 30 frozen plus 7 additive source-verified
+evidence cases in strata, and paired explanation examples
+(seven formative author-reviewed pairs, superseded by a 14case exploratory LLM comparison).
+II. R ELATED W ORK
+A. Indian legal NLP and judgment prediction
+ILDC established Indian Supreme Court judgment prediction and explanation as a benchmark task [1], supplying the
+fixed splits and labels used here. InLegalBERT [2] motivates
+our neural baseline; practitioner-evaluated summarisation [12]
+shows length and presentation are first-order concerns. None
+of these lines addresses cross-corpus identity or per-citation
+provenance, which is where this work sits.
+B. Legal retrieval, benchmarks, and temporal constraints
+COLIEE evaluates case-law and statute retrieval and entailment [9]; LegalBench measures LLM legal reasoning [10];
+CaseHOLD tests holding selection and pre-training value [11].
+Each uses one fixed corpus and none requires a candidate
+to pre-date the query matter. TaxFlow applies hybrid RAG
+with validity filtering to Indian tax-law question answering
+[3]; CaseFacts frames U.S. legal claim verification with Supported/Refuted/Overruled labels [4], showing validity evolves;
+LexTime benchmarks temporal event ordering [5]. Retrievalaugmented generation established retrieval as an explicit nonparametric evidence source [15]; BM25 supplies the sparse
+
+ranking basis [7] and Tesseract the OCR engine for corpus
+repair [8].
+C. Positioning
+The boundary against the closest work is as follows. We
+claim neither the first legal RAG system, nor the first Indian legal model, nor the first temporal legal benchmark:
+the contribution is the reproducible combination of contentalignment gating, conservative pre-ranking eligibility, exact
+retrieval-run verification, and separate recovery-versus-validity
+reporting on a source-first key. Jurisdictions, tasks, corpora,
+and denominators differ, so no external system is used as
+a numerical baseline. Per-work boundaries: ILDC/CJPE [1]
+supplies the prediction setting and splits (we add a separate
+provenance-bearing corpus without reproducing its architecture); InLegalBERT [2] motivates the neural baseline (we correct truncation via chunk-and-pool without assuming it must
+win); TaxFlow [3] shares legal-retrieval concerns (statutory
+validity; we address precedent identity, passage provenance,
+and a verified key instead); CaseFacts [4] shows validity
+evolves with noisy open retrieval (we verify identity, eligibility,
+and provenance from case facts); LexTime [5] treats event
+ordering, whereas we enforce availability through metadata
+before ranking.
+III. P ROBLEM F ORMULATION
+Let a historical query judgment have identifier q, query year
+Yq , and frozen facts-only text Fq . Let each candidate evidence
+passage p belong to a source judgment with a stable source
+identifier, an exact decision date, citation metadata, page and
+character boundaries, and stored passage text.
+The temporal policy admits p only when the decision year
+of its source is strictly earlier than Yq . A same-year source is
+treated as ambiguous, because ILDC supplies no exact query
+date; a source with missing or unparseable date metadata is
+excluded. Both rules trade recall for the guarantee that no
+displayed authority can post-date the matter.
+The evidence task decomposes into three separable questions.
+• Recovery. Does the top-100 candidate set contain the
+independently verified expected authority, and is that
+authority among the five displayed sources?
+• Integrity. Does each displayed citation reproduce a real
+retrieved corpus passage with exact provenance, avoid the
+query judgment and its aligned duplicates, and satisfy the
+temporal rule?
+• Presentation. Given identical evidence and citations,
+does a structured Issue–Authority–Evidence–Conclusion–
+Uncertainty format make the material easier to inspect
+than unstructured prose?
+Outcome prediction is a secondary evaluation capability, not
+a fourth research question. It is reported on its own population
+and never pooled with the evidence measures, so that a
+classification score cannot substitute for evidence quality and
+a traceable citation cannot be mistaken for complete authority
+
+TABLE I
+O PERATIONAL DEFINITIONS USED THROUGHOUT THE FROZEN
+EVALUATION .
+Term
+
+Implemented definition
+
+Facts-only input
+
+Text retained before the earlier of a recognised dispositive cue and a 60% character cap,
+sentence-aligned where possible; inputs below
+10% retention or 100 words are excluded
+
+Temporal existence
+
+The source has a parseable exact decision date
+in corpus metadata
+
+Temporal applicability
+
+For query year Y , an authority is eligible only if
+its decision year is < Y ; same-year, later-year,
+and missing-date sources are excluded
+
+Temporal effectiveness
+
+The eligibility predicate is applied inside the
+BM25 candidate relation before ranking and
+LIMIT 100, so ineligible sources cannot consume returned depth
+
+Recall@100
+
+Share of answer-key cases whose predefined
+authority occurs anywhere in the returned top100 candidates
+
+Recall@5
+
+Share of answer-key cases whose predefined authority is among the five selected and displayed
+sources
+
+Provenance validity
+
+A displayed item reproduces the stored
+source ID, citation, decision date, court,
+PDF/page/character locator, exact passage, and
+retrieval-run membership
+
+Citation
+groundedness
+
+Every material displayed proposition is verbatim
+text of a supplied evidence passage and links to
+that evidence item
+
+Authority
+consistency
+
+A verified displayed source matches the answerkey authority by stable source ID, normalised
+citation, or normalised title plus exact decision
+date
+
+recovery. Table I fixes the operational definitions and pass/fail
+criteria.
+A. Research questions
+There are exactly three research questions. RQ1: Does
+grounding an Indian legal AI workflow in retrieved legal evidence improve legal-research reliability and relevant-evidence
+retrieval compared with a facts-only legal-language baseline?
+The controlled comparison is E2 versus E3; E1 is a traditional baseline reported for context. RQ2: Does provenanceconstrained evidence selection and citation verification reduce
+unsupported or unverifiable legal claims in the final output?
+RQ3: Can the proposed structured explanation format improve
+human-verifiable transparency without materially degrading
+prediction or retrieval performance?
+For RQ3, the implemented comparison holds the underlying evidence and citations constant and compares structured
+with unstructured presentation. It evaluates presentation transparency only; it does not independently establish a measurable prediction or retrieval-performance degradation or nondegradation effect.
+
+IV. C ORPUS C ONSTRUCTION AND AUDITING
+A. Purpose-split corpus design
+We use two corpora for different experimental purposes.
+ILDC Single supplies fixed case-level splits and binary
+outcome labels: 7,593 judgments (5,082 training, 994 validation, 1,517 test). After a shared sufficiency rule excluded 14
+test records, the held-out prediction population contains 1,503
+cases.
+The evidence corpus is an eCourts-derived collection of
+Indian Supreme Court judgments covering 1950–2020, supplying the metadata absent from ILDC: citations, exact decision
+dates, court and case identifiers, source paths, and page and
+character locators. Of 39,069 English PDF instances, 39,066
+accepted PDFs yielded 2,343,435 labelled chunks, of which
+2,036,981 unique chunks were loaded into a PostgreSQL
+provenance store and a SQLite FTS5 BM25 index.
+This split follows the information actually available in
+each source. ILDC supports fixed-split outcome prediction but
+exposes only a year in the case identifier and lacks the citation
+and passage provenance that verification requires. The eCourts
+collection supports dated, traceable retrieval but is not used as
+a substitute outcome-label benchmark. Cross-corpus links are
+drawn only after the alignment checks described below.
+B. Source-quality audit and targeted OCR repair
+A full audit found the stored text valid UTF-8, but 15
+PDF instances (representing 14 source IDs) had missing or
+badly corrupted embedded text, concentrated in image-backed
+1980s/1990s Reports plus one mojibake-affected 2018 file.
+Fixed checks covered absent embedded text, control characters, mojibake markers, visible-ASCII ratio, and English-token
+ratio.
+Only flagged instances were re-rendered and processed
+with English Tesseract OCR at 250 DPI [8]. Twelve passed
+the same post-OCR quality gate and were restored; three
+single-page PDFs remained below threshold and were transparently excluded rather than forced into the index. Raw PDFs
+were preserved unchanged, exclusions were recorded, and
+the provenance store and BM25 index were rebuilt from the
+accepted corpus.
+C. Cross-corpus identifier alignment
+Linking ILDC query cases to eCourts sources requires
+establishing that two records describe the same judgment. The
+obvious route — converting an eCourts identifier of the form
+YYYY INSC N to the ILDC-like string YYYY_N — is unsafe,
+and quantifiably so.
+That conversion produced 5,391 syntactic candidates. Only
+11 passed content alignment; 5,380 were identifiernamespace collisions, concentrated in legacy material where
+similar numeric suffixes routinely denote entirely different
+judgments. Trusting identifier equality here would silently
+merge unrelated cases, corrupting both deduplication and
+leakage control.
+The corrected pipeline treats identifier equality as candidate generation only. A reusable gate evaluates title or party
+
+identity together with direct six-token phrase overlap before
+any mapping may drive deduplication or retrieval exclusion.
+Combining syntactic and title/party candidates yielded 8,927
+deduplicated pairs, of which 1,304 were accepted and 7,623
+rejected. Retrieval additionally applies a full-document selfmatch safeguard, so that an unmapped copy of the query
+judgment can be removed without suppressing an earlier
+authority merely quoted at length by the later judgment.
+We regard this audit as independently useful. It demonstrates that mechanically similar ILDC and eCourts identifiers
+do not establish judgment identity, and it supplies a contentbased alternative reusable across answer-key validation, development probes, leakage checks, and retrieval-time exclusion.
+D. Source-verified authority answer key
+The authority evaluation uses 30 ILDC fixed-test cases. Test
+membership was confirmed before external verification. For
+each accepted case the query judgment was inspected through
+a primary source or accepted eCourts mirror, one earlier
+authority was recorded independently of system retrieval, and
+that authority was reconciled to the corpus by stable source
+ID, normalised citation, or normalised title plus exact date for
+parallel reporter forms.
+The identifier-collision discovery triggered a read-only audit of the then-current mappings: 20 passed, nine resolved
+sources failed direct content alignment, and one source was
+unresolved. One case was relinked to a content-aligned source
+and the other nine flagged records were replaced by new fixedtest cases, yielding a final audit of 30/30 direct-content passes.
+The sample is not era-balanced: five query cases are from
+the 1970s, 13 from the 1980s, nine from the 1990s, two from
+the 2000s, and one from the 2010s. The 1980s account for
+43.3%. This concentration is a consequence of the source and
+alignment gates rather than deliberate temporal sampling, and
+we treat it as a limitation (Section X).
+A later additive extension verified seven further fixedtest cases (1990_234, 1990_256, 1990_324, 1991_136,
+1991_87, 1992_286, 1993_90) under the same gates,
+without modifying the original 30-case key (listed in Section VIII). Three further candidates were held back as needing
+review and are not part of any evaluation. The combined 37case population is therefore a later expanded analysis, not
+the original frozen base; all results below retain Base-30,
+Extension-7, and Combined-37 strata.
+V. S YSTEM D ESIGN
+The system comprises four auditable layers. E1 is the
+traditional TF–IDF plus logistic-regression outcome baseline;
+E2 is the facts-only InLegalBERT outcome baseline. E3 is the
+retrieval/evidence-grounded branch, and E4 is the verification,
+provenance, and structured-explanation bundle applied to that
+branch. E2 is not a retrieval baseline. Retrieval quality is evaluated against the predefined authority/evidence key; outcome
+prediction is secondary.
+1. Corpus and alignment layer. ILDC splits supply prediction cases and labels. Cleaned eCourts chunks retain stable
+
+source, date, citation, court, PDF, page, and character provenance. A content-aligned crosswalk plus a runtime content
+check control target-case leakage.
+2. Outcome branch. A shared facts-only extractor feeds
+sparse linear baseline (E1) and InLegalBERT chunk-and-pool
+model (E2). These baselines produce binary predictions and
+never retrieve external evidence.
+3. Evidence branch (E3). Facts-only text is converted to
+salient terms, matched through BM25 under pre-ranking temporal eligibility, and narrowed to five source-diverse passages
+rendered in a fixed evidence-linked structure.
+4. Verification and reporting layer (E4). Each displayed
+record is verified against the corpus and the recorded retrieval
+run; duplicate and temporal rules are enforced; verified sources
+are compared with the source-first answer key. Versioned artifacts preserve metrics, failures, and configuration provenance.
+The evidence renderer is extractive: material legal text is
+displayed verbatim, and its evidence-bound conclusion uses
+fixed, non-inferential wording tied to evidence identifiers. The
+renderer cannot retrieve, rerank, invent an authority, paraphrase
+a material proposition, or infer an outcome. Outcome prediction is produced separately by the prediction branch.
+VI. M ETHOD
+A. Shared facts-only input
+E1 and E2 share the extraction configuration ildcpredecision-facts-v1. The extractor retains text preceding the earlier of a recognised dispositive cue and 60% of
+the document, moving the boundary to a preceding sentence
+end when sufficient text remains. Cases below 10% retention
+or 100 words are excluded. Neither prediction path uses
+retrieval. Model and threshold selection uses validation data
+only; the held-out test split is evaluated once, after selection.
+B. E1: sparse linear baseline
+E1 uses lowercased TF–IDF unigrams and bigrams with
+sublinear term frequency, minimum document frequency two,
+L2 normalisation, and at most 100,000 features. Logisticregression values C ∈ {0.1, 1.0, 10.0} are compared by
+validation accuracy, with smaller C breaking ties. The selected
+C = 10.0 pipeline is refitted once on eligible training and
+validation cases and evaluated once on test data. Seed 202605.
+C. E2: InLegalBERT chunk-and-pool
+E2
+fine-tunes
+law-ai/InLegalBERT
+(revision
+b5ecfed8) with a new two-label head. It supersedes
+an earlier 256-token prefix run that truncated 99.20%
+of eligible test inputs — a discarded result retained for
+traceability. Each facts-only document is instead represented
+by overlapping 512-token windows with 50-token overlap.
+Training uses three epochs, seed 202607, learning rate
+2 × 10−5 , weight decay 0.01, warm-up ratio 0.1, and gradient
+accumulation.
+Mean pooling of window logits before softmax is the primary rule, and checkpoint selection uses validation documentlevel mean-logit accuracy only. Majority vote is reported as a
+
+secondary comparison, not a post-hoc selection rule. All 1,503
+eligible test documents and 9,576 test windows are covered.
+D. E3: temporally constrained retrieval
+The query builder tfidf-segment-salient-termsv1 segments the full facts-only input, removes proceduralreport boilerplate, scores terms deterministically, retains section and article cues, and emits at most 32 unique terms. These
+query a SQLite FTS5 BM25 index backed by PostgreSQL
+provenance.
+The frozen configuration is week11-bm25-salientterms-preranked-temporal-v3: only judgments with
+decision year strictly earlier than the query year enter the
+candidate relation before BM25 ordering and the top-100
+cutoff, so the full depth is spent on eligible material rather
+than discarded ineligible depth.
+Candidate sources are checked against the alignment-gated
+crosswalk and a direct self-match rule requiring at least
+100 shared six-token occurrences and 80% unique candidatesource phrase coverage. A non-learned selector then chooses
+up to five passages in BM25 order, with at most one passage
+per source.
+E. E4: citation and provenance verification
+E4 receives the E3 answer, retrieval-run identifier, query
+identity and year, and persisted corpus records. Each displayed
+item must exist in the corpus, reproduce exact passage and
+provenance, belong to the recorded run, avoid the query and
+duplicates, and pre-date the query year; any failure rejects the
+citation.
+Authority consistency is evaluated separately, after verification. A fully valid citation may differ from the single expected
+authority without being labelled substantively irrelevant — a
+distinction we return to in Section VIII-D.
+
+G. Bundled-intervention caveat
+E4
+jointly
+checks
+corpus
+existence,
+exact
+passage/provenance identity, run membership, duplicate
+status, and temporal eligibility over shared final retrieval and
+evidence. Aggregate reliability cannot be attributed to any
+one component; the supported claim concerns the complete
+bundle.
+VII. C ITATION AND P ROVENANCE P ROTOCOL
+Each chunk is keyed by a stable identifier built from its
+source path and passage location. The persisted record stores:
+source ID, source case ID where available, citation, exact
+decision date, court, local PDF file, page number, character
+start and end, and chunk text. Retrieval runs record query ID,
+year, query text, index version, temporal policy, rank, score,
+and temporal status.
+The renderer may expose only supplied selected evidence.
+Material content remains verbatim; authority cards and conclusions refer to evidence IDs. Verification then checks corpus
+existence, exact field equality, run membership, duplicate
+status, and temporal eligibility, with answer-key matching only
+after a displayed citation has passed. Parallel reporter forms
+are reconciled through stable source identity or normalised
+title plus exact decision date, never loose string similarity.
+This protocol distinguishes four failure states that a single
+“correct citation” label would collapse:
+1) a fabricated or altered citation;
+2) a real citation that was not retrieved for this query;
+3) a retrieved citation violating temporal or duplicate policy;
+4) a fully valid citation that does not match the predefined
+expected authority.
+In our results, states (1)–(3) occur zero times and state (4)
+occurs in 18 of 30 cases — a profile that a single aggregate
+score would render invisible.
+
+F. Inference-time evidence augmentation
+Outcome prediction was subsequently added to E3 and
+E4 by reusing the frozen E2 checkpoint without fine-tuning.
+A shared input builder concatenates the frozen facts extract
+and the selected verbatim evidence in selection order, applies the same 512-token windows with 50-token overlap,
+pools window logits by their mean, and selects the class by
+argmax. Gold labels, scores, dates, provenance, and boilerplate are excluded from model input. Seed 202607; configuration e3e4-evidence-augmented-inlegalbertcheckpoint6318-v1.
+We note the methodological caveat plainly: the checkpoint
+was trained on facts-only inputs, so applying it to facts plus
+retrieved passages is an inference-time distribution shift, not
+evidence-aware fine-tuning. These predictions are therefore
+reported descriptively — on the frozen 30-case base and,
+in the RQ1 extension, on the combined 37 cases — using
+the frozen E2 checkpoint at inference time, and are not
+directly comparable with the 1,503-case baselines, which form
+a separate population with a different denominator.
+
+VIII. R ESULTS
+A. Reporting populations
+Four populations are reported and never aggregated across
+kinds: 1,503 eligible fixed ILDC test cases; a combined 37case reference-evidence population (Base-30 frozen key with
+150 citations, Extension-7 additive cases with 35, Combined37 with 185), always stratified; and paired explanation-review
+cases (seven formative author-reviewed pairs, superseded by
+the 14-case LLM evaluation below).
+B. Outcome prediction
+On the 1,503-case population (Table II), sparse E1 reached
+accuracy 0.61344 and macro-F1 0.612342, exceeding corrected E2 mean-logit pooling at 0.596806 and 0.592358.
+E2’s secondary majority-vote aggregation reached 0.6015 and
+0.5937. All primary models exceeded the 0.5017 majorityclass accuracy.
+This does not show domain pre-training is ineffective in
+general, only that the sparse baseline performed better under
+
+TABLE II
+O UTCOME PREDICTION . P OPULATIONS ARE DISTINCT AND NOT A
+LIKE - FOR - LIKE LEADERBOARD .
+n
+
+Model
+
+Acc.
+
+Macro-F1
+
+Majority class
+1,503
+E1 TF–IDF + LR
+1,503
+E2 InLegalBERT, mean logits 1,503
+E2 InLegalBERT, maj. vote
+1,503
+
+0.5017
+0.61344
+0.596806
+0.6015
+
+0.3341
+0.612342
+0.592358
+0.5937
+
+E3 evidence-augmented
+E4 verified evid.-augmented
+
+0.666667
+0.666667
+
+0.603175
+0.603175
+
+30
+30
+
+Outcome baselines, ILDC test (n=1,503)
+0.6
+
+Accuracy
+Macro-F1
+
+0.4
+
+0.2
+
+0.0
+rity
+Majo
+
+F
+E1 T
+
+-IDF
+
++LR
+
+ean
+E2 m
+
+it
+-log
+
+ote
+aj-v
+E2 m
+
+Fig. 1. Accuracy and macro-F1 for E1, corrected E2 under both pooling rules,
+and the majority baseline on the eligible ILDC test population (n = 1,503).
+
+these frozen settings; Section IX shows the two models make
+substantially non-identical errors.
+On the separate 30-case subset, evidence-augmented E3 and
+verified E4 both reached accuracy 0.666667 and macro-F1
+0.603175, with identical confusion matrices. On the combined
+37 cases the same shared predictor reaches accuracy 0.648649
+and macro-F1 0.607347 with confusion matrix [[6,3],[10,18]],
+again identical for E3 and E4 (Table III). The equality is
+expected and is not evidence that verification is redundant: with no evidence rejected, the predictor received an
+identical input; E4’s contribution is control, traceability, and
+explanation. Had verification rejected evidence, the reported
+pair would diverge visibly.
+C. Authority recovery and evidence integrity
+Base-30 recovery is Recall@5 0.40 (12/30) and Recall@100
+0.50 (15/30: 12 selected + 3 retrieved-but-unselected); 15
+authorities were absent at k=100.
+The principal RQ1 result uses the combined 37-case population (Table III). The seven extension cases contribute no additional top-5 recovery (0/7) but five further top-100 recoveries
+at ranks 14, 16, 26, 32, and 89, with two absent; their displayed
+citations are likewise fully verified (35/35). The combined
+figures are therefore Recall@5 12/37 = 0.324324 and Recall@100 20/37 = 0.540541 over 185 displayed citations. The
+lower combined Recall@5 is descriptive of the added stratum,
+not evidence about the base configuration, and the frozen 30case result above is retained unchanged alongside it.
+
+TABLE III
+RQ1 RETRIEVAL AND EVIDENCE - AUGMENTED PREDICTION BY STRATUM .
+T HE COMBINED ROW IS THE PRINCIPAL EVALUATION ; STRATA ARE NEVER
+POOLED SILENTLY.
+Population
+
+n
+
+R@5
+
+R@100 E3 Acc.
+
+E3 F1
+
+Base-30
+30
+0.40 (12/30)
+0.50 (15/30)
+0.6667
+0.6032
+Extension-7
+7
+0.00 (0/7)
+0.7143 (5/7)
+0.5714
+0.5714
+Combined-37 37 0.324324 (12/37) 0.540541 (20/37) 0.648649 0.607347
+
+TABLE IV
+E VIDENCE RECOVERY AND INTEGRITY ON THE FROZEN BASE -30
+ANSWER - KEY STRATUM (n = 30 QUERIES ; 150 DISPLAYED CITATIONS ).
+C OMBINED -37 VALUES ARE REPORTED IN TABLE III AND THE
+SURROUNDING TEXT.
+Measure
+
+Value
+
+Arithmetic
+
+Recall@5
+Recall@100
+Absent at k=100
+Authority precision
+struct. ceiling
+Grounding
+Provenance validity
+Temporal violations
+Unsupported claims
+
+0.40
+0.50
+0.50
+0.08
+0.20
+1.00
+1.00
+0
+0
+
+12 of 30 in top 5
+15 of 30 in top 100
+15 of 30
+12 of 150 shown
+30 of 150 (5 shown, 1 credited)
+150/150 passed
+150/150 passed
+0 of 150
+0 of 30 cases
+
+Figure 2 shows the recovery funnel. Base-30 integrity is
+150/150 grounded and provenance-valid with 0/150 temporal
+violations and 0/30 unsupported claims (Table IV, Fig. 3); the
+candidate log held 3,000/3,000 eligible candidates, and a fivecase faithfulness check resolved every reference to its persisted
+chunk. Combined-37 holds the same profile at 185/185, 0/185,
+and 0/37.
+E4 verification is fail-closed: any failing check rejects the
+citation. On live data nothing was rejected — a ceiling effect
+of already-valid selected evidence, not a reduction magnitude.
+Three positive controls through the unchanged verifier show
+the gate bites: altered passages rejected 37/37, fabricated
+citations 37/37, and backdated cases 37/37.
+This is the paper’s central result. Verification success
+and authority recovery are dissociated: the system verified
+everything it displayed (185/185 combined; 150/150 on the
+frozen base) while recovering the expected authority in 20
+of 37 cases at k=100 (15/30 base). Neither number alone
+describes the system. A reviewer told only that all displayed
+citations are valid would over-trust it; a reviewer told only
+that Recall@100 is 0.54 would miss that nothing displayed
+was fabricated, misattributed, or anachronistic.
+D. Interpreting authority-consistency precision
+Authority-consistency precision was 0.08, with recall 0.40
+and F1 0.133 — to be read structurally, not as a fabrication
+rate: with one credited authority per case and five displayed,
+perfect inclusion caps the measure at 30/150 = 0.20, so 0.08
+is 40% of ceiling.
+The 138 non-matching displayed citations are not independently annotated for substantive legal relevance and cannot
+
+Cases (combined n=37)
+
+Authority recovery funnel, combined-37
+20
+
+Base-30
+Extension-7
+
+15
+
+17
+
+12
+
+Retrieval investigation pathway (historical)
+Dev R@100 (n=9)
+Base-30 R@5 pre/post
+Base-30 R@100 pre/post
+
+1.00
+0.75
+
+10
+
+0.50
+
+8
+
+0.25
+
+5
+
+0.00
+
+0
+Top-5
+selected
+
+Retrieved
+only (6-100)
+
+Absent
+at k=100
+
+Fig. 2. Expected-authority recovery on the combined reference set (n = 37):
+12 selected, eight retrieved but unselected (three base, five extension), 17
+absent at k=100.
+
+ac y
+Leg
+
+)
+v)
+v)
+v)
+00
+ev
+@5
+de
+(de
+(de
+@1
+0R
+t (d
+k(
+tch
+0R
+an
+e-3
+a
+l i en
+r
+3
+s
+a
+a
+S
+se
+B
+lf-m
+Pre
+Ba
+Se
+
+Fig. 4. Retrieval investigation pathway. The development probe (n = 9)
+covers salient-query and self-match repairs; the held-out comparison (n = 30)
+covers pre- to pre-ranking filtering. Distinct populations, not one learning
+curve.
+
+Displayed-evidence integrity, combined-37
+1.2
+1.0
+
+1.00
+
+1.00
+
+RQ3 exploratory LLM ratings (not human)
+
+0.8
+
+Structured
+
+0.6
+
+Unstructured
+
+Transparency
+
+0.4
+
+Clarity
+
+0.2
+0.0
+Grounded
+37/37
+
+Provenance
+185/185
+
+0.00
+
+0.00
+
+Temporal
+viol. 0/185
+
+Unsupported
+0/37
+
+Traceability
+Verifiability
+Linkage
+
+Fig. 3. Displayed-evidence integrity, combined n = 37 (185 citations): all
+grounding and provenance checks passed, with no temporal violations or
+unsupported claims. Base-30 contributes 150/150.
+
+be declared incorrect. They passed every integrity check; they
+simply are not the one authority the key records. Reporting
+this metric without its ceiling would materially misrepresent
+the system.
+E. Retrieval mechanism
+The final configuration came from three bounded changes,
+each validated on the nine-case probe before the 30-case heldout test: full-input salient terms took the probe from 0/9 to 3/9
+at k=100; the 80% coverage self-match condition took it to
+6/9 and forced withdrawal of an over-broad lexical-mismatch
+claim; pre-ranking temporal filtering took it to 7/9 and, carried
+over, lifted Recall@5 from 5/30 to 12/30 and Recall@100
+from 12/30 to 15/30 without losing any of the 12 prior top100 successes.
+Temporal capacity is not the whole story. 2013_35 stayed
+absent despite 79 eligible candidates in its raw top 100, while
+1980_105 was recovered from only three and became a
+top-five hit: pool size and lexical relevance contribute independently, with residual lexical mismatch the prominent
+unresolved cause.
+F. Explanation format
+The principal RQ3 evaluation is a blinded exploratory
+presentation comparison by four LLM raters (Gemini, Claude
+
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+Mean rating (1–5; 4 LLM raters × 14 cases)
+
+Fig. 5. Blinded LLM-rater means by dimension (14 cases × 4 raters):
+exploratory, not human-subject evidence.
+
+Sonnet 4.6, DeepSeek, GPT-5.6 Luna) over 14 paired cases:
+the seven formative pairs plus all seven verified extension
+cases, with no cherry-picking. Each rater scored five transparency dimensions (1–5) with a forced preference, yielding
+112 display ratings and 56 preferences. The structured presentation was preferred in 56/56 evaluations (+1.75 linkage,
++1.00 verifiability, +2.48 traceability, +2.52 clarity, +1.98
+transparency; overall +1.95, 4.66 vs. 2.71); see Fig. 5.
+This is explicitly not human evaluation: no independent rater
+participated, no significance test was run, and nothing about
+human preference or legal correctness follows. Two cautions
+apply. First, DeepSeek and GPT-5.6 Luna produced byteidentical rating vectors, retained separately rather than merged,
+so the unanimity partly reflects duplicated outputs. Second, the
+seven-case self-review (means 4.57/2.71, 4.57/2.29, 4.43/2.86,
+4.43/3.00; 7/7 structured) is formative, non-independent evidence superseded above. Its durable output remains negative:
+generic uncertainty wording did not adapt to 2013_35, suggesting generic uncertainty language may not adapt reliably to
+evidence quality.
+
+TABLE V
+O UTCOME - ERROR OVERLAP BY EVALUATION POPULATION . “E1” AND
+“E2” COUNT CASES WHERE ONLY THAT MODEL WAS CORRECT.
+Population
+
+Both
+
+E1
+
+E2
+
+Neither
+
+Full test (n = 1,503)
+Answer key (n = 30)
+
+684 238 213
+18
+3
+3
+
+368
+6
+
+TABLE VI
+E XHAUSTIVE AUTHORITY- RECOVERY PARTITION (n = 30).
+Outcome
+
+n
+
+Cases
+
+Retrieved and selected
+
+12
+
+2008_1629,
+1995_322,
+1995_375, 1986_176, 1977_99,
+1981_187, 1980_222, 1980_105,
+1995_425, 2002_944, 1982_29,
+1988_96
+
+Retrieved, not selected
+Absent at k=100
+
+3
+
+1980_133 (rank 15), 1981_55
+(rank 28), 1985_40 (rank 78)
+1997_792, 1993_185, 1971_295,
+1974_36, 1986_378, 1984_136,
+2013_35, 1980_217, 1978_33,
+1977_145, 1995_412, 1995_403,
+1986_397, 1994_632, 1992_84
+
+15
+
+IX. E RROR A NALYSIS
+A. Outcome disagreement
+The analysis is read-only over final frozen outputs; reconstructed E1 and inference-only E2 predictions reproduced
+their metrics before per-case joining. Across 1,503 cases, both
+models were correct on 684 and both wrong on 368; E1
+alone was correct on 238 and E2 alone on 213 (Table V) —
+complementary errors suggesting ensemble or disagreementtriggered routing as future work.
+In the evidence-augmented run, E2 was wrong while E3 and
+E4 were correct for two cases (1974_36, 1984_136). E3correct/E4-wrong and E3-wrong/E4-correct each occurred in
+0/30 cases, because verification changed neither the selected
+evidence nor the shared predictor input.
+Critically, four cases (2008_1629, 1981_187,
+1982_29, 1985_40) retrieved and selected the expected
+authority yet still produced an incorrect outcome prediction:
+correct recovery does not mechanically imply a correct
+prediction. No correct prediction was accompanied by an
+unsupported citation.
+B. Authority-recovery buckets
+Table VI gives the exhaustive partition: the middle bucket
+isolates selection failure (available but undisplayed, addressable by a better selector), while the absent bucket requires
+upstream improvement in representation, matching, ranking,
+or coverage.
+C. Worked example: retrieval noise made visible
+Case 1985_40 (factory at Atul; excise item 14D) shows
+why extractive presentation aids review. The five displayed
+
+citations were verified, while the expected authority [1964] 2
+S.C.R. 888 sat at rank 78 unselected.
+Inspecting the displayed set, the first concerns excise valuation for Atul Products, but the others concern an industrial
+dispute, rayon and silk sales tax, and cigarette excise duty
+— mismatches the authority index and per-evidence blocks
+made visible, offered strictly as navigability illustration, not a
+relevance annotation.
+X. L IMITATIONS AND T HREATS TO VALIDITY
+Scope. English-language Indian Supreme Court judgments
+only; no other Indian languages, High Court or lower-court
+material, separately versioned statutes, or cross-jurisdictional
+transfer.
+Extraction approximation. OCR restored 12 of 15 affected
+PDF instances; three were excluded and repaired text may
+retain noise. With no gold facts/reasoning boundary, the facts
+rule can retain reasoning or omit facts near a boundary.
+Answer-key size and era concentration. Evidence evaluation rests on 30 frozen cases, extended additively to 37
+with seven later verified cases; 13 of the base 30 are from
+the 1980s. The combined set is neither large nor era-balanced
+and should not be read as representative of the ILDC test set
+or of Indian legal research generally — the primary constraint
+on generality.
+Single reference authority. One expected authority per
+query, not every relevant source: inconsistency is a reproducible reference mismatch, not a substantive legal-relevance
+judgment.
+Residual recovery gap. At k=100, 17 of the 37 expected
+authorities still went unrecovered; the 2013_35/1980_105
+contrast shows temporal room alone does not surface the
+authority. This limited comparison does not establish a causal
+attribution for the remaining gap.
+Year-level temporal granularity. ILDC query dates have
+year-level precision only, so any candidate sharing a query’s
+year is excluded rather than risk admitting a source that
+actually postdates it – a conservative choice that can discard
+genuinely eligible evidence. Day-level dates would require
+manually checking each case against a primary source; the
+limitation therefore sits in the dataset, not in how the pipeline
+parses dates.
+Bundled verification. E4 checks several integrity properties
+together and cannot isolate any single component’s causal
+contribution.
+Non-independent explanation review. The seven-case review is a non-random author self-review. The superseding 14case LLM comparison is exploratory presentation evaluation
+by four model raters, not human-subject evidence; two runs
+produced identical outputs and are reported separately rather
+than merged, so even unanimity partly reflects duplicated runs.
+Prototype scale. Results apply to the frozen implementation
+and samples rather than to all users, courts, domains, or
+changing corpora. No production deployment is claimed or
+evaluated.
+
+XI. R ESPONSIBLE U SE AND G OVERNANCE
+The system is designed as a legal-research aid, not an
+adjudicator or a provider of legal advice. E3/E4 predictions are
+experimental; the renderer states no legal conclusion beyond
+supplied evidence, predictions stay separate, and a human reviewer judges relevance, currency, authority, and applicability
+[6].
+Risk controls are fail-closed: missing dates, same-year ambiguity, later dates, target identity, and duplication exclude
+evidence from display. A citation must resolve to exact corpus
+text and the correct retrieval run; altered or unsupported
+material is rejected. Stable locators make verification possible
+without trusting the renderer’s prose.
+Governance also requires transparent negative results: discarded runs, superseded configurations, the collision correction, key replacements, OCR exclusions, and the nonindependent review status are preserved. Populations and
+denominators remain separate, and alternative citations are not
+called irrelevant without annotation.
+Public judgments do not remove privacy or misuse concerns: no public end-user search service is exposed and
+no consequential decision automated; any deployment would
+require access controls, licensing review, privacy assessment,
+independent evaluation, monitoring, and a correction process.
+XII. C ONCLUSION AND F UTURE W ORK
+We built and evaluated a provenance-preserving, temporally
+constrained evidence workflow for historical Indian Supreme
+Court research, keeping evidence and prediction measurements
+separate throughout.
+The principal finding is a dissociation. Every one of 185
+displayed citations across the combined 37 cases passed verification, with zero unsupported claims across the 37 cases,
+while 17 of the 37 expected authorities were absent at k=100.
+Verification succeeded for what the system displayed; it did not
+guarantee that the system found the expected authority. Legalresearch systems therefore benefit from explicit controls —
+but those controls must be evaluated alongside, never instead
+of, retrieval coverage and human review.
+The cross-corpus audit yields a transferable methodological
+lesson: only 11 of 5,391 syntactic identifier matches between
+ILDC and the eCourts collection were content-aligned. Identifier equality is a candidate hint requiring content validation,
+not evidence of judgment identity.
+The supporting results are reported with their limits. On
+the 1,503-case outcome task the sparse TF–IDF baseline outperformed corrected InLegalBERT under the frozen settings
+— a result about this experiment, not a general verdict on
+legal-domain pre-training. Inference-time evidence augmentation reached 0.666667 accuracy and 0.603175 macro-F1 on
+the frozen 30-case subset (0.648649 and 0.607347 on the
+combined 37), descriptively and under acknowledged distribution shift. The 14-case structured-presentation comparison
+is exploratory LLM-rater evidence, not human preference;
+the seven-case self-review beneath it is formative and nonindependent.
+
+Future work. An era-balanced key of 75–100 cases would
+support a paired significance test (e.g., McNemar’s); a blinded
+review with independent raters and agreement reporting (e.g.,
+Fleiss’ κ) would replace the formative explanation evidence;
+hybrid dense–sparse retrieval would test whether semantic retrieval closes residual lexical misses under the present controls;
+and evidence-sensitive uncertainty language would address the
+exposed calibration weakness.
+R EPRODUCIBILITY
+All configurations, seeds, model revisions, corpus identities,
+and evaluation artifacts are frozen and machine-readable,
+including checkpoint-6318 (924a5bb9...dbdc773) with
+a stable replay hash. The implementation passes 81 automated research-pipeline tests (75 host-runnable plus 6
+transformer/torch-only unit tests) and the documented reproducibility checks (14/14 documentation checks and a freeze
+audit of 39 recorded entries: 28 byte-exact, 1 after lineending normalisation, and 10 differing only in non-scientific
+metadata, with all reported metrics verified identical; per-file
+evidence in the repository audit). Separately, the local demo
+stack is covered by 8/8 Spring Boot service tests, 6/6 FastAPI
+wrapper tests, and a passing TypeScript compile plus production frontend build; these exercise orchestration and contracts
+only, never the frozen scientific results. Code and artifacts are
+available at https://github.com/0-YuvrajSingh/NyayaTrace.
+A minimal connected local research demo (React 18 + TypeScript UI, Spring Boot 3.2.5 orchestration API, FastAPI wrapper around the frozen pipeline) exposes the E4 evidence path
+with bearer-token authentication, per-request audit records,
+and experiment-metadata references; the FastAPI layer delegates every research step to the frozen implementation and the
+static frozen-artifact viewer is retained as a fallback. The stack
+binds to loopback only and is not a production, multi-tenant,
+or autonomous system.
+ACKNOWLEDGMENT
+The authors thank Kriti Mishra for her mentorship and
+guidance throughout this work.
+R EFERENCES
+[1] V. Malik, R. Sanjay, S. K. Nigam, K. Ghosh, S. K. Guha, A. Bhattacharya, and A. Modi, “ILDC for CJPE: Indian Legal Documents
+Corpus for Court Judgment Prediction and Explanation,” in Proc. 59th
+Annual Meeting of the Association for Computational Linguistics (ACLIJCNLP), 2021, pp. 4046–4062.
+[2] S. Paul, A. Mandal, P. Goyal, and S. Ghosh, “Pre-trained Language
+Models for the Legal Domain: A Case Study on Indian Law,” in Proc.
+19th Int. Conf. on Artificial Intelligence and Law (ICAIL), 2023, pp.
+187–196.
+[3] V. R. Karna, R. R. M., B. S. Babu, N. S., M. M., and H. V., “A Hybrid
+RAG-LLaMA Framework for Scalable and Accurate Interpretation of
+Legal Texts,” Applied Artificial Intelligence, vol. 40, no. 1, art. 2626097,
+2026.
+[4] A. R. Putta, J. Devasier, and C. Li, “CaseFacts: A Benchmark for Legal
+Fact-Checking and Precedent Retrieval,” in Proc. 64th Annual Meeting
+of the Association for Computational Linguistics, 2026, pp. 17246–
+17265.
+[5] C. Barale, L. Barrett, V. S. Bajaj, and M. Rovatsos, “LexTime: A
+Benchmark for Temporal Ordering of Legal Events,” in Findings of
+the Association for Computational Linguistics: EMNLP 2025, 2025, pp.
+5220–5236.
+
+[6] Supreme Court of India, Pooja Ramesh Singh v. Jammu and Kashmir
+Bank Ltd. & Anr., 2026 INSC 668, 2026. Order copy: https://ibbi.gov.i
+n/uploads/order/8e1ccab8f7f445f81034223c1d0fe7b9.pdf.
+[7] S. Robertson and H. Zaragoza, “The Probabilistic Relevance Framework:
+BM25 and Beyond,” Foundations and Trends in Information Retrieval,
+vol. 3, no. 4, pp. 333–389, 2009.
+[8] R. Smith, “An Overview of the Tesseract OCR Engine,” in Proc. 9th Int.
+Conf. on Document Analysis and Recognition (ICDAR), vol. 2, 2007, pp.
+629–633.
+[9] R. Goebel, Y. Kano, M.-Y. Kim, J. Rabelo, K. Satoh, and M. Yoshioka, “Summary of the Competition on Legal Information, Extraction/Entailment (COLIEE) 2023,” in Proc. 19th Int. Conf. on Artificial
+Intelligence and Law (ICAIL), 2023, pp. 472–480.
+[10] N. Guha et al., “LegalBench: A Collaboratively Built Benchmark for
+Measuring Legal Reasoning in Large Language Models,” in Advances
+in Neural Information Processing Systems 36, Datasets and Benchmarks
+Track, 2023.
+[11] L. Zheng, N. Guha, B. R. Anderson, P. Henderson, and D. E. Ho, “When
+Does Pretraining Help? Assessing Self-Supervised Learning for Law and
+the CaseHOLD Dataset of 53,000+ Legal Holdings,” in Proc. 18th Int.
+Conf. on Artificial Intelligence and Law (ICAIL), 2021, pp. 159–168.
+[12] A. Shukla, P. Bhattacharya, S. Poddar, R. Mukherjee, K. Ghosh, P.
+Goyal, and S. Ghosh, “Legal Case Document Summarization: Extractive
+and Abstractive Methods and their Evaluation,” in Proc. 2nd Conf. of the
+Asia-Pacific Chapter of the ACL (AACL-IJCNLP), 2022, pp. 1048–1064.
+[13] M. Dahl, V. Magesh, M. Suzgun, and D. E. Ho, “Large Legal Fictions:
+Profiling Legal Hallucinations in Large Language Models,” Journal of
+Legal Analysis, vol. 16, no. 1, pp. 64–93, 2024.
+[14] J. J. Nay, “Large Language Models as Fiduciaries: A Case Study Toward
+Robustly Communicating With Artificial Intelligence Through Legal
+Standards,” arXiv preprint arXiv:2301.10095, 2023.
+[15] P. Lewis et al., “Retrieval-Augmented Generation for KnowledgeIntensive NLP Tasks,” in Advances in Neural Information Processing
+Systems 33, 2020, pp. 9459–9474.
+
+
