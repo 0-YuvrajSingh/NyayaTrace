@@ -19,3 +19,4 @@ while ((m = refRegex.exec(tex)) !== null) {
 }
 
 console.log('\nAll float and section refs resolved:', allResolved);
+
