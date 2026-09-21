@@ -47,11 +47,10 @@ authority may not exist, may lack the attributed passage, may post-date
 the matter, or may never have been retrieved. A 2026
 Supreme Court of India ruling overturned tribunal findings built on
 exactly these defects, making citation verifiability a functional
-requirement. This paper presents an
+requirement. We present an
 evidence pipeline for
 historical Indian Supreme Court judgments in which every displayed citation is
-temporally eligible, provenance-bound, and mechanically verifiable against the
-persisted corpus. The design is extractive: material propositions
+temporally eligible, provenance-bound, and mechanically verifiable. The design is extractive: material propositions
 are shown verbatim with locators, and outcome prediction is
 kept separate so a classification score can never stand in for
 evidence quality. We report three findings on a combined 37-case
@@ -123,8 +122,7 @@ evaluated setting.
 
 \begin{enumerate}
 \item \textbf{A quantified cross-corpus identity failure and its remedy.}
-Converting eCourts identifiers of the form \texttt{YYYY INSC N} to ILDC-style
-\texttt{YYYY\_N} produced 5{,}391 syntactic candidates, of which only 11 passed
+Converting eCourts identifiers of the form \texttt{YYYY INSC N} to the identifier style of the Indian Legal Documents Corpus (ILDC), \texttt\{YYYY\_N\}, produced 5{,}391 syntactic candidates, of which only 11 passed
 content alignment (Section~\ref{sec:alignment}): identifier
 equality is unsafe for this dataset pair. We supply a reusable
 content-alignment gate based on title/party identity plus direct phrase overlap.
