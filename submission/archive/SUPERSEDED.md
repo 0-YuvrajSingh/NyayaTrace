@@ -25,3 +25,14 @@ figures + zip, with recomputed SHA-256 hashes in its `MANIFEST.md`).
 
 Do not edit the archived files. They are retained solely so the numbering
 change and the demo-description update (`paper.md:326`) remain traceable.
+
+## Batch 2026-09-23 — pre-submission cleanup (approved)
+
+Moved here unmodified (via `git mv`, history preserved) under Document 3's
+governance principle (discarded material preserved, not erased):
+
+- `artifacts/paper_draft.md` → `submission/archive/paper_draft.md`
+  (superseded manuscript draft; no live references).
+- `scratch/paper_audit_report.md` → `submission/archive/paper_audit_report.md`
+  (Sep-21 audit-session findings narrative; no live references; the underlying
+  checks live on as the `scratch/*.js` probes, retained separately).
