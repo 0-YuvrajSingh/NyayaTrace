@@ -1,0 +1,50 @@
+paper location | exact claim | value | experiment | population | source artifact/code | independent replay evidence | status
+Abstract | combined reference-evidence population | 37 cases (30+7) | E3/E4 | 30 base + 7 extension | answer_key/authority_answer_key.json (30 eval) + answer_key/extension_v6 (7) | base-30 functionally replayed; extension-7 not replayed | PARTIALLY SUPPORTED
+Abstract | syntactic matches surviving alignment | 11 of 5391 | alignment | cross-corpus pairs | corpus/dedup_report.md + artifacts/week15_dataset_and_corpus_draft.md | not re-run (audit computation) | ARTIFACT-ONLY
+Abstract | Recall@5 frozen base | 12/30 (from 5/30) | E3 retrieval | 30 eval | artifacts/e3_e4_evidence_augmented_evaluation.json | replay per-case flags 12/30 identical; selected chunk_ids 30/30 identical | PROVEN (functional)
+Abstract | Recall@100 frozen base | 15/30 (from 12/30) | E3 retrieval | 30 eval | same as above | replay flags 15/30 identical | PROVEN (functional)
+Abstract | combined Recall | 12/37 and 20/37 | E3 retrieval | 37 | extension manifest + RQ1 report | extension stratum not replayed | ARTIFACT-ONLY
+Abstract | displayed citations verified | 185 (150+35), 0 unsupported | E4 | 37 | frozen E3/E4 artifact + extension | base 150/150 recomputed (run fails closed); 35 extension not replayed | PARTIALLY SUPPORTED
+Abstract | authorities absent at k=100 | 17 | E3 retrieval | 37 | derived 37-20 | base 15/30 replayed; extension part not | PARTIALLY SUPPORTED
+Abstract | outcome baselines population | 1503 ILDC cases | E1/E2 | 1503 test | artifacts/e1_baseline_results.json + e2_chunk_pool_results.json | E1 canonical IDENTICAL; E2 exact x2 | PROVEN
+Abstract | 14-case four-LLM-rater comparison 56/56 | 56/56 | RQ3 | 14 cases x 4 raters | LLM-rater records (not in replay scope) | no replay performed | NOT VERIFIED
+Corpus | ILDC splits | 7593 (5082/994/1517) | — | ILDC | e1/e2 results source_rows (5082/994/1517 verified in e2 splits; 1517 in e1 splits) | denominators match replays | ARTIFACT-ONLY (splits consumed as frozen)
+Corpus | excluded test records | 14 -> 1503 | E1/E2 | test | e1/e2 splits excluded_ids (14 IDs match) | cache prep 5020/983/1503 windows 33702/6054/9576 match | PROVEN
+Corpus | eCourts PDFs | 39069 instances, 39066 accepted | corpus | eCourts | extraction_quality_full.json (to confirm) | not replayed | ARTIFACT-ONLY
+Corpus | chunks | 2343435 labelled, 2036981 unique loaded | corpus | eCourts | ecourts_corpus_identity.json (2343435) + DB count 2036981 + BM25 2036981 | identity hash + counts independently re-hashed (SHA 4d294043 both) | PROVEN (counts/identity)
+Corpus | OCR repair | 15 PDFs/14 IDs; 12 restored, 3 excluded | corpus | flagged PDFs | extraction quality artifacts | not replayed | ARTIFACT-ONLY
+Alignment | identifier gate | 5391 -> 11 pass, 5380 collisions | alignment | pairs | dedup_report.md | not re-run | ARTIFACT-ONLY
+Alignment | pair outcomes | 8927 pairs: 1304 accepted, 7623 rejected | alignment | pairs | dedup_report.md | not re-run | ARTIFACT-ONLY
+Answer key | audit outcome | 20 pass, 9 fail, 1 unresolved -> 1 relink + 9 replace; 30/30 | key | 30 mappings | answer_key_alignment_audit_corrected.md | not re-run | ARTIFACT-ONLY
+Answer key | era split | 5/13/9/2/1; 1980s 43.3% | key | 30 | authority_answer_key.json IDs | independently recounted, 13/30=43.33% | PROVEN (recount)
+Answer key | extension | 7 IDs + 3 held back | key | extension | extension_manifest.json | not replayed | ARTIFACT-ONLY
+E1 | accuracy / macro-F1 | 0.61344 / 0.612342 | E1 | 1503 | e1_baseline_results.json test_metrics | canonical replay IDENTICAL (hash d719f1d9 both) | PROVEN
+E1 | class F1 / CM | 0.632975 / 0.591708; [[501,248],[333,421]] | E1 | 1503 | same | same replay | PROVEN
+E1 | C selection | C in {0.1,1.0,10.0} -> 10.0; seed 202605 | E1 | train/val | e1 artifact validation_candidates | refit with C=10 recomputed; C-search not re-run | PARTIALLY SUPPORTED
+E2 | mean-logit acc/F1 | 0.596806 / 0.592358 | E2 | 1503 | e2_chunk_pool_results.json | inference exact x2, file hash identical (3A27FD) | PROVEN
+E2 | class F1 / CM | 0.63494 / 0.549777; [[527,222],[384,370]] | E2 | 1503 | same | same | PROVEN
+E2 | majority vote | 0.6015 / 0.5937 (0.601464/0.593682) | E2 | 1503 | e2_test_predictions.json | same replay | PROVEN
+E2 | majority baseline | 0.5017 / 0.3341 (0.501663/0.334072) | — | 1503 | e1 majority_class_baseline | arithmetic from 749/754 labels | PROVEN (arithmetic)
+E2 | config | 512-token/50-overlap, 9576 windows, 3 epochs, lr 2e-5, seed 202607 | E2 | train/test | config/e2_chunk_pool.json + results | windows/counts replayed; training not re-run | PARTIALLY SUPPORTED
+E2 | old 256-token run truncated 99.20% | 99.20% | E2-superseded | test | e2_input_length_audit.json | not replayed | ARTIFACT-ONLY
+E3/E4 base | accuracy / F1 / CM | 0.666667 / 0.603175; [[4,3],[7,16]] | E3/E4 | 30 | frozen E3/E4 artifact | recomputed: labels 30/30, aggregates identical | PROVEN (functional; fp16 logit noise only)
+E3/E4 combined | 0.648649 / 0.607347; [[6,3],[10,18]] | E3/E4 | 37 | extension/RQ1 artifacts | not replayed | ARTIFACT-ONLY
+Extension-7 | R@5 0/7, R@100 5/7=0.7143, acc 0.5714/F1 0.5714 | E3 | 7 | extension artifacts | not replayed | ARTIFACT-ONLY
+Retrieval base | R@5/R@100 partition | 12 sel + 3 unsel; 15 absent | E3 | 30 | frozen flags + week11 ranks | flags replayed identical; ranks 15/28/78 artifact | PROVEN (flags); ARTIFACT (ranks)
+Integrity base | 150/150 grounded+provenance; 0/150 temporal; 0/30 unsupported; 3000 candidates | E4 | 30 | frozen artifact | recomputed run fails closed (exit 0); 30x100 arithmetic | PROVEN (functional)
+Integrity combined | 185/185; 0/185; 0/37 | E4 | 37 | artifacts | extension part not replayed | PARTIALLY SUPPORTED
+Authority precision | 0.08 (12/150), ceiling 0.20 (30/150), F1 0.133 | E3 | 30 | frozen retrieval block | recomputed identical | PROVEN
+Positive controls | 37/37 x3 (altered/fabricated/backdated) | E4 gate | 37 synthetic | week7/week8 QA artifacts | not replayed | ARTIFACT-ONLY
+Probe pathway | 0/9->3/9->6/9->7/9; 5/30->12/30; 12/30->15/30; 0 regressions | retrieval dev | 9 probe + 30 | retrieval_investigation_summary.md + week11 | base deltas corroborated by replay flags; probe steps not re-run | PARTIALLY SUPPORTED
+Case examples | 2013_35: 79 eligible; 1980_105: 3, top-5 | retrieval | 2 cases | week11/week12 artifacts (3 agree) | not re-derived | ARTIFACT-ONLY
+Worked example | 1985_40 rank 78; [1964] 2 S.C.R. 888 | retrieval | 1 case | key + week11/12 | rank corroborated; passage-topic gloss not checked | PARTIALLY SUPPORTED
+Buckets | 12 selected / 3 not (ranks 15,28,78) / 15 absent + case lists | E3 | 30 | frozen flags (partition) + week11 (ranks) | partition replayed; ranks artifact | PARTIALLY SUPPORTED
+Error overlap | 684/238/213/368; key 18/3/3/6 | E1/E2 | 1503 + 30 | frozen E1+E2 predictions join | join recomputed exactly from frozen inputs | PROVEN (arithmetic; models replayed)
+E2-vs-E3 cases | 1974_36, 1984_136 corrected | E2/E3 | 30 | frozen join | join recomputed, both found | PROVEN (arithmetic)
+Recovery-vs-prediction | 4 cases incl. 1985_40 | E3 | 30 | frozen join | 2008_1629/1981_187/1982_29 selected+wrong confirmed; 1985_40 selected=False per flags | ISSUE (see issue list)
+LLM RQ3 | 56/56; deltas +1.75/+1.00/+2.48/+2.52/+1.98; 4.66 vs 2.71 | RQ3 | 14x4 | rater records | no replay | NOT VERIFIED
+Self-review | means 4.57/2.71 etc; 7/7 | RQ3 pilot | 7 | review records | no replay | NOT VERIFIED
+Reproducibility | 81 tests (75+6) | tests | repo | pytest 81 passed (this audit) | total proven; 75/6 split plausible, not itemized | PROVEN (total)
+Reproducibility | 14/14 docs; 39 entries 29 byte-exact + 10 metadata | freeze | repo | week16 audit: actually 28 + 1 CRLF + 10 | 14/14 proven; 29-count imprecise (see issues) | PASS WITH CAVEAT
+Reproducibility | 8/8 Spring; 6/6 FastAPI; TS compile | demo | demo | spring_retest.log 8/8; fastapi log 6/6 | Spring+FastAPI proven; TS compile not checked | PARTIALLY SUPPORTED
+Reproducibility | checkpoint-6318 hash 924a5bb9..dbdc773; stable replay hash | E2 | checkpoint | file sha verified in container | PROVEN (file); replay-hash wording caveat (path-string volatility)

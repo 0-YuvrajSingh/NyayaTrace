@@ -1,0 +1,14 @@
+category,candidate,classification,action,note
+zero_byte_files,none found,N/A,N/A,None present
+editor_artifacts,none found,N/A,N/A,None present (*.bak/*.tmp/*.swp/~$)
+remaining_aux_files,none found,N/A,N/A,All .aux/.out files were deleted in Prompt 20
+remaining_out_files,none found,N/A,N/A,All .aux/.out files were deleted in Prompt 20
+latex_log_files_replay_root,experiments/audit_fixes/replay/{bm25.log + corpus.log + e1.log + e1_1.log + e1_2.log + pytest.log + pytest_fastapi.log},KEEP_AUDIT_EVIDENCE,KEEP,"Replay execution logs. corpus.log records a script argument error — evidence of what was attempted during replay construction. bm25.log + e1.log are active replay evidence."
+latex_log_files_replay_logs,experiments/audit_fixes/replay/logs/ (31 files),KEEP_AUDIT_EVIDENCE,KEEP,"E1/E2/E3/E4 replay execution logs. spring_retest.log (240KB) + e3e4_replay_gpu*.log are direct evidence that experiments were run. Not LaTeX artifacts."
+old_6page_check_logs,experiments/audit_fixes/replay/project_cleanup_scan/6page_check1.log + final6page_check2.log,KEEP_AUDIT_EVIDENCE,KEEP,"LaTeX compilation check logs from 6-page manuscript evaluation — audit evidence of why 6-page was rejected. The 6-page manuscript itself is gone; these logs document the rejection decision."
+empty_directories,experiments/audit_fixes/spec_clean/ (deleted P21),ALREADY_DELETED,N/A,Deleted in Prompt 21
+submission_archive_dirs,submission/final/ + submission/archive/ + submission/final/figures/,ALREADY_DELETED,N/A,All three directories removed this prompt (Prompt 22) when contents were git rm'd
+manuscript_compare_script,experiments/audit_fixes/scripts/manuscript_compare.py,KEEP_AUDIT_EVIDENCE,KEEP,"Audit script used to compare manuscript versions. The manuscripts are gone but the script is an audit tool — classified KEEP_AUDIT_EVIDENCE per policy."
+revised_stats_script,experiments/audit_fixes/scripts/revised_stats.py,KEEP_AUDIT_EVIDENCE,KEEP,"Stats script used during revised manuscript analysis. Audit provenance."
+sixpage_batch_scripts,experiments/audit_fixes/scripts/sixpage_batch1-7.py + sixpage_stats.py,KEEP_AUDIT_EVIDENCE,KEEP,"Scripts used to audit 6-page manuscript claims. The 6-page manuscript is gone; these scripts document the audit process. Audit provenance."
+docs_manuscript_audit,docs/PHASE2_7_FINAL_MANUSCRIPT_AUDIT.md,KEEP_AUDIT_EVIDENCE,KEEP,"Phase 2.7 manuscript audit report — documents the audit of paper_master.tex claims-to-artifacts. This is research audit documentation, not a manuscript copy. Audit provenance."
