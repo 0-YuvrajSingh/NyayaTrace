@@ -50,7 +50,7 @@ defects. We present an
 evidence pipeline for
 historical Indian Supreme Court judgments in which every displayed citation is
 temporally eligible, provenance-bound, and mechanically verifiable, with outcome
-prediction kept separate. We report three independently replayed findings. First, naive ILDC--eCourts identifier matching proves unsafe, as only 11 out of 5{,}391 syntactic matches survived strict content alignment.
+prediction kept separate. We report three main findings, supported by independent replay and source-side audit. First, naive ILDC--eCourts identifier matching proves unsafe: only 11 of 5{,}391 syntactic matches survived strict content alignment.
 Second, pre-ranking temporal eligibility
 raised Recall@5 from
 5/30 to 12/30 and Recall@100 from 12/30 to 15/30 on the frozen 30-case base.
@@ -106,16 +106,14 @@ Fabricated, real-but-unretrieved, policy-violating, and valid-but-unexpected
 citations (Section~\ref{sec:protocol}).
 
 \item \textbf{An evaluation that keeps recovery and integrity apart.} Authority
-recovery, citation integrity, outcome prediction, and
-presentation are reported on their own populations
+recovery, citation integrity, and outcome prediction are reported on their own populations
 (Section~\ref{sec:results}).
 \end{enumerate}
 
 \textbf{Scope.} No legal
 correctness for retrieved authorities, no autonomous legal advisor, no
 claim that retrieval improves outcome prediction: a
-researcher-facing prototype on four non-pooled
-populations (1{,}503 outcome cases; 30 frozen evidence cases comprising the replayed core).
+researcher-facing prototype. Two populations are evaluated and never pooled: 1{,}503 outcome cases and the 30 frozen evidence cases (Base-30).
 
 % =====================================================================
 \section{Related Work}
@@ -168,11 +166,7 @@ metadata is excluded. Both rules trade
 recall so that, under the fail-closed metadata checks applied here, no
 displayed authority can post-date the matter.
 
-The evidence task decomposes into recovery (expected authority in the top 100
-and among the five displayed?),
-integrity (each citation a real retrieved passage with
-exact provenance, avoiding query/duplicates, under the temporal rule?),
-and presentation (does structure aid inspection?).
+The evidence task decomposes into three questions. Recovery asks whether the expected authority appears in the top 100 and among the five displayed. Integrity asks whether each citation is a real retrieved passage with exact provenance that avoids the query and duplicates and satisfies the temporal rule. Presentation asks whether the structure aids inspection; we do not evaluate it here.
 
 Outcome prediction is secondary, reported on its own
 population and never pooled with evidence measures. Table~\ref{tab:defs} fixes
@@ -368,8 +362,8 @@ to five passages in BM25 order, at most one per source.
 
 E4 receives the E3 answer, retrieval-run identifier, and
 persisted corpus records. Each displayed item must exist in the
-corpus, reproduce exact passage and provenance, belong to the recorded
-run, avoid the query and duplicates, and pre-date the
+corpus and reproduce its stored passage and provenance. It must also belong to the recorded
+run, exclude the query and duplicates, and pre-date the
 query year; any failure rejects the citation. Authority consistency is then
 evaluated separately: a fully valid citation may differ from the single
 expected authority without being substantively irrelevant (Section~\ref{sec:ceiling}).
@@ -384,9 +378,9 @@ the same 512-token/50-overlap windows with mean-logit \texttt{argmax} (seed
 \texttt{e3e4-\allowbreak evidence-\allowbreak augmented-\allowbreak inlegalbert-\allowbreak checkpoint6318-\allowbreak v1}).
 Gold labels, scores, dates, and provenance are excluded from model input.
 
-We note the caveat plainly: the checkpoint was trained on
-facts-only inputs, so applying it to facts plus retrieved passages is an
-inference-time distribution shift, not evidence-aware fine-tuning. These
+Because the checkpoint was trained on
+facts-only inputs, applying it to facts plus retrieved passages is an
+inference-time distribution shift rather than evidence-aware fine-tuning. These
 predictions are reported descriptively on the frozen 30-case
 base, and are
 not directly comparable with the 1{,}503-case baselines.

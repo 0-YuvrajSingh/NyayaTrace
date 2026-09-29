@@ -62,3 +62,44 @@
 - **BM25 equivalence scope:** The clarification that the BM25 rebuild was identical at the ranking level (top 100 for evaluated queries) rather than byte-for-byte SQLite equality was retained exactly as it accurately reflects the limit of the reproduction claim.
 - **Leakage:** The language confirming zero temporal violations and zero self-matches was retained exactly without expanding it into a generalized "guaranteed leakage-free" claim.
 - **Outcome Metrics:** All numbers related to the 1,503-case split baseline accuracy (0.61344 and 0.596806) were preserved verbatim as they are established by E1 and E2 reproducible evidence.
+
+---
+## Prompt 29 (Final Direct Repository Application)
+
+**Date:** 2026-09-29
+**Final TEX SHA-256:** 0CE6A6B0FF0205ED50921BEB19BF106370B43D1A27A11903145BD2AAB817238A
+**Final PDF SHA-256:** F4C6225778C888C3B0984A750C0D7E65BEB19829FF61B46DFA0B553EAA6B131B
+**Page Count:** 6 (Confirmed via tectonic exit 0, exactly [1][2][3][4][5][6])
+**Overfull Hboxes:** 0
+
+### Direct Edits Applied
+
+1. **Abstract Scientific Correction:**
+   * **Before:** "We report three independently replayed findings. First, naive ILDC--eCourts identifier matching proves unsafe, as only 11 out of 5{,}391..."
+   * **After:** "We report three main findings, supported by independent replay and source-side audit. First, naive ILDC--eCourts identifier matching proves unsafe: only 11 of 5{,}391..."
+   * **Meaning:** Corrected scientific provenance (the 5391->11 is a source-side corpus audit, not independent replay); applied stylistic humanization ("unsafe: only" instead of "unsafe, as only").
+
+2. **Contributions (Population Clarification):**
+   * **Before:** "...and presentation are reported on their own populations"
+   * **After:** "...and outcome prediction are reported on their own populations"
+   * **Meaning:** Removed obsolete presentation evaluation claim to match the scientific freeze.
+
+3. **Scope (Population Count Correction):**
+   * **Before:** "...four non-pooled populations (1{,}503 outcome cases; 30 frozen evidence cases..."
+   * **After:** "...Two populations are evaluated and never pooled: 1{,}503 outcome cases and the 30 frozen evidence cases (Base-30)."
+   * **Meaning:** Fixed incorrect statement of 4 populations to correctly state 2 populations, completely segregating outcome vs. evidence.
+
+4. **Problem Formulation (Presentation Clarification):**
+   * **Before:** "...and presentation (does structure aid inspection?)."
+   * **After:** "...Presentation asks whether the structure aids inspection; we do not evaluate it here."
+   * **Meaning:** Kept presentation as a conceptual evidence task dimension but explicitly disclaimed it from this evaluation. Converted a long fragmented list into declarative sentences.
+
+5. **Method E4 (Structural Humanization):**
+   * **Before:** "Each displayed item must exist in the corpus, reproduce exact passage and provenance, belong to the recorded run, avoid the query and duplicates, and pre-date the query year; any failure rejects the citation."
+   * **After:** "Each displayed item must exist in the corpus and reproduce its stored passage and provenance. It must also belong to the recorded run, exclude the query and duplicates, and pre-date the query year; any failure rejects the citation."
+   * **Meaning:** Split a long 5-part run-on requirement sentence into two cleaner, active constraints without altering the exact rigorous requirements.
+
+6. **Results Caveat (Structural Humanization):**
+   * **Before:** "We note the caveat plainly: the checkpoint was trained on facts-only inputs, so applying it to facts plus retrieved passages is an inference-time distribution shift, not evidence-aware fine-tuning."
+   * **After:** "Because the checkpoint was trained on facts-only inputs, applying it to facts plus retrieved passages is an inference-time distribution shift rather than evidence-aware fine-tuning."
+   * **Meaning:** Eliminated formulaic transition wording for direct scholarly prose.
