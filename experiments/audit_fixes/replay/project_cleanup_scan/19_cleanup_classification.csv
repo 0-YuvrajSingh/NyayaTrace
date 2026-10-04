@@ -1,0 +1,23 @@
+Path,Category,ExactDuplicate,Referenced,Tracked,Regenerable,Risk,Recommendation
+corpus/ecourts year-folder PDF dup pairs (5182 groups),REVIEW_REQUIRED,yes (pairwise),by chunks only,no,no,HIGH,REVIEW_MANUALLY
+experiments/audit_fixes/replay/e2_hf_cache/,DUPLICATE_CANDIDATE,yes,no,no,yes (recopy from artifacts),MEDIUM,DELETE_LATER
+validation_replay/e2_cache/,DUPLICATE_CANDIDATE,yes,unknown,no,yes (reprepare),MEDIUM,REVIEW_MANUALLY
+experiments/audit_fixes/replay/spring-api-copy/,DUPLICATE_CANDIDATE,yes (jar),no,no,yes (mvn package),LOW,DELETE_LATER
+artifacts/figures/*.pdf,DUPLICATE_CANDIDATE,yes,by nothing (figures/ is cited),unknown,no,LOW,ARCHIVE_LATER
+demo/web node_modules + demo/spring-api/target,GENERATED_REGENERABLE,partially,no,no,yes (npm/mvn),LOW,DELETE_LATER
+replay tex pass logs (~60) + aux/log/out triplets,GENERATED_REGENERABLE,no,no,no,yes (pdflatex),LOW,DELETE_LATER
+replay early/superseded scripts+probes,OBSOLETE_CANDIDATE,no,by nothing,no,yes (git? untracked - no),LOW,CONSOLIDATE_LATER
+rebuild_final_batch*.py + sixpage_batch*.py,TEMPORARY_CANDIDATE,no,by nothing,no,no,MEDIUM,ARCHIVE_LATER
+final_stats/revised_stats/paper_stats/sixpage_stats.py,TEMPORARY_CANDIDATE,near,by nothing,no,yes,LOW,CONSOLIDATE_LATER
+replay/bm25_ranking_probe.json,FAILED_RUN_ARTIFACT,no,by nothing,no,yes,LOW,ARCHIVE_LATER
+replay/logs/docker_info.log (0B),FAILED_RUN_ARTIFACT,no,by nothing,no,yes,LOW,DELETE_LATER
+replay/e3e4_replay.log + e2.log (failed runs),FAILED_RUN_ARTIFACT,no,by nothing,no,no,LOW,ARCHIVE_LATER
+experiments/audit_fixes/replay/.db_env,SECURITY_CANDIDATE,no,by docker runs,no,no,HIGH,DO_NOT_TOUCH
+paper_master_6page.tex/.pdf,REVIEW_REQUIRED,no,unknown,no,no,HIGH,REVIEW_MANUALLY
+paper_master_original_backup.*,DUPLICATE_CANDIDATE,yes,by nothing,no,no,LOW,ARCHIVE_LATER
+artifacts/local_cleanup/corpus_consolidation_manifest.json (BOM),REVIEW_REQUIRED,no,unknown,unknown,no,LOW,REVIEW_MANUALLY
+src/ scripts/ tests/ config/ answer_key/ figures/ demo sources,KEEP_SOURCE/KEEP_CANONICAL,no,yes,yes,n/a,none,KEEP
+artifacts frozen results + checkpoint + bm25 manifest,KEEP_REPRODUCIBILITY_ARTIFACT,no,yes,unknown,n/a,none,KEEP
+replay evidence outputs (predictions/replays/identity/probe/audit reports),KEEP_AUDIT_EVIDENCE,no,yes,no,n/a,none,KEEP
+paper_master.tex/.pdf,KEEP_CANONICAL,no,yes,yes,n/a,none,KEEP
+.gitignore (modified),REVIEW_REQUIRED,no,n/a,yes,n/a,none,DO_NOT_TOUCH

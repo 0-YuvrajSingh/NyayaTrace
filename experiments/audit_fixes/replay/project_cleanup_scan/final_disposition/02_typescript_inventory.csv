@@ -1,0 +1,11 @@
+seq,path,type,size_bytes,role,git_tracked,action,rationale
+1,demo/web/src/api.ts,TypeScript source,1744,API client layer for demo web frontend,unknown - not checked as not deletion candidate,KEEP,Legitimate TS project source; must not be deleted solely because unreferenced from Python/Java
+2,demo/web/src/App.tsx,TypeScript React component,7603,Main React UI component,unknown - not checked as not deletion candidate,KEEP,Core frontend source
+3,demo/web/src/main.tsx,TypeScript entry point,315,React application entry point,unknown - not checked as not deletion candidate,KEEP,Core frontend source
+4,demo/web/src/types.ts,TypeScript types,1949,Shared TypeScript type definitions,unknown - not checked as not deletion candidate,KEEP,Core frontend source; shared across components
+5,demo/web/package.json,NPM manifest,571,Node.js/npm project manifest with dependencies,unknown - not checked as not deletion candidate,KEEP,Required for npm install / build reproducibility
+6,demo/web/package-lock.json,NPM lockfile,58126,Exact dependency version lockfile,unknown - not checked as not deletion candidate,KEEP,Required for reproducible builds; must not be deleted
+7,demo/web/tsconfig.json,TypeScript config,436,TypeScript compiler configuration,unknown - not checked as not deletion candidate,KEEP,Required for tsc / Vite build
+8,demo/web/vite.config.ts,Vite build config,228,Vite bundler configuration,unknown - not checked as not deletion candidate,KEEP,Required for npm run build
+9,demo/web/dist/,Vite build output,unknown,Pre-built frontend assets for instant local demo,gitignored,KEEP,Regenerable via npm run build; kept for instant demo without rebuild
+note,demo/web/node_modules/,n/a,n/a,Not found — no node_modules present,n/a,N/A,No node_modules directory exists; nothing to clean

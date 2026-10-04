@@ -1,0 +1,2 @@
+seq,path,type,size_bytes,sha256_pre_delete,classification,phase,reason,action,status
+1,experiments/audit_fixes/spec_clean/,directory (empty),0,N/A,SAFE_DELETE_EMPTY_DIR,Phase G,"Empty directory. Only content (Indian_Legal_XAI_clean.docx 26467 bytes SHA A96EA009...) was deleted in Prompt 20. Directory itself is gitignored (.gitignore line 56). No files lost. No research content removed.",Remove-Item -Force,EXECUTED

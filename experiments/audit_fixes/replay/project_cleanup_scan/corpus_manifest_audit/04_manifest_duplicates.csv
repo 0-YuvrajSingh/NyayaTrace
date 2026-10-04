@@ -1,0 +1,7 @@
+record_type,path_or_key,result
+same_filename_none,—,no other corpus_consolidation_manifest.json in repo; nearest names are unrelated-domain manifests (TRANSFER_MANIFEST 1.6KB; e2_cache manifests; rq*/ manifests),
+same_schema_none,—,no sibling with Category/SourcePath/DestinationPath/Action schema found,
+content_vs_TRANSFER_MANIFEST.json,different size/domain (1.6KB transfer record vs 1.97MB cleanup log),not equivalent,
+content_vs_corpus/dataset_manifest.md,different format (md) and purpose,not equivalent,
+content_vs_e2_cache_manifests,different domain (window cache),not equivalent,
+frozen_BM25_link,"record DestinationSha256/SourceSha256 = 3187F7FCE824EA8CCC5A26D908936CE4B78E81238289EA69348CB861350D65FB","matches frozen retrieval/bm25.sqlite hash (kept artifact); proves manifest describes the real frozen index lineage",

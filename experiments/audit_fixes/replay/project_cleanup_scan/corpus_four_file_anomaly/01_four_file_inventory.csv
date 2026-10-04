@@ -1,0 +1,6 @@
+# 01 — four-file inventory (read-only; SHA from direct reads)
+path,year_folder,filename,byte_size,sha256,pdf_page_count,byte_identical_to_others
+corpus/ecourts/pdfs/year=1979/1980_2_292_297_EN.pdf,year=1979,1980_2_292_297_EN.pdf,199627,fddeb6b48754f4382607db7541091bd5251883a6140f126cbf6c9eb4d49a1f12,5,yes (byte-identical to all other 3 files)
+corpus/ecourts/pdfs/year=1979/1980_2_293_297_EN.pdf,year=1979,1980_2_293_297_EN.pdf,199627,fddeb6b48754f4382607db7541091bd5251883a6140f126cbf6c9eb4d49a1f12,5,yes (byte-identical to all other 3 files)
+corpus/ecourts/pdfs/year=1980/1980_2_292_297_EN.pdf,year=1980,1980_2_292_297_EN.pdf,199627,fddeb6b48754f4382607db7541091bd5251883a6140f126cbf6c9eb4d49a1f12,5,yes (byte-identical to all other 3 files)
+corpus/ecourts/pdfs/year=1980/1980_2_293_297_EN.pdf,year=1980,1980_2_293_297_EN.pdf,199627,fddeb6b48754f4382607db7541091bd5251883a6140f126cbf6c9eb4d49a1f12,5,yes (byte-identical to all other 3 files)
