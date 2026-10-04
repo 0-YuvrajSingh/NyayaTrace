@@ -18,33 +18,29 @@
 
 % Tighter tables in two-column layout
 \renewcommand{\arraystretch}{1.12}
+\linespread{0.97}
 
 \begin{document}
 
 \title{Temporally Constrained, Provenance-Verified Evidence Retrieval for Indian Legal Research}
 
 \author{
-\begin{tabular}{c@{\hspace{1.0em}}c}
-Yuvraj Singh & RishiRaj Jaiswal \\
-\textit{Department of Computer Science and Engineering} & \textit{Department of Computer Science and Engineering} \\
-\textit{Ajay Kumar Garg Engineering College} & \textit{Ajay Kumar Garg Engineering College} \\
-Ghaziabad, India & Ghaziabad, India \\
-{\small yuvraj2312026@akgec.ac.in} & {\small rishi2312003@akgec.ac.in} \\[2ex]
-Rahul Ranjan & Saurav Kumar Chaudhary \\
-\textit{Department of Computer Science and Engineering} & \textit{Department of Computer Science and Engineering} \\
-\textit{Ajay Kumar Garg Engineering College} & \textit{Ajay Kumar Garg Engineering College} \\
-Ghaziabad, India & Ghaziabad, India \\
-{\small rahul2312151@akgec.ac.in} & {\small saurav2312023@akgec.ac.in}
-\end{tabular}
+\IEEEauthorblockN{
+Yuvraj Singh, RishiRaj Jaiswal, Rahul Ranjan, Saurav Kumar Chaudhary, Kriti Mishra
+}
+\IEEEauthorblockA{
+\textit{Department of Computer Science and Engineering}\\
+\textit{Ajay Kumar Garg Engineering College}\\
+Ghaziabad, India\\
+{\small \{yuvraj2312026, rishi2312003, rahul2312151, saurav2312023, kritimishra\}@akgec.ac.in}
+}
 }
 
 \maketitle
 
 % =====================================================================
 \begin{abstract}
-AI-assisted legal research fails in ways that fluent output conceals: a cited
-authority may not exist, may lack the attributed passage, may post-date
-the matter, or may never have been retrieved. A 2026 Supreme Court of India
+AI-assisted legal research can produce fluent answers with citations that do not exist, lack the attributed passage, post-date the matter, or were never retrieved. A 2026 Supreme Court of India
 ruling (2026 INSC 668) overturned tribunal findings built on exactly these
 defects. We present an
 evidence pipeline for
@@ -54,46 +50,43 @@ prediction kept separate. We report three main findings, supported by independen
 Second, pre-ranking temporal eligibility
 raised Recall@5 from
 5/30 to 12/30 and Recall@100 from 12/30 to 15/30 on the frozen 30-case base.
-Third, all 150 displayed base citations passed verification,
-with zero unsupported claims,
+Third, all 150 displayed base citations passed provenance and integrity
+verification with zero failed checks,
 while 15 expected authorities remained
 absent at $k{=}100$. Outcome baselines on 1{,}503 cases use their own population.
 
 \end{abstract}
 
 \begin{IEEEkeywords}
-legal information retrieval, explainable AI, provenance verification, temporal
-filtering, retrieval-augmented systems, Indian legal NLP, BM25, InLegalBERT
+legal information retrieval, explainable AI, provenance verification, temporal filtering, Indian legal NLP
 \end{IEEEkeywords}
 
 % =====================================================================
 \section{Introduction}
 
-Legal research rewards fluency over evidence: generated
-responses cite nonexistent judgments, misattribute passages, or
-invoke unavailable law. Such hallucinations are frequent, not exceptional
+Generated legal-research responses can cite nonexistent judgments, misattribute passages, or invoke unavailable law. Such hallucinations are frequent, not exceptional
 \cite{dahl2024}, and communicating legal standards to models remains open
 \cite{nay2023}.
 
 The problem is no longer confined to the literature. In \emph{Pooja Ramesh Singh
 v.\ Jammu and Kashmir Bank Ltd.\ \& Anr.}, 2026 INSC 668 (Civil Appeal
 No.\ 11950 of 2025, decided 2 July 2026), the Supreme Court of
-India set aside tribunal decisions after identifying nonexistent authorities,
-incorrect citations, and fabricated passages apparently produced through
-AI-assisted research \cite{poojasingh2026}.
+India set aside the underlying tribunal decisions after finding that several
+authorities relied upon in those proceedings could not be substantiated
+and that the cited material contained serious citation and content defects \cite{poojasingh2026}.
 
 We treat that constraint as the design foundation:
 retrieved facts carry stable
 locators, duplicates are excluded, only verbatim passages are rendered,
 and each citation is verified against corpus and retrieval run.
 
-Our primary finding highlights a stark contrast: while all 150 displayed citations passed strict verification without a single unsupported claim, 15 of the 30 expected authorities failed to appear within the top 100 retrieved results.
+All 150 displayed citations passed provenance and integrity verification, while 15 of the 30 expected authorities were absent from the top 100 results.
 
 \textbf{Contributions.} We make four main contributions:
 
 \begin{enumerate}
 \item \textbf{A quantified cross-corpus identity failure and its remedy.}
-\texttt{YYYY INSC N} to \texttt{YYYY\_N} conversion produced 5{,}391 syntactic candidates, of which only 11 passed
+\texttt{YYYY INSC N}$\rightarrow$\texttt{YYYY\_N} conversion produced 5{,}391 syntactic candidates, of which only 11 passed
 content alignment (Section~\ref{sec:alignment}).
 
 \item \textbf{Pre-ranking temporal eligibility.} Historical
@@ -123,17 +116,23 @@ researcher-facing prototype. Two populations are evaluated and never pooled: 1{,
 ILDC established Indian Supreme Court judgment prediction and
 explanation as a benchmark task \cite{malik2021}; InLegalBERT \cite{paul2023} motivates our neural
 baseline; practitioner-evaluated summarisation \cite{shukla2022}
-shows length and presentation are first-order concerns. None of
+shows that legal documents are long and complex and that domain-expert
+evaluation can reveal aspects missed by document-wide metrics. None of
 these lines addresses cross-corpus identity or per-citation
 provenance, which is where this work sits.
 
 \subsection{Legal retrieval and temporal constraints}
 
-COLIEE, LegalBench, and CaseHOLD evaluate retrieval and reasoning on single
-fixed corpora with no pre-dating requirement \cite{coliee2023,legalbench2023,casehold2021}.
+COLIEE evaluates legal case retrieval and entailment, while
+LegalBench provides a broad benchmark of legal reasoning tasks
+and CaseHOLD evaluates identification of relevant case holdings
+\cite{coliee2023,legalbench2023,casehold2021}. LegalBench-RAG further targets the
+retrieval step of legal RAG by evaluating precise source spans in legal corpora
+\cite{pipitone2024}. These benchmarks do not target the specific historical
+pre-dating eligibility constraint used here.
 TaxFlow adds validity filtering for Indian tax-law QA \cite{taxflow2026};
-CaseFacts and LexTime target evolving validity and event ordering
-\cite{casefacts2026,lextime2025}. Retrieval-augmented generation
+CaseFacts models temporal validity and changes in precedent \cite{casefacts2026},
+while LexTime evaluates temporal ordering of legal events \cite{lextime2025}. Retrieval-augmented generation
 established retrieval as an explicit non-parametric evidence source
 \cite{lewis2020}; BM25 supplies the sparse ranking basis \cite{robertson2009}
 and Tesseract the OCR engine for corpus repair \cite{smith2007}.
@@ -174,11 +173,7 @@ definitions.
 
 \subsection{Research questions}
 
-We investigate two primary research questions. \textbf{RQ1:} Does grounding a
-legal AI workflow in retrieved evidence improve reliability and retrieval against a facts-only
-baseline (E2 versus E3; E1 for context)? \textbf{RQ2:} Does
-provenance-constrained selection and verification reduce
-unsupported claims?
+We investigate two primary research questions. \textbf{RQ1:} Does pre-ranking temporal eligibility improve authority recovery (Recall@5, Recall@100) over the unfiltered BM25 baseline? Evidence-augmented outcome prediction on the 30-case set is reported descriptively alongside and is not directly comparable with the 1{,}503-case baselines (different population, task, and metric). \textbf{RQ2:} Does provenance-constrained selection and verification ensure that displayed evidence satisfies the defined grounding and integrity checks?
 
 
 \begin{table}[t]
@@ -196,13 +191,13 @@ character cap; inputs below 10\% retention or
 100 words are excluded \\
 \addlinespace
 Temporal existence &
-The source has a parseable exact decision date \\
+The source has a parseable exact decision date sufficient to evaluate historical eligibility \\
 \addlinespace
 Temporal applicability &
 For query year $Y$, an authority is eligible only if its decision year is
 $< Y$; same-year, later-year, and missing-date sources are excluded \\
 \addlinespace
-Temporal effectiveness &
+Temporal enforcement &
 Eligibility is applied inside the BM25 candidate relation before
 ranking and \texttt{LIMIT 100} \\
 \addlinespace
@@ -351,7 +346,7 @@ terms for a SQLite FTS5 BM25 index backed by PostgreSQL provenance.
 
 The frozen configuration (\texttt{week11-\allowbreak bm25-\allowbreak salient-\allowbreak terms-\allowbreak preranked-\allowbreak temporal-\allowbreak v3}) admits only judgments with decision year strictly earlier than the
 query year into the candidate relation \emph{before} BM25 ordering and the
-top-100 cutoff, so the full depth is spent on eligible material.
+top-100 cutoff, so the full depth is spent on eligible material. The unfiltered BM25 baseline uses the same corpus, query builder, candidate generation, and top-100 cutoff as the temporal configuration, but applies no pre-ranking temporal eligibility predicate; all downstream alignment, self-match, and evidence-selection rules are held fixed.
 
 Candidate sources are checked against the alignment-gated crosswalk and a
 self-match rule (100 shared six-token occurrences, 80\%
@@ -420,8 +415,12 @@ This protocol distinguishes four failure states that a single
 authority.
 \end{enumerate}
 
-In our results, states (1)--(3) occur zero times and state (4) occurs
-in 18 of 30 cases.
+State (2) applies to a citation presented in output without corresponding retrieval-run membership; an expected authority absent from retrieval is instead counted as an authority-recovery miss.
+
+In our results, states (1)--(3) occur zero times and state (4)---a fully valid
+citation not matching the single predefined expected authority---occurs in 18 of 30
+\emph{cases} (the 18 cases in which no selected citation matched the expected authority;
+the remaining 12 cases each contain the expected authority among the five selected).
 
 % =====================================================================
 \section{Results}
@@ -435,9 +434,8 @@ ILDC test cases (outcome prediction) and Base-30 (30 queries; 150 citations) for
 \subsection{Outcome prediction}
 
 On the 1{,}503-case population (Table~\ref{tab:outcome}), sparse E1 reached accuracy 0.61344 and macro-F1 0.612342,
-exceeding corrected E2 mean-logit pooling at 0.596806 and 0.592358 (majority vote
-0.6015 and 0.5937). All primary models exceeded
-the 0.5017 majority-class accuracy.
+exceeding E2 InLegalBERT mean-logit pooling at 0.596806 and 0.592358 (majority vote
+0.6015 and 0.5937). On the 1{,}503-case population, E1 and E2 exceeded the majority-class accuracy of 0.5017. E3 and E4 are reported separately on the 30-case evidence population and are not compared with the 1{,}503-case majority baseline.
 
 \begin{table}[t]
 \caption{Outcome prediction (distinct populations; not a leaderboard).}
@@ -475,33 +473,31 @@ Base-30 recovery is Recall@5 0.40 (12/30) and Recall@100 0.50 (15/30: 12
 selected $+$ 3 retrieved-but-unselected); 15 authorities were absent at
 $k{=}100$.
 
-The principal RQ1 result is the Base-30 row of Table~\ref{tab:rq1strata}.
+The principal RQ1 result is the temporal pre-ranking row of Table~\ref{tab:rq1strata}.
 
 
 \begin{table}[t]
-\caption{RQ1 retrieval and prediction by stratum (Base-30 replayed).}
+\caption{RQ1 authority recovery (Base-30 replayed).}
 \label{tab:rq1strata}
 \centering
 \footnotesize
-\setlength{\tabcolsep}{2pt}
-\begin{tabular}{lrrrrr}
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{lrrr}
 \toprule
-\textbf{Population} & \textbf{$n$} & \textbf{R@5} & \textbf{R@100} &
-\textbf{E3 Acc.} & \textbf{E3 F1} \\
+\textbf{Retrieval condition} & \textbf{$n$} & \textbf{R@5} & \textbf{R@100} \\
 \midrule
-Base-30          & 30 & 0.40 (12/30) & 0.50 (15/30)   & 0.6667 & 0.6032 \\
-
+Unfiltered BM25 & 30 & 0.1667 (5/30) & 0.4000 (12/30) \\
+Temporal pre-ranking & 30 & 0.4000 (12/30) & 0.5000 (15/30) \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 Table~\ref{tab:integrity} summarizes Base-30 integrity:
 150/150 grounded and provenance-valid with 0/150 temporal violations and 0/30
-unsupported claims.
+cases with ungrounded displayed material.
 
 
-E4 verification is fail-closed: any failing check rejects the citation. On
-live data nothing was rejected, a ceiling effect of already-valid evidence.
+E4 verification is fail-closed: any failing check rejects the citation. In the evaluated run, nothing was rejected, a ceiling effect of already-valid evidence.
 
 \begin{table}[t]
 \caption{Evidence recovery and integrity, Base-30 (30
@@ -522,16 +518,14 @@ Authority precision & 0.08 & 12 of 150 shown \\
 Grounding           & 1.00 & 150/150 passed \\
 Provenance validity & 1.00 & 150/150 passed \\
 Temporal violations & 0    & 0 of 150 \\
-Unsupported claims  & 0    & 0 of 30 cases \\
+Ungrounded displays  & 0    & 0 of 30 cases \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 
 
-\textbf{This is the paper's central result.} The system verified everything it displayed (150/150)
-while recovering the expected authority
-in 15 of 30 cases at $k{=}100$.
+The system verified all 150 displayed citations and recovered the expected authority in 15 of 30 cases at $k{=}100$.
 
 \subsection{Interpreting authority-consistency precision}
 \label{sec:ceiling}
@@ -567,7 +561,7 @@ cause.
 
 The analysis is read-only over final frozen outputs. Across 1{,}503 cases, both models were correct on 684
 and both wrong on 368; E1 alone was correct on 238 and E2 alone on 213
-(on the 30-case key: 18/3/3/6).
+(on the 30-case key: 18 both correct, 3 E1-only correct, 3 E2-only correct, and 6 both wrong).
 
 
 In the evidence-augmented run, E2 was wrong while E3 and E4 were correct for two
@@ -579,7 +573,7 @@ Critically, three cases (\texttt{2008\_1629}, \texttt{1981\_187},
 authority yet still produced an incorrect outcome prediction, and a fourth
 (\texttt{1985\_40}) was retrieved but not selected yet likewise predicted
 incorrectly: correct recovery does not mechanically imply a correct prediction. No correct prediction was
-accompanied by an unsupported citation.
+accompanied by a citation that failed the defined integrity checks.
 
 \subsection{Authority-recovery buckets}
 
@@ -598,6 +592,8 @@ improvement.
 
 \textbf{Scope.} English-language Indian Supreme Court judgments
 only.
+
+\textbf{Human-rated explanation quality.} Human-rated explanation quality was not evaluated in this study. Explainability is therefore assessed operationally through evidence linkage, provenance, and citation verification rather than through a human-rating study.
 
 \textbf{Extraction approximation.} Some affected PDF instances were restored through the post-OCR
 quality gate \cite{smith2007}; repaired text may retain noise. With
@@ -656,16 +652,14 @@ We designed, implemented, and evaluated a provenance-preserving, temporally cons
 workflow for historical Indian Supreme Court research.
 
 The principal finding is a dissociation. Every one of 150 displayed base citations
-passed verification, with zero unsupported claims,
+passed provenance and integrity verification with zero failed checks,
 while 15 of
 the 30 expected authorities were
 absent at $k{=}100$.
 
-The cross-corpus audit yields a transferable lesson: only 11 of
-5{,}391 syntactic identifier matches between ILDC and the eCourts collection
-were content-aligned.
+In this cross-corpus audit, only 11 of 5{,}391 syntactic identifier matches between ILDC and the eCourts collection were content-aligned.
 
-We report supporting results along with their limits. The sparse TF--IDF baseline outperformed the corrected InLegalBERT under the frozen settings (1{,}503 cases). Inference-time evidence augmentation
+We report supporting results along with their limits. The sparse TF--IDF baseline outperformed E2 InLegalBERT under the frozen settings (1{,}503 cases). Inference-time evidence augmentation
 reached 0.666667 accuracy and 0.603175 macro-F1 on the frozen 30-case subset,
 descriptively and under acknowledged distribution shift.
 
@@ -681,8 +675,8 @@ All configurations, seeds, model revisions, corpus identities, and evaluation
 artifacts are frozen and machine-readable, including checkpoint-6318
 (\texttt{924a5bb9\ldots dbdc773}). The implementation passes 81
 tests and the documented
-checks (14/14 documentation; freeze audit of 39 entries:
-28 byte-exact, one line-ending-normalized, 10 metadata-differing).
+checks (14/14 documentation; freeze audit of 30 entries:
+22 byte-exact, 8 byte-drift).
 All independently replayed primary metrics matched their frozen references; E3/E4
 decisions, evidence selections, and metrics matched despite bounded fp16 variation,
 and BM25 matched at ranking level on the 30 evaluated queries.
@@ -691,10 +685,8 @@ wrapper tests. Code and artifacts are available
 at \url{https://github.com/0-YuvrajSingh/NyayaTrace}.
 
 % =====================================================================
-\section*{Acknowledgment}
 
-The authors thank Kriti Mishra for her mentorship and guidance throughout this work.
-
+\IEEEtriggeratref{6}
 \begin{thebibliography}{00}
 \bibitem{dahl2024}
 M. Dahl, V. Magesh, M. Suzgun, and D. E. Ho, ``Large Legal Fictions: Profiling
@@ -737,6 +729,10 @@ L. Zheng, N. Guha, B. R. Anderson, P. Henderson, and D. E. Ho, ``When Does
 Pretraining Help? Assessing Self-Supervised Learning for Law and the CaseHOLD
 Dataset of 53,000+ Legal Holdings,'' in \emph{Proc.\ 18th Int.\ Conf.\ on
 Artificial Intelligence and Law (ICAIL)}, 2021, pp.\ 159--168.
+\bibitem{pipitone2024}
+N. Pipitone and G. H. Alami, ``LegalBench-RAG: A Benchmark for
+Retrieval-Augmented Generation in the Legal Domain,'' \emph{arXiv
+preprint arXiv:2408.10343}, 2024. doi: 10.48550/arXiv.2408.10343.
 \bibitem{taxflow2026}
 V. R. Karna, R. R. M., B. S. Babu, \emph{et al.},
 ``A Hybrid RAG-LLaMA Framework for Scalable and Accurate Interpretation of Legal
