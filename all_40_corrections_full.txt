@@ -1,0 +1,251 @@
+APPLY THESE CORRECTIONS:
+
+1. Fix the identifier notation everywhere:
+   `YYYY INSC N → YYYY_N`
+   Keep this notation consistent throughout the paper.
+
+2. Keep RQ1 completely separate from outcome prediction.
+   RQ1 must concern only temporal eligibility and authority recovery:
+   “Does applying temporal eligibility before ranking improve authority recovery (Recall@5 and Recall@100) over the unfiltered BM25 baseline?”
+
+3. Remove any claim equivalent to “zero unsupported claims.”
+   Use the narrower provenance/integrity wording:
+   displayed evidence passed the defined grounding, provenance, and integrity checks.
+   Do NOT imply that this proves legal correctness or relevance.
+
+4. Keep the 30-entry freeze-audit result exactly as:
+   22 byte-exact entries and 8 entries with byte-level drift.
+   Do not invent a reason for the byte-level drift.
+
+5. Remove any unexplained wording such as “corrected E2.”
+   Refer simply to E2 or the appropriate frozen E2 configuration.
+
+6. Clarify State (4) as a CASE-LEVEL result:
+   State (4) occurred in 18 of 30 cases because those cases had no expected authority among the five selected citations.
+   The other 12 cases contained the expected authority among the five selected.
+   Counted per citation, State (4) covered 138 of 150 displayed citations.
+
+7. Use the exact RQ2 wording:
+   “Do provenance-constrained selection and verification keep the displayed evidence within the defined grounding and integrity checks?”
+
+8. Explicitly define the unfiltered BM25 baseline as a controlled baseline:
+   same corpus,
+   same query builder,
+   same candidate generation,
+   same top-100 cutoff,
+   no temporal eligibility predicate,
+   with alignment, self-match, and selection rules held fixed.
+
+9. Author block must contain exactly these five authors:
+   Yuvraj Singh, RishiRaj Jaiswal, Rahul Ranjan, Saurav Kumar Chaudhary, Kriti Mishra
+
+10. Keep the human-explanation limitation explicit:
+   “Human-rated explanation quality was not evaluated in this study. Explainability is therefore assessed operationally through evidence linkage, provenance, and citation verification rather than through a human-rating study.”
+
+11. Do not apply the majority-class baseline to the 30-case E3/E4 evidence experiment.
+   The 0.5017 majority baseline is for the 1,503-case outcome population only.
+
+12. Fix any stale reference to a “Base-30 row of Table III.”
+   The same-30 facts-only E2 result belongs in Table II:
+   E2 InLegalBERT, facts only (same 30 cases)
+   n = 30
+   Accuracy = 0.70
+   Macro-F1 = 0.653402
+
+13. Change Table I terminology:
+   “Temporal effectiveness” → “Temporal enforcement.”
+
+14. Replace any wording such as:
+   “live data nothing was rejected”
+   with:
+   “In the evaluated run, nothing was rejected.”
+
+15. Clarify temporal existence:
+   It means that the source has a parseable exact decision date sufficient to evaluate historical eligibility.
+
+16. Clarify the 30-case outcome breakdown exactly:
+   18 both correct,
+   3 E1-only,
+   3 E2-only,
+   6 both wrong.
+
+17. Preserve the exact E9 wording and case IDs:
+   “Adding evidence moved individual predictions in both directions. Two cases that facts-only E2 got wrong (1974_36 and 1984_136) were correct once evidence was added, while three cases it had right became wrong (1980_217, 1985_40, and 1994_632), so accuracy went from 21/30 to 20/30. E4 verification changed neither the selected evidence nor the predictor input (0/30 divergences).”
+
+18. Use conservative wording for k=5:
+   “Temporal pre-ranking recovered a net 7 more authorities at k = 5.”
+   Do NOT change this to “7 gains and 0 losses” unless the underlying paired logs explicitly establish that.
+
+19. Keep the exact outcome results frozen:
+   E1, 1,503 cases:
+   Accuracy = 0.61344
+   Macro-F1 = 0.612342
+
+   E2 mean-logit, 1,503 cases:
+   Accuracy = 0.596806
+   Macro-F1 = 0.592358
+
+   E2 majority vote, 1,503 cases:
+   Accuracy = 0.6015
+   Macro-F1 = 0.5937
+
+   E2 facts-only same-30:
+   Accuracy = 0.70
+   Macro-F1 = 0.653402
+
+   E3 evidence-augmented, 30 cases:
+   Accuracy = 0.666667
+   Macro-F1 = 0.603175
+
+   E4 verified evidence-augmented, 30 cases:
+   Accuracy = 0.666667
+   Macro-F1 = 0.603175
+
+20. Keep RQ1 results exactly:
+   Unfiltered BM25:
+   R@5 = 5/30 = 0.1667
+   R@100 = 12/30 = 0.4000
+
+   Temporal pre-ranking:
+   R@5 = 12/30 = 0.4000
+   R@100 = 15/30 = 0.5000
+
+   All 12 unfiltered top-100 recoveries are retained.
+   At k=5 use only the conservative “net 7 more authorities” wording.
+
+21. Keep integrity results exactly:
+   Grounding = 150/150
+   Provenance validity = 150/150
+   Temporal violations = 0/150
+   Ungrounded displays = 0/30
+   E4 rejected nothing in the evaluated run.
+
+22. Keep authority-consistency metrics exactly:
+   Precision = 0.08
+   Recall = 0.40
+   F1 = 0.133
+   Structural ceiling = 0.20
+
+23. Keep the 30-authority buckets exactly:
+   12 retrieved and selected
+   3 retrieved but not selected:
+      1980_133 rank 15
+      1981_55 rank 28
+      1985_40 rank 78
+   15 absent at k=100
+
+24. Keep the exact E9 error-analysis interpretation:
+   Retrieving the correct authority does not guarantee the correct prediction.
+   Preserve these three IDs:
+   2008_1629
+   1981_187
+   1982_29
+   and the fourth:
+   1985_40
+
+25. Keep the novelty positioning narrow.
+   Do NOT claim:
+   - first legal RAG system
+   - first Indian legal model
+   - first temporal legal benchmark
+   - temporal filtering itself is novel
+
+   The positioning should remain:
+   historical Indian Supreme Court retrieval using a reproducible combination of content-based corpus alignment, temporal eligibility before ranking, exact retrieval-run provenance verification, and separate reporting of authority recovery and citation validity.
+
+26. Keep the Related Work reference order exactly:
+   [11] CaseFacts
+   [12] LexTime
+   [13] LegalSearch-R1
+   [14] Temporal Misgrounding in Legal RAG
+   [15] TaxFlow
+   [16] RAG
+   [17] BM25
+   [18] Tesseract
+
+27. Preserve the verified TaxFlow entry and do not remove it.
+
+28. Keep the exact reproducibility wording:
+   “All configurations, seeds, model revisions, corpus identities, and evaluation artifacts are recorded in machine-readable manifests, including the E2 checkpoint (checkpoint-6318).”
+
+29. Keep the checks wording:
+   “The implementation passes 81 tests. A freeze audit of 30 manifest entries found 22 byte-exact and 8 with byte-level drift; the audit output is in the repository.”
+
+30. Keep:
+   “Each retrieved passage carries a stable locator.”
+
+31. Keep the E2 technical configuration unchanged:
+   InLegalBERT revision b5ecfed8,
+   512-token windows,
+   50-token overlap,
+   3 epochs,
+   seed 202607,
+   learning rate 2e-5,
+   weight decay 0.01,
+   warm-up ratio 0.1,
+   gradient accumulation,
+   mean-logit pooling as primary,
+   majority vote as secondary,
+   checkpoint selected using document-level validation accuracy under mean-logit pooling.
+
+32. Keep the E1 configuration unchanged:
+   TF-IDF unigrams/bigrams,
+   sublinear TF,
+   minimum document frequency 2,
+   L2 normalization,
+   100,000 features,
+   C ∈ {0.1, 1.0, 10.0},
+   validation-selected C = 10.0,
+   seed 202605.
+
+33. Preserve the bundled-intervention caveat:
+   Do not attribute the overall reliability result to any single E4 check.
+
+34. Preserve the conclusion wording that E1 scored slightly higher than E2 under the frozen settings, while the paired difference was not statistically significant.
+
+35. Preserve the explicit statement that evidence augmentation was inference-time use of a facts-only-trained E2 checkpoint and is therefore a distribution shift, not evidence-aware fine-tuning.
+
+36. The abstract and introduction must use the verified 2026 INSC 668 wording:
+   “the Supreme Court of India set aside NCLT and NCLAT orders that relied on non-existent or misattributed citations.”
+   In the introduction preserve the more specific explanation:
+   three of the six citations were non-existent and three had non-existent paragraphs attributed to them.
+
+37. Keep the limitations:
+   - 30-case evidence evaluation
+   - 13 cases from the 1980s
+   - not era-balanced
+   - one expected authority per query
+   - no human-rated explanation-quality study
+   - English-language Indian Supreme Court judgments only
+   - OCR may contain residual noise
+   - facts-only boundary is an approximation
+   - query dates known only to year
+   - 15/30 expected authorities absent at k=100
+   - production deployment not evaluated
+
+38. Do NOT reintroduce removed material:
+   - 14/14 documentation tests
+   - Spring Boot/FastAPI demo-stack tests
+   - unsupported LLM numerical claims
+   - the removed TypeScript clause
+   - positive-control claims
+   - RQ3/human-rating results that were not actually evaluated.
+
+39. Page count is currently wrong.
+   The current rendered PDF is 7 pages, but the target submission PDF must be EXACTLY 6 IEEE pages.
+   Fix page balance using IEEEtran-compatible layout balancing only.
+   Prefer:
+      \IEEEtriggeratref{9}
+   before the bibliography if needed.
+   Do NOT:
+      shrink fonts,
+      reduce margins,
+      alter IEEE column dimensions,
+      artificially compress tables,
+      remove valid technical content merely to hit six pages,
+      use \balance,
+      use \enlargethispage.
+
+40. The `.tex` source is authoritative for the submission PDF.
+   The DOCX is secondary and must NOT determine the IEEE page count.
+
