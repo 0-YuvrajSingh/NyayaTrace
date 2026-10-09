@@ -27,5 +27,5 @@
 <text x='67.0' y='421.0' font-family='Arial, Helvetica, sans-serif' font-size='15' font-weight='400' fill='#202124' text-anchor='start'>Unsupported claims</text>
 <text x='367.0' y='421.0' font-family='Arial, Helvetica, sans-serif' font-size='15' font-weight='400' fill='#202124' text-anchor='start'>0</text>
 <text x='587.0' y='421.0' font-family='Arial, Helvetica, sans-serif' font-size='15' font-weight='400' fill='#202124' text-anchor='start'>Controlled renderer made no unsupported evidence claim</text>
-<text x='55.0' y='468.0' font-family='Arial, Helvetica, sans-serif' font-size='14' font-weight='400' fill='#5f6368' text-anchor='start'>All values are final E4 verification results; they assess displayed evidence, not expected-authority recovery.</text>
+<text x='55.0' y='427.0' font-family='Arial, Helvetica, sans-serif' font-size='14' font-weight='400' fill='#5f6368' text-anchor='start'>Final E4 results on displayed evidence (not expected-authority recovery); partly constrained by the extract-only design.</text>
 </svg>

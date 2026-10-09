@@ -17,7 +17,7 @@
 <text x='95.0' y='120.0' font-family='Arial, Helvetica, sans-serif' font-size='13' font-weight='400' fill='#5f6368' text-anchor='end'>5</text>
 <line x1='105.0' y1='115.0' x2='105.0' y2='540.0' stroke='#202124' stroke-width='1.5'/>
 <line x1='105.0' y1='540.0' x2='1050.0' y2='540.0' stroke='#202124' stroke-width='1.5'/>
-<text x='42.0' y='330.0' font-family='Arial, Helvetica, sans-serif' font-size='15' font-weight='400' fill='#5f6368' text-anchor='start'>Mean rating (1-5)</text>
+<text x='42.0' y='330.0' font-family='Arial, Helvetica, sans-serif' font-size='15' font-weight='400' fill='#5f6368' text-anchor='start'>Mean rating (1–5)</text>
 <rect x='162.1' y='151.4' width='54.0' height='388.6' fill='#2962a3'/>
 <text x='189.1' y='143.4' font-family='Arial, Helvetica, sans-serif' font-size='13' font-weight='400' fill='#202124' text-anchor='middle'>4.57</text>
 <rect x='230.1' y='309.3' width='54.0' height='230.7' fill='#d97706'/>
