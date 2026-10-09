@@ -1,0 +1,8 @@
+{
+  "overall": "MATCH",
+  "queries_run": 0,
+  "identical": 0,
+  "minor_drift": 0,
+  "mismatch": 0,
+  "per_case": []
+}

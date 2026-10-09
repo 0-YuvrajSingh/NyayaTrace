@@ -1,0 +1,76 @@
+
+==================================== ERRORS ====================================
+_____________ ERROR collecting tests/test_e2_chunk_pool_windows.py _____________
+tests/test_e2_chunk_pool_windows.py:13: in <module>
+    SPEC.loader.exec_module(MODULE)
+<frozen importlib._bootstrap_external>:995: in exec_module
+    ???
+<frozen importlib._bootstrap_external>:1132: in get_code
+    ???
+<frozen importlib._bootstrap_external>:1190: in get_data
+    ???
+E   FileNotFoundError: [Errno 2] No such file or directory: '/work/scripts/prepare_e2_chunk_pool_cache.py'
+_________ ERROR collecting tests/test_evidence_augmented_prediction.py _________
+ImportError while importing test module '/work/tests/test_evidence_augmented_prediction.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/local/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_evidence_augmented_prediction.py:11: in <module>
+    from legal_xai.evidence_augmented_prediction import (
+src/legal_xai/evidence_augmented_prediction.py:18: in <module>
+    import torch
+E   ModuleNotFoundError: No module named 'torch'
+_______________ ERROR collecting tests/test_evidence_pipeline.py _______________
+ImportError while importing test module '/work/tests/test_evidence_pipeline.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/local/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_evidence_pipeline.py:1: in <module>
+    from legal_xai.evidence_pipeline import EvidenceCandidate, select_diverse_evidence, temporal_preranked_bm25_sql
+src/legal_xai/evidence_pipeline.py:15: in <module>
+    import psycopg
+E   ModuleNotFoundError: No module named 'psycopg'
+_____________________ ERROR collecting tests/test_facts.py _____________________
+tests/test_facts.py:11: in <module>
+    RULE = load_facts_extraction_rule(Path("config/facts_extraction.json"))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/legal_xai/facts.py:46: in load_facts_extraction_rule
+    payload: dict[str, Any] = json.loads(Path(path).read_text(encoding="utf-8"))
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/local/lib/python3.12/pathlib.py:1013: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'config/facts_extraction.json'
+________________ ERROR collecting tests/test_grounded_answer.py ________________
+ImportError while importing test module '/work/tests/test_grounded_answer.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/usr/local/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_grounded_answer.py:3: in <module>
+    from legal_xai.evidence_pipeline import EvidenceCandidate
+src/legal_xai/evidence_pipeline.py:15: in <module>
+    import psycopg
+E   ModuleNotFoundError: No module named 'psycopg'
+=============================== warnings summary ===============================
+../usr/local/lib/python3.12/site-packages/fastapi/testclient.py:1
+  /usr/local/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+ERROR tests/test_e2_chunk_pool_windows.py - FileNotFoundError: [Errno 2] No s...
+ERROR tests/test_evidence_augmented_prediction.py
+ERROR tests/test_evidence_pipeline.py
+ERROR tests/test_facts.py - FileNotFoundError: [Errno 2] No such file or dire...
+ERROR tests/test_grounded_answer.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 5 errors during collection !!!!!!!!!!!!!!!!!!!!
+1 warning, 5 errors in 2.22s

@@ -1,0 +1,49 @@
+/usr/local/lib/python3.12/site-packages/sklearn/linear_model/_logistic.py:1403: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+{
+  "status": "exact_reproduction_confirmed",
+  "metrics": {
+    "accuracy": 0.61344,
+    "macro_f1": 0.612342,
+    "class_0_f1": 0.632975,
+    "class_1_f1": 0.591708,
+    "confusion_matrix_labels": [
+      0,
+      1
+    ],
+    "confusion_matrix": [
+      [
+        501,
+        248
+      ],
+      [
+        333,
+        421
+      ]
+    ]
+  },
+  "records": 1503
+}
+	Command being timed: "python scripts/reconstruct_e1_predictions.py --model-output /out/e1_model.joblib --predictions-output /out/e1_test.json"
+	User time (seconds): 101.96
+	System time (seconds): 5.07
+	Percent of CPU this job got: 214%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:49.98
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1540540
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 31
+	Minor (reclaiming a frame) page faults: 403675
+	Voluntary context switches: 3854
+	Involuntary context switches: 44396
+	Swaps: 0
+	File system inputs: 181175
+	File system outputs: 2808
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
