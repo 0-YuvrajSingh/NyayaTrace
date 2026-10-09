@@ -1,4 +1,4 @@
-"""Render Week 14 paper figures using only the finalized evidence inventory."""
+"""Render the evaluation-plot deliverable (submission/figures) from the finalized evidence inventory."""
 
 from __future__ import annotations
 
@@ -9,7 +9,7 @@ from typing import Any
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "artifacts/figures"
+OUT = ROOT / "submission/figures"
 INVENTORY = ROOT / "artifacts/week14_results_evidence_inventory.json"
 FONT = "font-family='Arial, Helvetica, sans-serif'"
 INK = "#202124"
@@ -50,7 +50,7 @@ def rect(x: float, y: float, width: float, height: float, fill: str) -> str:
 def write(name: str, lines: list[str]) -> Path:
     OUT.mkdir(parents=True, exist_ok=True)
     path = OUT / name
-    path.write_text("\n".join([*lines, "</svg>"]) + "\n", encoding="utf-8")
+    path.write_bytes(("\n".join([*lines, "</svg>"]) + "\n").encode("utf-8"))
     return path
 
 
@@ -99,7 +99,7 @@ def retrieval_funnel_figure(inventory: dict[str, Any]) -> Path:
     rows = [
         ("Answer-key cases", total, total, BLUE, "30/30"),
         ("Found within k=100", selected + deferred, total, GREEN, f"{selected + deferred}/30 = Recall@100 0.50"),
-        ("Found within top 5", selected, total, BLUE, f"{selected}/30 = Recall@5 0.40"),
+        ("Displayed among five selected sources", selected, total, BLUE, f"{selected}/30 = Recall@5 0.40"),
     ]
     for index, (label, count, denominator, color, value) in enumerate(rows):
         y = 135 + index * 120
@@ -121,9 +121,9 @@ def retrieval_funnel_figure(inventory: dict[str, Any]) -> Path:
 def investigation_figure(inventory: dict[str, Any]) -> Path:
     data = inventory["retrieval_investigation_visualization"]
     dev = data["development_probe_recall_at_100"]
-    held = data["held_out_temporal_comparison"]
-    lines = svg_open("Retrieval investigation: development repairs and held-out temporal test", 1200, 680)
-    lines.extend([text(60, 82, "Development probe: Recall@100 (n=9)", 18, INK, "start", "500"), text(660, 82, "Held-out temporal comparison (n=30)", 18, INK, "start", "500")])
+    base30 = data["base30_eligibility_filter_comparison"]
+    lines = svg_open("Retrieval investigation: development probe and Base-30 eligibility-filter comparison", 1200, 680)
+    lines.extend([text(60, 82, "Development probe: Recall@100 (n=9)", 18, INK, "start", "500"), text(660, 82, "Base-30 comparison, exploratory (n=30)", 18, INK, "start", "500")])
     for panel_left, panel_right in ((70, 565), (665, 1140)):
         top, bottom = 125, 530
         for tick in range(0, 11, 2):
@@ -139,18 +139,18 @@ def investigation_figure(inventory: dict[str, Any]) -> Path:
         lines.extend([rect(x, 530 - height, dev_width, height, BLUE), text(x + dev_width / 2, 530 - height - 8, f"{row['numerator']}/{row['denominator']}", 13, INK, "middle")])
         words = row["stage"].replace("-", " ").split()
         lines.extend([text(x + dev_width / 2, 554, " ".join(words[:2]), 12, INK, "middle"), text(x + dev_width / 2, 572, " ".join(words[2:]), 12, INK, "middle")])
-    held_group = 170
-    for index, row in enumerate(held):
+    for index, row in enumerate(base30):
         center = 760 + index * 210
-        for offset, value, color, label in ((-35, row["recall_at_5"], BLUE, "R@5"), (35, row["recall_at_100"], ORANGE, "R@100")):
+        for offset, value, color in ((-35, row["recall_at_5"], BLUE), (35, row["recall_at_100"], ORANGE)):
             height = 405 * value
             x = center + offset - 28
             lines.extend([rect(x, 530 - height, 56, height, color), text(x + 28, 530 - height - 8, f"{round(value * row['denominator'])}/{row['denominator']}", 13, INK, "middle")])
         lines.extend([text(center, 554, row["stage"].split()[0], 12, INK, "middle"), text(center, 572, " ".join(row["stage"].split()[1:]), 12, INK, "middle")])
     lines.extend([
-        rect(790, 610, 14, 14, BLUE), text(812, 622, "Recall@5", 13),
-        rect(905, 610, 14, 14, ORANGE), text(927, 622, "Recall@100", 13),
-        text(70, 642, "Panels use different frozen populations; the left panel is not a held-out Recall@5 trend.", 13, MUTED),
+        rect(790, 610, 14, 14, BLUE), text(812, 622, "Recall@5 (displayed sources)", 13),
+        rect(1000, 610, 14, 14, ORANGE), text(1022, 622, "Recall@100", 13),
+        text(70, 642, "Panels use different populations. Base-30 informed configuration choices, so the right panel is exploratory;", 13, MUTED),
+        text(70, 660, "its direction is constrained by construction (identical BM25 scores and order for eligible candidates).", 13, MUTED),
     ])
     return write("week14_figure_c_retrieval_investigation.svg", lines)
 
@@ -175,7 +175,7 @@ def integrity_figure(inventory: dict[str, Any]) -> Path:
         lines.extend([rect(x[0], yy, x[-1] - x[0], row_h, "#f7f9fb" if index % 2 else "#ffffff"), line(x[0], yy + row_h, x[-1], yy + row_h)])
         for cell, xx in zip(row, x):
             lines.append(text(xx + 12, yy + 41, cell, 15, INK))
-    lines.append(text(55, 427, "All values are final E4 verification results; they assess displayed evidence, not expected-authority recovery.", 14, MUTED))
+    lines.append(text(55, 427, "Final E4 results on displayed evidence (not expected-authority recovery); partly constrained by the extract-only design.", 14, MUTED))
     return write("week14_figure_d_integrity_summary.svg", lines)
 
 
@@ -204,38 +204,21 @@ def review_figure(inventory: dict[str, Any]) -> Path:
 
 
 def captions() -> str:
-    return """# Week 14 Figure Captions
+    return """# Figure captions (submission/figures)
 
-**Figure A. Outcome-prediction comparison on the frozen eligible ILDC test population (n=1,503).** E1, corrected E2 mean-logit pooling, E2 majority-vote pooling, and the majority baseline are shown for accuracy and, where applicable, macro F1.
+Generated by `scripts/build_week14_paper_figures.py` from `artifacts/week14_results_evidence_inventory.json`.
+These evaluation plots are a project deliverable; the six-page paper embeds no figures.
 
-**Figure B. Expected-authority recovery funnel on the 30-case source-verified answer-key subset (n=30).** The final configuration finds 15/30 expected authorities within k=100, including 12/30 within the top five; the stacked final row separates 12 selected, three retrieved-but-unselected, and 15 absent authorities.
+**Figure A. Outcome-prediction comparison on the frozen eligible ILDC test population (n=1,503).** E1, E2 mean-logit pooling, E2 majority-vote pooling, and the majority baseline are shown for accuracy and, where applicable, macro F1.
 
-**Figure C. Retrieval investigation pathway.** The left panel shows development-probe Recall@100 (n=9) across the first-32-term query, salient-term query construction, coverage-qualified self-match repair, and the final pre-ranking consistency check. The right panel shows the held-out 30-case temporal comparison for Recall@5 and Recall@100. The panels remain separate because the salient-term and self-match fixes were development-probe interventions, while the pre-ranking temporal filter was tested on the frozen held-out cohort.
+**Figure B. Expected-authority recovery funnel on the 30-case source-verified answer key (n=30).** Under the final pre-ranking configuration, 15/30 expected authorities are found within k=100 and 12/30 are displayed among the five selected sources (Recall@5); the stacked row separates 12 selected, three retrieved-but-unselected, and 15 absent authorities.
 
-**Figure D. Displayed-evidence integrity under the final frozen configuration (n=30 queries; 150 displayed citations).** All displayed citations passed grounding and provenance checks, with zero temporal violations and zero unsupported claims; these verification outcomes are distinct from expected-authority recovery.
+**Figure C. Retrieval investigation.** The left panel shows development-probe Recall@100 (n=9, train/validation cases) across the first-32-term query, salient-term query construction, coverage-qualified self-match repair, and a pre-ranking check run after adoption. The right panel shows the Base-30 comparison of the post-ranking and pre-ranking eligibility filters: Recall@5 over displayed sources 11/30 to 12/30, Recall@100 12/30 to 15/30. Base-30 informed configuration choices, so this comparison is exploratory, and its direction is constrained by construction (docs/RQ1_FINAL_ADJUDICATION.md).
 
-**Figure E. Explanation-format rubric means from the Week 13 author self-review fallback (n=7 paired cases).** Structured and unstructured presentations are compared across four perceived-quality dimensions. This is descriptive self-review evidence, not an independent human-review result.
+**Figure D. Displayed-evidence integrity under the final frozen configuration (n=30 queries; 150 displayed citations).** All displayed citations passed grounding and provenance checks, with zero temporal violations and no unsupported-claim detections. These results are partly constrained by the extract-only design; no unconstrained comparison arm was evaluated.
+
+**Figure E. Explanation-format rubric means from the Week 13 author self-review fallback (n=7 paired cases).** Descriptive self-review only; human-rated explanation quality (RQ3) was not evaluated.
 """
-
-
-def chapter() -> str:
-    results = (ROOT / "artifacts/week14_results_draft.md").read_text(encoding="utf-8")
-    insertion = {
-        "## Outcome prediction": "\n\n![Figure A. Outcome prediction comparison](figures/week14_figure_a_outcome_prediction.svg)\n\n*Figure A. Outcome-prediction comparison on the frozen eligible ILDC test population (n=1,503).*",
-        "## Authority recovery, grounding, and temporal integrity": "\n\n![Figure B. Expected-authority recovery funnel](figures/week14_figure_b_retrieval_funnel.svg)\n\n*Figure B. Expected-authority recovery funnel on the 30-case source-verified answer-key subset (n=30).*\n\n![Figure D. Displayed-evidence integrity](figures/week14_figure_d_integrity_summary.svg)\n\n*Figure D. Displayed-evidence integrity under the final frozen configuration (n=30 queries; 150 displayed citations).*",
-        "## Retrieval mechanism behind the final result": "\n\n![Figure C. Retrieval investigation](figures/week14_figure_c_retrieval_investigation.svg)\n\n*Figure C. Retrieval investigation pathway: development repairs and the held-out temporal comparison.*",
-        "## Explanation-format observation": "\n\n![Figure E. Explanation-format review](figures/week14_figure_e_explanation_review.svg)\n\n*Figure E. Explanation-format rubric means from the Week 13 author self-review fallback (n=7 paired cases; not independent evidence).*",
-    }
-    for heading, figure in insertion.items():
-        start = results.index(heading)
-        paragraph_end = results.find("\n\n", start + len(heading))
-        if paragraph_end == -1:
-            paragraph_end = len(results)
-        else:
-            next_heading = results.find("\n## ", paragraph_end + 2)
-            paragraph_end = len(results) if next_heading == -1 else next_heading
-        results = results[:paragraph_end] + figure + "\n" + results[paragraph_end:]
-    return "# Results Chapter Draft\n\n" + results.removeprefix("# Results Draft\n\n")
 
 
 def main() -> None:
@@ -247,9 +230,8 @@ def main() -> None:
         integrity_figure(inventory),
         review_figure(inventory),
     ]
-    (ROOT / "artifacts/week14_figure_captions.md").write_text(captions(), encoding="utf-8")
-    (ROOT / "artifacts/results_chapter_draft.md").write_text(chapter(), encoding="utf-8")
-    print(json.dumps({"figures": [str(path.relative_to(ROOT)).replace("\\", "/") for path in paths], "status": "paper_figures_and_results_chapter_written"}, indent=2))
+    (OUT / "captions.md").write_bytes(captions().encode("utf-8"))
+    print(json.dumps({"figures": [str(path.relative_to(ROOT)).replace("\\", "/") for path in paths], "status": "figures_and_captions_written"}, indent=2))
 
 
 if __name__ == "__main__":

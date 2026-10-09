@@ -79,6 +79,7 @@ Impact on frozen results: none - parsed content equal after removing volatile fi
 Software dependency versions: Python 3.11.9 -> 3.13.14; scikit-learn 1.9.0 -> 1.9.1; pyarrow 21.0.0 -> 25.0.1; platform Windows-10 -> Windows-11; PyTorch 2.13.0+cu130 (host) -> 2.5.1+cu124 (container runtime).
 Action: no frozen file modified; freeze JSON hashes unchanged.
 Status: CLOSED - evidence documented in docs/freeze_drift_audit.md.
+Erratum (2026-10-09): the cause attribution above was wrong for 8 of the 10 differing entries; they differ only in line endings and are content-identical to the freeze. Current classification: 29 byte-identical / 8 line-ending-only / 2 content-changed (docs/freeze_drift_audit.md, docs/RQ1_FINAL_ADJUDICATION.md). The scratch scripts named here (scratch/prove_drift.js, scratch/build_freeze_drift_audit.js) were removed in the cleanup (docs/REPOSITORY_CLEANUP_2026-10-09.md).
 
 ### RR-02 - Line-ending normalisation of hashed text files
 Observation: docker/e2.Dockerfile matches its frozen SHA-256 only after CRLF->LF;

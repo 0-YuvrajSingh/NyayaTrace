@@ -25,7 +25,7 @@ Source: `artifacts/retrieval_investigation_summary.md`. Three bounded changes pr
 
 - **Round 1:** Replace legacy first-32-term query construction with deterministic TF-IDF salient terms from the full facts-only input. Removed opening procedural boilerplate without changing the BM25 architecture.
 - **Round 2:** Repair the direct shared-phrase self-match guard by retaining the 100 shared-six-token floor and requiring 80% unique source-phrase coverage. Recovered three additional authorities in the corrected development probe and withdrew the prior broad lexical-mismatch claim.
-- **Round 3:** Apply the strict earlier-year temporal rule to the BM25 candidate relation before ranking and the top-100 cutoff. Improved held-out Recall@5 from 5/30 to 12/30, Recall@100 from 12/30 to 15/30, and selected expected authorities from 11/30 to 12/30, without losing any original retrieval successes.
+- **Round 3:** Apply the strict earlier-year temporal rule to the BM25 candidate relation before ranking and the top-100 cutoff. Adopted after a Base-30 comparison (development-informed, not held-out). Raised displayed expected authorities (Recall@5 over selected sources) from 11/30 to 12/30 and Recall@100 from 12/30 to 15/30, without losing any original retrieval successes; raw rank <= 5 moved 5/30 to 12/30 (displacement diagnostic, not Recall@5).
 
 ## Citation-cardinality context for authority-consistency precision
 

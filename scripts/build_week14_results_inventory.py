@@ -173,22 +173,24 @@ def main() -> None:
                 },
                 {
                     "change": "Apply the strict earlier-year temporal rule to the BM25 candidate relation before ranking and the top-100 cutoff.",
-                    "effect": "Improved held-out Recall@5 from 5/30 to 12/30, Recall@100 from 12/30 to 15/30, and selected expected authorities from 11/30 to 12/30, without losing any original retrieval successes.",
+                    "effect": "Adopted after a Base-30 comparison (development-informed, not held-out). Raised displayed expected authorities (Recall@5 over selected sources) from 11/30 to 12/30 and Recall@100 from 12/30 to 15/30, without losing any original retrieval successes; raw rank <= 5 moved 5/30 to 12/30 (displacement diagnostic, not Recall@5).",
                 },
             ],
         },
         "retrieval_investigation_visualization": {
-            "source": "artifacts/retrieval_investigation_summary.md; development-stage values are recorded in the linked Week 9/10 probe artifacts and the held-out comparison in artifacts/week11_temporal_preranking_investigation.md.",
-            "reporting_guard": "The query-construction and self-match repairs were evaluated on a nine-case development probe; only the post-ranking versus pre-ranking temporal comparison is a held-out 30-case Recall@5/Recall@100 comparison. Do not plot these as one common-population trend.",
+            "source": "artifacts/retrieval_investigation_summary.md; development-stage values are recorded in the linked Week 9/10 probe artifacts and the development-informed Base-30 comparison in artifacts/week11_temporal_preranking_investigation.md (docs/RQ1_FINAL_ADJUDICATION.md).",
+            "reporting_guard": "The query-construction and self-match repairs were evaluated on a nine-case development probe and on six Base-30 regression controls; the post-ranking versus pre-ranking comparison was run on Base-30 and informed adoption, so it is a development-informed 30-case comparison, not a held-out one. Do not plot these as one common-population trend.",
             "development_probe_recall_at_100": [
                 {"stage": "First-32-term query", "numerator": 0, "denominator": 9},
                 {"stage": "Salient-term query", "numerator": 3, "denominator": 9},
                 {"stage": "Self-match repair", "numerator": 6, "denominator": 9},
                 {"stage": "Pre-ranking check", "numerator": 7, "denominator": 9},
             ],
-            "held_out_temporal_comparison": [
-                {"stage": "Post-ranking baseline", "recall_at_5": 5 / 30, "recall_at_100": 12 / 30, "denominator": 30},
-                {"stage": "Pre-ranking final", "recall_at_5": 12 / 30, "recall_at_100": 15 / 30, "denominator": 30},
+            # Recall@5 = expected authority among the five displayed sources (paper definition); the raw-rank <= 5
+            # value is a displacement diagnostic only. Base-30 informed adoption (docs/RQ1_FINAL_ADJUDICATION.md).
+            "base30_eligibility_filter_comparison": [
+                {"stage": "Post-ranking filter", "recall_at_5": 11 / 30, "recall_at_100": 12 / 30, "raw_rank_le5_diagnostic": 5 / 30, "denominator": 30},
+                {"stage": "Pre-ranking filter", "recall_at_5": 12 / 30, "recall_at_100": 15 / 30, "raw_rank_le5_diagnostic": 12 / 30, "denominator": 30},
             ],
         },
         "citation_cardinality_transition": {
