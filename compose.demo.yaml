@@ -11,9 +11,9 @@
 #   ML_INTERNAL_TOKEN  caller token for Spring -> FastAPI calls
 #
 # Start (repository root):
-#   $env:POSTGRES_PASSWORD = "local-only-dev"
-#   $env:DEMO_API_TOKEN = "local-only-dev"
-#   $env:ML_INTERNAL_TOKEN = "local-only-dev"
+#   $env:POSTGRES_PASSWORD = "<choose-a-local-password>"
+#   $env:DEMO_API_TOKEN = "<choose-a-random-token>"
+#   $env:ML_INTERNAL_TOKEN = "<choose-a-different-random-token>"
 #   docker compose -f compose.demo.yaml up --build
 
 services:

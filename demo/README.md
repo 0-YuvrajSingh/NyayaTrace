@@ -81,9 +81,9 @@ experimental prediction or skipped reason, uncertainty, human-review notice).
 
 ```powershell
 # Repository root. No secrets are stored anywhere by these commands.
-$env:POSTGRES_PASSWORD = "local-only-dev"
-$env:DEMO_API_TOKEN = "local-only-dev"
-$env:ML_INTERNAL_TOKEN = "local-only-dev"
+$env:POSTGRES_PASSWORD = "<choose-a-local-password>"
+$env:DEMO_API_TOKEN = "<choose-a-random-token>"
+$env:ML_INTERNAL_TOKEN = "<choose-a-different-random-token>"
 docker compose -f compose.demo.yaml up --build
 # UI: http://127.0.0.1:8081/  (API: :8080, ML: :8001, demo DB: 127.0.0.1:54330)
 # Enter the same DEMO_API_TOKEN value in the UI token field.
@@ -97,7 +97,7 @@ Native alternative (three terminals): `uvicorn app:app` in `demo/ml-service`
 ## Example research request
 
 ```powershell
-$headers = @{ Authorization = "Bearer local-only-dev" }
+$headers = @{ Authorization = "Bearer $env:DEMO_API_TOKEN" }
 $body = @{ query = "anticipatory bail section 438"; query_id = "week10-replay-01";
            query_year = 2020; candidate_k = 100; top_k = 5 } | ConvertTo-Json
 Invoke-RestMethod -Uri http://127.0.0.1:8080/api/research/query -Method Post `

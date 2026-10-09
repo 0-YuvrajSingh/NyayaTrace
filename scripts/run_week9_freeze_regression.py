@@ -9,6 +9,7 @@ input using the identical BM25 index and retrieval safeguards.
 from __future__ import annotations
 
 import argparse
+import os
 import json
 from pathlib import Path
 
@@ -19,7 +20,8 @@ from legal_xai.evidence_pipeline import retrieve_temporal_candidates, select_div
 from legal_xai.facts import extract_case_facts, load_facts_extraction_rule
 
 
-DATABASE_URL = "postgresql://legal_xai:legal_xai_local_only_2026@127.0.0.1:54329/legal_xai"
+# Credentials come from the environment (see compose.yaml / .env); none are stored here.
+DATABASE_URL = os.environ.get("LEGAL_XAI_DATABASE_URL", "")
 CASES = {
     # The two historical retrieved-and-selected controls.
     "1995_412": {"expected_source_id": "1987_1_1_67", "historical_rank": 22, "historical_status": "retrieved_and_selected"},
@@ -59,6 +61,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
+    if not DATABASE_URL:
+        raise SystemExit("Set LEGAL_XAI_DATABASE_URL to the provenance database URL before running this script.")
     if args.output.exists():
         raise SystemExit("REJECTED: final regression artifact already exists; this pass must not be rerun")
 

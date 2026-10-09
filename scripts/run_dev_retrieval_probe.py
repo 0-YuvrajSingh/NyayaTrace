@@ -8,6 +8,7 @@ FTS query, and reports whether its independently verified authority appears.
 from __future__ import annotations
 
 import argparse
+import os
 import json
 from pathlib import Path
 import statistics
@@ -20,7 +21,8 @@ from legal_xai.facts import extract_case_facts, load_facts_extraction_rule
 from legal_xai.retrieval import fts_query
 
 
-DATABASE_URL = "postgresql://legal_xai:legal_xai_local_only_2026@127.0.0.1:54329/legal_xai"
+# Credentials come from the environment (see compose.yaml / .env); none are stored here.
+DATABASE_URL = os.environ.get("LEGAL_XAI_DATABASE_URL", "")
 
 
 def load_ildc_texts(probe: dict[str, object]) -> dict[str, str]:
@@ -69,6 +71,8 @@ def main() -> None:
     parser.add_argument("--query-mode", choices=("legacy_first_32", "salient_tfidf"), default="salient_tfidf")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
+    if not DATABASE_URL:
+        raise SystemExit("Set LEGAL_XAI_DATABASE_URL to the provenance database URL before running this script.")
 
     probe = json.loads(args.probe.read_text(encoding="utf-8"))
     if any(entry.get("split") != "dev" for entry in probe["entries"]):

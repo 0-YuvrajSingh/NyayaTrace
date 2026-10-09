@@ -8,6 +8,7 @@ decision from the results.
 from __future__ import annotations
 
 import argparse
+import os
 import json
 from pathlib import Path
 
@@ -17,7 +18,8 @@ from legal_xai.answer_key import is_test_split_case, load_test_split_ids
 from legal_xai.evidence_pipeline import retrieve_temporal_candidates, select_diverse_evidence
 
 
-DATABASE_URL = "postgresql://legal_xai:legal_xai_local_only_2026@127.0.0.1:54329/legal_xai"
+# Credentials come from the environment (see compose.yaml / .env); none are stored here.
+DATABASE_URL = os.environ.get("LEGAL_XAI_DATABASE_URL", "")
 TEST_QUERIES = {
     "2008_1629": "resignation revised pay scale retrospective effect public undertaking",
     "1995_425": "panchayat secretary civil post government servant article 311",
@@ -83,6 +85,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
+    if not DATABASE_URL:
+        raise SystemExit("Set LEGAL_XAI_DATABASE_URL to the provenance database URL before running this script.")
     if args.output.exists():
         raise SystemExit(f"REJECTED: confirmation already exists at {args.output}; it must not be rerun.")
 

@@ -10,6 +10,7 @@ import argparse
 import csv
 import hashlib
 import json
+import os
 import sqlite3
 from pathlib import Path
 from typing import Any
@@ -22,7 +23,8 @@ from legal_xai.retrieval import exclude_query_duplicate, fts_query, query_exclus
 from legal_xai.temporal import assess_temporal_eligibility
 
 
-DATABASE_URL = "postgresql://legal_xai:legal_xai_local_only_2026@127.0.0.1:54329/legal_xai"
+# Credentials come from the environment (see compose.yaml / .env); none are stored here.
+DATABASE_URL = os.environ.get("LEGAL_XAI_DATABASE_URL", "")
 INDEX = Path("retrieval/bm25.sqlite")
 CASES = {
     "2008_1629": {
@@ -98,6 +100,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, default=Path("artifacts/week10_rank_reconciliation.json"))
     args = parser.parse_args()
+    if not DATABASE_URL:
+        raise SystemExit("Set LEGAL_XAI_DATABASE_URL to the provenance database URL before running this audit.")
     if args.output.exists():
         raise SystemExit("REJECTED: reconciliation artifact already exists; this audit must not be rerun")
 

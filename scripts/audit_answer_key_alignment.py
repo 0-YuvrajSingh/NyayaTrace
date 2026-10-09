@@ -9,6 +9,7 @@ metric may rely on that query-source mapping.
 from __future__ import annotations
 
 import argparse
+import os
 from collections import Counter
 from datetime import date
 import json
@@ -22,7 +23,8 @@ import pyarrow.parquet as pq
 from legal_xai.alignment import title_party_alignment
 
 
-DATABASE_URL = "postgresql://legal_xai:legal_xai_local_only_2026@127.0.0.1:54329/legal_xai"
+# Credentials come from the environment (see compose.yaml / .env); none are stored here.
+DATABASE_URL = os.environ.get("LEGAL_XAI_DATABASE_URL", "")
 STOPWORDS = frozenset({
     "and", "anr", "another", "appeal", "appeals", "court", "etc", "for", "from", "has", "have", "in",
     "judgment", "law", "of", "or", "ors", "others", "the", "this", "to", "v", "versus", "with",
@@ -125,6 +127,8 @@ def main() -> None:
     parser.add_argument("--json-output", type=Path, required=True)
     parser.add_argument("--markdown-output", type=Path, required=True)
     args = parser.parse_args()
+    if not DATABASE_URL:
+        raise SystemExit("Set LEGAL_XAI_DATABASE_URL to the provenance database URL before running this script.")
 
     entries = [entry for entry in json.loads(args.answer_key.read_text(encoding="utf-8"))["entries"]
                if entry.get("status") == "evaluation"]

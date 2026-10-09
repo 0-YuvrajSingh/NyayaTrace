@@ -17,7 +17,8 @@ from pathlib import Path
 import psycopg
 
 
-DEFAULT_DATABASE_URL = "postgresql://legal_xai:legal_xai_local_only_2026@127.0.0.1:54329/legal_xai"
+# Credentials come from the environment (see compose.yaml / .env); none are stored here.
+DEFAULT_DATABASE_URL = os.environ.get("LEGAL_XAI_DATABASE_URL", "")
 
 SCHEMA_SQL = """
 CREATE TABLE IF NOT EXISTS corpus_chunks (
@@ -90,6 +91,8 @@ def main() -> None:
     parser.add_argument("--database-url", default=os.getenv("LEGAL_XAI_DATABASE_URL", DEFAULT_DATABASE_URL))
     parser.add_argument("--output", type=Path, default=Path("artifacts/provenance_load.json"))
     args = parser.parse_args()
+    if not args.database_url:
+        raise SystemExit("Set LEGAL_XAI_DATABASE_URL to the provenance database URL before running this script.")
 
     with psycopg.connect(args.database_url) as connection:
         with connection.cursor() as cursor:

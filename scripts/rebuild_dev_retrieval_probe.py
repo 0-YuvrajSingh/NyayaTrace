@@ -9,6 +9,7 @@ an explicit earlier-case citation in that aligned query source.
 from __future__ import annotations
 
 import argparse
+import os
 from collections import Counter
 from datetime import date
 import json
@@ -27,7 +28,8 @@ from legal_xai.alignment import (
 from legal_xai.answer_key import is_dev_only_case, load_split_ids, mirror_source_quality_status
 
 
-DATABASE_URL = "postgresql://legal_xai:legal_xai_local_only_2026@127.0.0.1:54329/legal_xai"
+# Credentials come from the environment (see compose.yaml / .env); none are stored here.
+DATABASE_URL = os.environ.get("LEGAL_XAI_DATABASE_URL", "")
 
 # Each authority was identified from an explicit SCR citation in the aligned
 # query judgment.  These are candidate *authority* IDs, not query ID matches.
@@ -110,6 +112,8 @@ def main() -> None:
     parser.add_argument("--output", type=Path, default=Path("answer_key/dev_retrieval_probe.json"))
     parser.add_argument("--database-url", default=DATABASE_URL)
     args = parser.parse_args()
+    if not args.database_url:
+        raise SystemExit("Set LEGAL_XAI_DATABASE_URL to the provenance database URL before running this script.")
 
     crosswalk = pd.read_csv("corpus/dedup_matches.csv")
     crosswalk["ildc_id"] = crosswalk["ildc_id"].astype(str)

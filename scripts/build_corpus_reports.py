@@ -31,7 +31,8 @@ STOP_WORDS = {
     "and", "the", "of", "for", "with", "ors", "anr", "another", "others", "state", "india",
     "union", "ltd", "limited", "court", "supreme", "commission", "department", "authority",
 }
-DEFAULT_DATABASE_URL = "postgresql://legal_xai:legal_xai_local_only_2026@127.0.0.1:54329/legal_xai"
+# Credentials come from the environment (see compose.yaml / .env); none are stored here.
+DEFAULT_DATABASE_URL = os.environ.get("LEGAL_XAI_DATABASE_URL", "")
 
 
 def ildc_id_from_ecourts_case_id(case_id: object) -> str | None:
@@ -304,6 +305,8 @@ def main() -> None:
     parser.add_argument("--database-url", default=os.getenv("LEGAL_XAI_DATABASE_URL", DEFAULT_DATABASE_URL))
     parser.add_argument("--alignment-only", action="store_true", help="Rebuild only alignment-gated leakage artifacts.")
     args = parser.parse_args()
+    if not args.database_url:
+        raise SystemExit("Set LEGAL_XAI_DATABASE_URL to the provenance database URL before running this script.")
 
     ildc = load_ildc(args.corpus_root)
     ecourts = load_ecourts(args.corpus_root)
