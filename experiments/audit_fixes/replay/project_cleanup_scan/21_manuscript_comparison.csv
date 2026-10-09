@@ -1,7 +1,0 @@
-VariantA,VariantB,Similarity,LinesA,LinesB,SectionsAdded,SectionsRemoved,TablesChanged,FiguresChanged,RefsChanged,FactualCorrectionsDelta,UnsupportedReintroduced,PagesA,PagesB
-paper_master.tex,paper_master_revised.tex,0.9797,1128,1142,0,0,0,0,2 entries corrected (pooja+taxflow),11 corrections applied,0,10,11
-paper_master.tex,paper_master_final.tex,0.5348,1128,813,0,0,"overlap+buckets tables removed; 4 tables remain",5 figs removed,2 entries corrected,"11 corrections + Base-30 restructure",0,10,6
-paper_master.tex,paper_master_6page.tex,0.5029,1128,781,0,0,unknown,fig1/4/5 removed (fig2-3 kept),unknown,partial (see markers),185/56/37-37 claims retained; trigger lines retained,10,6
-paper_master_revised.tex,paper_master_final.tex,0.5483,1142,813,0,0,same as above,5 figs removed,pooja/taxflow carried over,same as above,0,11,6
-paper_master_revised.tex,paper_master_6page.tex,0.5055,1142,781,0,0,unknown,fig1/4/5 removed,unknown,partial,see above,11,6
-paper_master_final.tex,paper_master_6page.tex,0.7227,813,781,0,0,same 4 tables retained,final has 0 figs vs 2 in 6page,identical 15 keys,"final: all 11 corrections; 6page: partial",6page reintroduces removed claims,6,6

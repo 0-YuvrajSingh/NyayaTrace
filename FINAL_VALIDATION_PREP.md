@@ -1,3 +1,5 @@
+> **Historical record (dated).** Its freeze-drift cause attributions are superseded: the current audit is `docs/freeze_drift_audit.md` (39 paths = 29 byte-identical / 8 line-ending-only / 2 content-changed). See `docs/REPOSITORY_CLEANUP_2026-10-09.md` for files removed since.
+
 # Final Validation Preparation (no architecture change, no new research features)
 
 Date (UTC): 2026-09-11. Basis: `FINAL_BASELINE_AUDIT.md` + read-only

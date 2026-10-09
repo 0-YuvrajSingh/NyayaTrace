@@ -1,5 +1,7 @@
 # Indian Legal XAI Project Checklist
 
+> **Historical record.** Some files this document cites were removed in the 2026-10-09 repository cleanup; tracked ones remain recoverable from git (e.g. commit `cf1ca2a`). See `docs/REPOSITORY_CLEANUP_2026-10-09.md` for the full list.
+
 Project progress tracker. It is committed only when the user has explicitly approved it alongside real completed work.
 
 ## Week 1 — Completed

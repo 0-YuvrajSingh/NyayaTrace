@@ -1,3 +1,5 @@
+> **Historical record.** Some files this document cites were removed in the 2026-10-09 repository cleanup; tracked ones remain recoverable from git (e.g. commit `cf1ca2a`). See `docs/REPOSITORY_CLEANUP_2026-10-09.md` for the full list.
+
 # FINAL REPOSITORY AUDIT — NyayaTrace
 ## Temporally Constrained and Provenance-Verified Legal Research over Indian Supreme Court Judgments
 
